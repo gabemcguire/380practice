@@ -1,6 +1,7 @@
 // stores/questionStore.ts
 import { defineStore } from 'pinia'
 import questionsData from '~/data/questions.json'
+import initSqlJs from 'sql.js'
 import type { Section, Question } from '~/types'
 
 export const useQuestionStore = defineStore('question', {
@@ -9,6 +10,7 @@ export const useQuestionStore = defineStore('question', {
     selectedSection: null as Section | null,
     currentQuestionIndex: 0,
     userAnswers: {} as Record<number, string>,
+    SQL: null as any,
     score: 0,
   }),
   
@@ -49,16 +51,45 @@ export const useQuestionStore = defineStore('question', {
       }
     },
     
-    submitAnswer(answer: string) {
+    async initSQLJS() {
+      if (!this.SQL) {
+        this.SQL = await  initSqlJs({
+        locateFile: file => `/sql-wasm.wasm` // Adjust the path if necessary
+  })      }
+    },
+    
+    async submitAnswer(answer: string) {
       const question = this.currentQuestion
-      if (question) {
-        this.userAnswers[question.id] = answer
+      if (!question) return
+      
+      this.userAnswers[question.id] = answer
+      
+      if ('initialData' in question) {
+        // SQL question
+        await this.initSQLJS()
+        const db = new this.SQL.Database()
+        question.initialData.forEach(statement => {
+          db.run(statement)
+        })
+        
+        try {
+          const result = db.exec(answer)
+          const expectedResult = db.exec(question.expectedResult)
+          if (JSON.stringify(result) === JSON.stringify(expectedResult)) {
+            this.score++
+          }
+        } catch (error) {
+          // Invalid SQL query
+        }
+        
+        db.close()
+      } else {
+        // Multiple choice question
         if (answer === question.answer) {
           this.score++
         }
       }
-    },
-    
+    },    
     reset() {
       this.selectedSection = null
       this.currentQuestionIndex = 0

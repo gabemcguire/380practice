@@ -7,6 +7,13 @@ export interface Question {
   explanation: string;
 }
 
+export interface SQLQuestion {
+  id: number
+  question: string
+  initialData: string[]
+  expectedResult: any
+  explanation: string
+}
 export interface Section {
   id: string;
   type: 'date' | 'topic';
