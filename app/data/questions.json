@@ -1,0 +1,221 @@
+{
+  "sections": [
+    {
+      "id": "entity-relationship-diagrams",
+      "type": "topic",
+      "title": "Entity-Relationship Diagrams I",
+      "difficulty": "Easy",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the purpose of the Entity-Relationship (E/R) Model?",
+          "options": [
+            "To describe a system for designing a web page",
+            "To describe the database and capture constraints",
+            "To build front-end interfaces",
+            "To represent server connections"
+          ],
+          "answer": "To describe the database and capture constraints",
+          "explanation": "The E/R model is used to describe the system we want to represent in a database, including its constraints."
+        },
+        {
+          "id": 2,
+          "question": "What shape is used to represent an Entity Set in an ER Diagram?",
+          "options": ["Diamond", "Rectangle", "Oval", "Circle"],
+          "answer": "Rectangle",
+          "explanation": "In an ER diagram, an entity set is represented by a rectangle."
+        },
+        {
+          "id": 3,
+          "question": "Which shape is used to represent attributes in an Entity-Relationship Diagram?",
+          "options": ["Diamond", "Oval", "Rectangle", "Triangle"],
+          "answer": "Oval",
+          "explanation": "In an ER diagram, attributes are represented by ovals connected to their respective entities."
+        },
+        {
+          "id": 4,
+          "question": "What does a diamond represent in an ER diagram?",
+          "options": ["Entity", "Attribute", "Relationship", "Primary Key"],
+          "answer": "Relationship",
+          "explanation": "In an ER diagram, a diamond is used to represent relationships between entities."
+        },
+        {
+          "id": 5,
+          "question": "Which of the following is an example of an Entity Set?",
+          "options": ["Player", "name", "position", "Team"],
+          "answer": "Player",
+          "explanation": "An entity set is a collection of similar entities, such as 'Player' in a sports system."
+        },
+        {
+          "id": 6,
+          "question": "What is an Entity Set?",
+          "options": [
+            "A collection of similar entities",
+            "A collection of relationships between entities",
+            "A unique identifier for an entity",
+            "A set of attributes"
+          ],
+          "answer": "A collection of similar entities",
+          "explanation": "An entity set is a collection of similar entities, like all 'Players' in a sports team."
+        },
+        {
+          "id": 7,
+          "question": "In an ER Diagram, what is represented by a relationship?",
+          "options": [
+            "An attribute connecting two entity sets",
+            "A diamond representing the connection between two or more entity sets",
+            "A connection between an attribute and an entity set",
+            "A unique identifier for each entity"
+          ],
+          "answer": "A diamond representing the connection between two or more entity sets",
+          "explanation": "A relationship is represented by a diamond connecting two or more entity sets in an ER diagram."
+        },
+        {
+          "id": 8,
+          "question": "What type of attribute cannot be used in an ER diagram?",
+          "options": [
+            "String",
+            "Integer",
+            "List or collection",
+            "Date"
+          ],
+          "answer": "List or collection",
+          "explanation": "Attributes in ER diagrams must be simple, meaning they cannot be lists, collections, or composite structures."
+        },
+        {
+          "id": 9,
+          "question": "What is the value of an entity set?",
+          "options": [
+            "The attributes it contains",
+            "The relationships it has",
+            "The set of entities that belong to it",
+            "Its primary key"
+          ],
+          "answer": "The set of entities that belong to it",
+          "explanation": "The value of an entity set is the collection of entities that belong to that set."
+        },
+        {
+          "id": 10,
+          "question": "What is a primary key in the context of an ER diagram?",
+          "options": [
+            "An attribute that uniquely identifies each entity in an entity set",
+            "An attribute that represents a relationship between two entities",
+            "A set of entities that are related to each other",
+            "A graphical symbol used in ER diagrams"
+          ],
+          "answer": "An attribute that uniquely identifies each entity in an entity set",
+          "explanation": "A primary key is an attribute (or set of attributes) that uniquely identifies each entity in an entity set."
+        }
+      ]
+    },
+    
+    {
+      "id": "entity-relationship-diagrams-II",
+      "type": "topic",
+      "title": "Entity-Relationship Diagrams II",
+      "difficulty": "Easy",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the purpose of the Entity-Relationship (E/R) Model?",
+          "options": [
+            "To describe a system for designing a web page",
+            "To describe the database and capture constraints",
+            "To build front-end interfaces",
+            "To represent server connections"
+          ],
+          "answer": "To describe the database and capture constraints",
+          "explanation": "The E/R model is used to describe the system we want to represent in a database, including its constraints."
+        },
+        {
+          "id": 2,
+          "question": "What shape is used to represent an Entity Set in an ER Diagram?",
+          "options": ["Diamond", "Rectangle", "Oval", "Circle"],
+          "answer": "Rectangle",
+          "explanation": "In an ER diagram, an entity set is represented by a rectangle."
+        },
+        {
+          "id": 3,
+          "question": "Which shape is used to represent attributes in an Entity-Relationship Diagram?",
+          "options": ["Diamond", "Oval", "Rectangle", "Triangle"],
+          "answer": "Oval",
+          "explanation": "In an ER diagram, attributes are represented by ovals connected to their respective entities."
+        },
+        {
+          "id": 4,
+          "question": "What does a diamond represent in an ER diagram?",
+          "options": ["Entity", "Attribute", "Relationship", "Primary Key"],
+          "answer": "Relationship",
+          "explanation": "In an ER diagram, a diamond is used to represent relationships between entities."
+        },
+        {
+          "id": 5,
+          "question": "Which of the following is an example of an Entity Set?",
+          "options": ["Player", "name", "position", "Team"],
+          "answer": "Player",
+          "explanation": "An entity set is a collection of similar entities, such as 'Player' in a sports system."
+        },
+        {
+          "id": 6,
+          "question": "What is an Entity Set?",
+          "options": [
+            "A collection of similar entities",
+            "A collection of relationships between entities",
+            "A unique identifier for an entity",
+            "A set of attributes"
+          ],
+          "answer": "A collection of similar entities",
+          "explanation": "An entity set is a collection of similar entities, like all 'Players' in a sports team."
+        },
+        {
+          "id": 7,
+          "question": "In an ER Diagram, what is represented by a relationship?",
+          "options": [
+            "An attribute connecting two entity sets",
+            "A diamond representing the connection between two or more entity sets",
+            "A connection between an attribute and an entity set",
+            "A unique identifier for each entity"
+          ],
+          "answer": "A diamond representing the connection between two or more entity sets",
+          "explanation": "A relationship is represented by a diamond connecting two or more entity sets in an ER diagram."
+        },
+        {
+          "id": 8,
+          "question": "What type of attribute cannot be used in an ER diagram?",
+          "options": [
+            "String",
+            "Integer",
+            "List or collection",
+            "Date"
+          ],
+          "answer": "List or collection",
+          "explanation": "Attributes in ER diagrams must be simple, meaning they cannot be lists, collections, or composite structures."
+        },
+        {
+          "id": 9,
+          "question": "What is the value of an entity set?",
+          "options": [
+            "The attributes it contains",
+            "The relationships it has",
+            "The set of entities that belong to it",
+            "Its primary key"
+          ],
+          "answer": "The set of entities that belong to it",
+          "explanation": "The value of an entity set is the collection of entities that belong to that set."
+        },
+        {
+          "id": 10,
+          "question": "What is a primary key in the context of an ER diagram?",
+          "options": [
+            "An attribute that uniquely identifies each entity in an entity set",
+            "An attribute that represents a relationship between two entities",
+            "A set of entities that are related to each other",
+            "A graphical symbol used in ER diagrams"
+          ],
+          "answer": "An attribute that uniquely identifies each entity in an entity set",
+          "explanation": "A primary key is an attribute (or set of attributes) that uniquely identifies each entity in an entity set."
+        }
+      ]
+    }
+  ]
+}

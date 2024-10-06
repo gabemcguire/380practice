@@ -1,2 +1,2 @@
-export const appName = 'Shadcn Nuxt Starter'
-export const appDescription = 'Open-source shadcn with nuxt starter.'
+export const appName = '380 Practice'
+export const appDescription = 'Practice computer science questions.'

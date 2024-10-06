@@ -50,6 +50,9 @@ importers:
       radix-vue:
         specifier: ^1.9.1
         version: 1.9.1(vue@3.4.33(typescript@5.4.5))
+      sql.js:
+        specifier: ^1.11.0
+        version: 1.11.0
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.4)
@@ -6400,6 +6403,9 @@ packages:
   speakingurl@14.0.1:
     resolution: {integrity: sha512-1POYv7uv2gXoyGFpBCmpDVSNV74IfsWlDW216UPjbWufNf+bSU6GdbDsxdcxtfwb4xlI3yxzOTKClUosxARYrQ==}
     engines: {node: '>=0.10.0'}
+
+  sql.js@1.11.0:
+    resolution: {integrity: sha512-GsLUDU3vhOo14Pd5ME0y2te49JQyby6HuoCuadevEV+CGgTUjmYRrm7B7lhRyzOgrmcWmspUfyjNb6sOAEqdsA==}
 
   stackback@0.0.2:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
@@ -15546,6 +15552,8 @@ snapshots:
   spdx-license-ids@3.0.17: {}
 
   speakingurl@14.0.1: {}
+
+  sql.js@1.11.0: {}
 
   stackback@0.0.2:
     optional: true
