@@ -369,8 +369,100 @@
         ],
         "answer": "To verify that the token has not been tampered with",
         "explanation": "The signature ensures the integrity of the JWT by verifying that the token has not been altered after it was issued."
+      },
+      {
+        "id": 6,
+        "question": "What is the middle part of a JWT?",
+        "options": [
+          "The base 64 header",
+          "The signature",
+          "The base 64 payload",
+          "The base 64 signature"
+        ],
+        "answer": "The base 64 payload",
+        "explanation": "The middle part of the JWT is the Base64-encoded payload."
       }
     ]
-  }
+    },
+    {
+  "id": "json-web-tokens-advanced",
+      "type": "topic",
+      "title": "JSON Web Tokens (JWTs) - Advanced",
+      "difficulty": "Hard",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What algorithm is used in a JWT with the header specifying 'alg': 'HS256'?",
+          "options": [
+            "HMAC using SHA-256",
+            "RSA using SHA-256",
+            "Elliptic Curve using SHA-256",
+            "MD5 with HMAC"
+          ],
+          "answer": "HMAC using SHA-256",
+          "explanation": "HS256 specifies the use of HMAC with SHA-256 to create the signature in the JWT, combining the secret key with the hash algorithm."
+        },
+        {
+          "id": 2,
+          "question": "What vulnerability could arise if a JWT token's algorithm is changed from RS256 to none?",
+          "options": [
+            "The token can be altered without needing to resign it",
+            "The payload becomes encrypted",
+            "The token becomes invalid",
+            "The signature becomes more secure"
+          ],
+          "answer": "The token can be altered without needing to resign it",
+          "explanation": "If the algorithm is set to 'none,' the token's signature is effectively disabled, allowing attackers to modify the payload without needing to re-sign the token."
+        },
+        {
+          "id": 3,
+          "question": "Which of the following is a best practice for securing JWTs?",
+          "options": [
+            "Storing JWTs in local storage",
+            "Storing JWTs in cookies with the 'HttpOnly' and 'Secure' flags",
+            "Encoding the payload using Base64",
+            "Using 'none' as the algorithm for quicker verification"
+          ],
+          "answer": "Storing JWTs in cookies with the 'HttpOnly' and 'Secure' flags",
+          "explanation": "JWTs should be stored in secure cookies with 'HttpOnly' to prevent JavaScript access and 'Secure' to ensure they're transmitted over HTTPS only."
+        },
+        {
+          "id": 4,
+          "question": "What is the primary difference between symmetric and asymmetric encryption in the context of JWTs?",
+          "options": [
+            "Symmetric encryption uses one key, while asymmetric encryption uses a public/private key pair",
+            "Symmetric encryption is faster but less secure than asymmetric encryption",
+            "Symmetric encryption always requires a password, while asymmetric encryption does not",
+            "Symmetric encryption is used in JWT signatures, while asymmetric encryption is not"
+          ],
+          "answer": "Symmetric encryption uses one key, while asymmetric encryption uses a public/private key pair",
+          "explanation": "In JWTs, symmetric encryption (e.g., HS256) uses a single secret key for both signing and verifying, while asymmetric encryption (e.g., RS256) uses a public/private key pair for signing and verification."
+        },
+        {
+          "id": 5,
+          "question": "Which claim is used in JWTs to define an expiration time for the token?",
+          "options": [
+            "iat",
+            "nbf",
+            "exp",
+            "sub"
+          ],
+          "answer": "exp",
+          "explanation": "The 'exp' (expiration) claim is used to define the time at which the JWT will expire. After this time, the token is no longer valid."
+        },
+        {
+          "id": 6,
+          "question": "What potential security risk exists if the 'exp' claim is omitted from a JWT?",
+          "options": [
+            "The token will never expire and can be used indefinitely",
+            "The token will automatically expire after 24 hours",
+            "The token becomes invalid immediately",
+            "The token can only be used once"
+          ],
+          "answer": "The token will never expire and can be used indefinitely",
+          "explanation": "Without the 'exp' claim, the token doesn't have an expiration time, meaning it could be reused indefinitely if it is not invalidated by other means."
+        }
+      ]
+    }
   ]
 }
