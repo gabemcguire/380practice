@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-center items-center min-h-screen ">
-    <div class="p-8 rounded-lg shadow-md max-w-2xl">
+    <div class="p-8 mb-2 rounded-lg shadow-md max-w-2xl">
       <h1 class="font-bold text-4xl mb-6 text-center">About</h1>
       <div class="space-y-4">
         <p class="text-lg ">
@@ -24,7 +24,11 @@
           </a>
         </div>
       </div>
+      <FAQ/>
     </div>
   </div>
+  
 </template>
+
+
 
