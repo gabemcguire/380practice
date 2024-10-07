@@ -13,12 +13,8 @@ const mainNav = [
     href: '/practice',
   },
   {
-    title: 'Topics',
-    href: '/topics',
-  },
-  {
-    title: 'Progress',
-    href: '/progress',
+    title: 'Challenges',
+    href: '/challenges',
   },
   {
     title: 'About',

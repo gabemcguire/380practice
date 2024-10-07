@@ -225,7 +225,6 @@
       "questions": [
         {
           "id": 1,
-          "image": "data:image/webp;base64,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", 
           "question": "What does SQL stand for?",
           "options": [
             "Structured Query Language",
@@ -252,33 +251,121 @@
           "id": 3,
           "question": "Suppose you have two tables, 'users' and 'orders'. The 'users' table has columns 'id', 'name', and 'email'. The 'orders' table has columns 'id', 'user_id', 'product', and 'order_date'. Write a SQL query to list all users along with the number of orders they have placed. The list should include users who have not placed any orders.",
           "initialData": [
-            "CREATE TABLE users (",
-            "  id INTEGER PRIMARY KEY,",
-            "  name TEXT NOT NULL,",
-            "  email TEXT UNIQUE NOT NULL",
-            ");",
-            "",
-            "CREATE TABLE orders (",
-            "  id INTEGER PRIMARY KEY,",
-            "  user_id INTEGER,",
-            "  product TEXT NOT NULL,",
-            "  order_date DATE NOT NULL,",
-            "  FOREIGN KEY(user_id) REFERENCES users(id)",
-            ");",
-            "",
-            "INSERT INTO users (id, name, email) VALUES",
-            "  (1, 'John Doe', 'john@example.com'),",
-            "  (2, 'Jane Smith', 'jane@sample.com'),",
-            "  (3, 'Alice Johnson', 'alice@example.com'),",
-            "  (4, 'Bob Brown', 'bob@another.com');",
-            "",
-            "INSERT INTO orders (id, user_id, product, order_date) VALUES",
-            "  (1, 1, 'Laptop', '2023-01-15'),",
-            "  (2, 1, 'Mouse', '2023-02-20'),",
-            "  (3, 3, 'Keyboard', '2023-03-10');"
+            "CREATE TABLE users ( id INTEGER PRIMARY KEY, name TEXT NOT NULL, email TEXT UNIQUE NOT NULL ); CREATE TABLE orders ( id INTEGER PRIMARY KEY, user_id INTEGER, product TEXT NOT NULL, order_date DATE NOT NULL, FOREIGN KEY(user_id) REFERENCES users(id) ); INSERT INTO users (id, name, email) VALUES (1, 'John Doe', 'john@example.com'), (2, 'Jane Smith', 'jane@sample.com'), (3, 'Alice Johnson', 'alice@example.com'), (4, 'Bob Brown', 'bob@another.com'); INSERT INTO orders (id, user_id, product, order_date) VALUES (1, 1, 'Laptop', '2023-01-15'), (2, 1, 'Mouse', '2023-02-20'), (3, 3, 'Keyboard', '2023-03-10');"
           ],
           "expectedResult": "SELECT u.id, u.name, u.email, COUNT(o.id) AS order_count FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id, u.name, u.email;",
           "explanation": "This query performs a LEFT JOIN between the 'users' and 'orders' tables to ensure all users are included, even those without any orders. It then groups the results by user ID and name, counting the number of orders each user has placed using the COUNT() function. Users with no orders will have an order_count of 0."
+        },
+        {
+          "id": 4,
+          "question": "Retrieve all records from the 'users' table.",
+          "initialData": [
+            "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);",
+            "INSERT INTO users (name) VALUES ('Alice'), ('Bob');"
+          ],
+          "expectedResult": "SELECT * FROM users;"
+        }
+      ]
+      
+    }, 
+    {
+      "id": "advanced-sql",
+      "type": "topic",
+      "title": "Advanced SQL",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Write a SQL query to return the total number of unique book titles in the 'library' table.",
+          "initialData": [
+            "CREATE TABLE library (book_id INTEGER PRIMARY KEY, title TEXT, author TEXT, genre TEXT);",
+            "INSERT INTO library (title, author, genre) VALUES ('The Great Gatsby', 'F. Scott Fitzgerald', 'Fiction'), ('Moby Dick', 'Herman Melville', 'Fiction'), ('The Great Gatsby', 'F. Scott Fitzgerald', 'Fiction');"
+          ],
+          "expectedResult": "SELECT COUNT(DISTINCT title) FROM library;",
+          "explanation": "This query counts the number of distinct book titles in the 'library' table."
+        },
+        {
+          "id": 2,
+          "question": "Write a SQL query to return all employees from the 'employees' table, ordered by salary from highest to lowest.",
+          "initialData": [
+            "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY, name TEXT, salary DECIMAL);",
+            "INSERT INTO employees (name, salary) VALUES ('John', 55000), ('Jane', 72000), ('Emily', 60000);"
+          ],
+          "expectedResult": "SELECT * FROM employees ORDER BY salary DESC;",
+          "explanation": "This query selects all columns from the 'employees' table and orders the results by salary in descending order."
+        },
+        {
+          "id": 3,
+          "question": "Write a SQL query to create a table called 'students' with columns: student_id (integer, primary key), name (text), age (integer), and major (text).",
+          "initialData": [],
+          "expectedResult": "CREATE TABLE students (student_id INTEGER PRIMARY KEY, name TEXT, age INTEGER, major TEXT);",
+          "explanation": "This query creates a 'students' table with columns for student ID, name, age, and major, defining 'student_id' as the primary key."
+        },
+        {
+          "id": 4,
+          "question": "Write a SQL query to return the names and ages of all students who are majoring in 'Computer Science'.",
+          "initialData": [
+            "CREATE TABLE students (student_id INTEGER PRIMARY KEY, name TEXT, age INTEGER, major TEXT);",
+            "INSERT INTO students (name, age, major) VALUES ('Alice', 20, 'Computer Science'), ('Bob', 21, 'Mathematics'), ('Charlie', 22, 'Computer Science');"
+          ],
+          "expectedResult": "SELECT name, age FROM students WHERE major = 'Computer Science';",
+          "explanation": "This query retrieves the 'name' and 'age' columns for students majoring in 'Computer Science'."
+        }
+      ]
+    },
+    {
+      "id": "sql-joins",
+      "type": "topic",
+      "title": "SQL Joins",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What type of join is used to return all records from both tables, with matching records from both sides where available?",
+          "options": [
+            "INNER JOIN",
+            "LEFT JOIN",
+            "RIGHT JOIN",
+            "FULL OUTER JOIN"
+          ],
+          "answer": "FULL OUTER JOIN",
+          "explanation": "A FULL OUTER JOIN returns all rows from both tables, matching rows where possible, and filling in NULLs where there are no matches."
+        },
+        {
+          "id": 2,
+          "question": "Write a SQL query to return the names of students and the courses they are enrolled in, showing students even if they are not enrolled in any course. Use the 'students' and 'enrollments' tables.",
+          "initialData": [
+            "CREATE TABLE students (student_id INTEGER PRIMARY KEY, name TEXT);",
+            "CREATE TABLE enrollments (student_id INTEGER, course_name TEXT);",
+            "INSERT INTO students (student_id, name) VALUES (1, 'Alice'), (2, 'Bob'), (3, 'Charlie');",
+            "INSERT INTO enrollments (student_id, course_name) VALUES (1, 'Math'), (1, 'Science'), (3, 'History');"
+          ],
+          "expectedResult": "SELECT students.name, enrollments.course_name FROM students LEFT JOIN enrollments ON students.student_id = enrollments.student_id;",
+          "explanation": "This query uses a LEFT JOIN to include all students, even those not enrolled in any courses. It matches students with their courses based on the 'student_id'."
+        },
+        {
+          "id": 3,
+          "question": "Write a SQL query to return the names of employees and their department names, but only show employees who are assigned to a department. Use the 'employees' and 'departments' tables.",
+          "initialData": [
+            "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY, name TEXT, department_id INTEGER);",
+            "CREATE TABLE departments (department_id INTEGER PRIMARY KEY, department_name TEXT);",
+            "INSERT INTO employees (employee_id, name, department_id) VALUES (1, 'John', 101), (2, 'Jane', 102), (3, 'Emily', NULL);",
+            "INSERT INTO departments (department_id, department_name) VALUES (101, 'HR'), (102, 'Engineering');"
+          ],
+          "expectedResult": "SELECT employees.name, departments.department_name FROM employees INNER JOIN departments ON employees.department_id = departments.department_id;",
+          "explanation": "This query uses an INNER JOIN to return only employees who are assigned to a department, matching records on 'department_id'."
+        },
+        {
+          "id": 4,
+          "question": "Write a SQL query to return the names of all projects and the names of their assigned managers, even if the project has no manager. Use the 'projects' and 'managers' tables.",
+          "initialData": [
+            "CREATE TABLE projects (project_id INTEGER PRIMARY KEY, project_name TEXT, manager_id INTEGER);",
+            "CREATE TABLE managers (manager_id INTEGER PRIMARY KEY, name TEXT);",
+            "INSERT INTO projects (project_id, project_name, manager_id) VALUES (1, 'Project A', 1), (2, 'Project B', NULL);",
+            "INSERT INTO managers (manager_id, name) VALUES (1, 'Michael');"
+          ],
+          "expectedResult": "SELECT projects.project_name, managers.name FROM projects LEFT JOIN managers ON projects.manager_id = managers.manager_id;",
+          "explanation": "This query uses a LEFT JOIN to return all projects, including those without an assigned manager. Projects with no manager will have NULL for the manager name."
         }
       ]
     }

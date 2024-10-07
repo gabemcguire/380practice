@@ -33,7 +33,7 @@
     <div v-else class="text-center">
       <p class="text-xl mb-4">You've completed all questions!</p>
       <p class="text-lg mb-4">Your score: {{ store.score }} / {{ store.totalQuestions }}</p>
-      <Button @click="goToHome">Back to Topics</Button>
+      <Button @click="goToHome" class="bg-emerald-600 hover:bg-emerald-500">Back to Topics</Button>
     </div>
   </div>
 </template>
@@ -61,12 +61,16 @@ const quizCompleted = computed(() => store.isQuizCompleted)
 const progress = computed(() => store.progress)
 
 // Handle user's answer
-const handleAnswer = (answer: string) => {
-  const correct = answer === store.currentQuestion?.answer
+const handleAnswer = async (answer: string) => {
+  // Await the submission to ensure state is updated
+  await store.submitAnswer(answer)
+  console.log('correct? ', store.isCorrect); 
+  // Determine if the answer is correct
+  const correct = store.isCorrect // Update the store to track correctness
   isCorrect.value = correct
   currentExplanation.value = store.currentQuestion?.explanation || ''
+  
   showFeedback.value = true
-  store.submitAnswer(answer)
 }
 
 // Proceed to the next question

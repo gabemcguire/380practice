@@ -63,13 +63,13 @@
   </div>
   <!-- Display feedback -->
   <div v-if="submitted" class="mt-4">
-    <Feedback :isCorrect="isCorrect" :explanation="explanation" @next="nextQuestion" />
+    <!-- <Feedback :isCorrect="isCorrect" :explanation="explanation" @next="nextQuestion" /> -->
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
-import { defineProps, defineEmits, nextTick } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 import type { SQLQuestion } from '~/types'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -93,7 +93,7 @@ const submitted = ref(false)
 const queryResult = ref(null)
 const db = ref(null)
 const dbTables = ref([])
-const isCorrect = ref(null)
+const isCorrect = ref(false) // Initialize as false
 const explanation = computed(() => question.value ? question.value.explanation : '')
 
 // Store the SQL module globally
@@ -134,7 +134,7 @@ const initializeDatabase = () => {
 
 onMounted(async () => {
   SQL.value = await initSqlJs({
-    locateFile: file => `/sql-wasm.wasm`
+    locateFile: file => `/sql-wasm.wasm` // Adjust if necessary
   })
   initializeDatabase()
 })
@@ -145,7 +145,7 @@ watch(question, (newQuestion, oldQuestion) => {
     userQuery.value = ''
     submitted.value = false
     queryResult.value = null
-    isCorrect.value = null
+    isCorrect.value = false
     db.value = null
     dbTables.value = []
     // Re-initialize the database for the new question
@@ -164,6 +164,11 @@ const runQuery = () => {
     checkAnswer()
   } catch (error) {
     queryResult.value = { error: error.message }
+    submitted.value = true
+    isCorrect.value = false
+    explanation.value = 'Invalid SQL query.'
+    // Emit the answer event even if there's an error
+    emit('answer', userQuery.value)
   }
 }
 
@@ -194,18 +199,26 @@ const checkAnswer = () => {
     // Compare userResult with expectedResult
     if (JSON.stringify(userResult) === JSON.stringify(expectedResult)) {
       isCorrect.value = true
-      store.score++
     } else {
       isCorrect.value = false
     }
+
+    // Emit the answer event after checking
+    emit('answer', userQuery.value)
   } catch (error) {
     console.error("Error in checkAnswer:", error)
     isCorrect.value = false
+    explanation.value = 'Error executing SQL query.'
+    emit('answer', userQuery.value)
   }
 }
 
 const nextQuestion = () => {
-  store.nextQuestion()
+  emit('next')
   // The watcher on 'question' will handle resetting and re-initializing
 }
 </script>
+
+<style scoped>
+/* Add any component-specific styles here */
+</style>
