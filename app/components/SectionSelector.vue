@@ -2,7 +2,7 @@
 <template>
   <div class="w-full max-w-6xl mx-auto">
     <h2 class="text-2xl font-bold mb-6">Select a Topic</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 gap-y-6">
       <Card 
         v-for="section in topicSections" 
         :key="section.id"

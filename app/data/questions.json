@@ -535,6 +535,127 @@
           "explanation": "Without the 'exp' claim, the token doesn't have an expiration time, meaning it could be reused indefinitely if it is not invalidated by other means."
         }
       ]
+    },
+    
+    {
+      "id": "sql-create-table",
+      "type": "topic",
+      "title": "SQL CREATE TABLE I",
+      "difficulty": "Easy",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the basic syntax for creating a table in SQL?",
+          "options": [
+            "CREATE DATABASE table_name (column_name data_type);",
+            "INSERT INTO table_name (column_name data_type);",
+            "CREATE TABLE table_name (column_name data_type);",
+            "SELECT * FROM table_name;"
+          ],
+          "answer": "CREATE TABLE table_name (column_name data_type);",
+          "explanation": "The basic syntax for creating a table in SQL is 'CREATE TABLE table_name (column_name data_type);'."
+        },
+        {
+          "id": 2,
+          "question": "Write a `CREATE TABLE` statement to create a 'courses' table with the following columns: 'id' (integer primary key), 'course_name' (text), 'instructor' (text), and 'credits' (integer).",
+          "initialData": [],
+          "expectedResult": "CREATE TABLE courses (id INTEGER PRIMARY KEY, course_name TEXT, instructor TEXT, credits INTEGER);",
+          "explanation": "This SQL command creates a 'courses' table with the necessary columns and their respective data types."
+        },
+        {
+          "id": 3,
+          "question": "Explain the purpose of using constraints like 'PRIMARY KEY' or 'NOT NULL' in a `CREATE TABLE` statement.",
+          "options": [
+            "Constraints enforce database integrity and ensure data accuracy.",
+            "Constraints define how the data is displayed.",
+            "Constraints limit the number of rows in a table.",
+            "Constraints automatically format the data."
+          ],
+          "answer": "Constraints enforce database integrity and ensure data accuracy.",
+          "explanation": "Constraints such as 'PRIMARY KEY' and 'NOT NULL' ensure that certain conditions are met when data is inserted into the table, such as uniqueness or mandatory fields."
+        }
+      ]
+    },
+    {
+      "id": "sql-edge-cases",
+      "type": "topic",
+      "title": "SQL Edge Cases",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What happens if the `COUNT()` function is used on an empty set?",
+          "options": [
+            "It returns 0.",
+            "It returns NULL.",
+            "It returns 1.",
+            "It throws an error."
+          ],
+          "answer": "It returns 0.",
+          "explanation": "The `COUNT()` function will return 0 when used on an empty set, as there are no rows to count."
+        },
+        {
+          "id": 2,
+          "question": "What does SQL return if a query attempts to insert a duplicate value into a column with a 'UNIQUE' constraint?",
+          "options": [
+            "The query succeeds but the duplicate value is ignored.",
+            "The query fails and an error is thrown.",
+            "The query automatically adjusts the value.",
+            "The query partially succeeds, inserting non-duplicate rows."
+          ],
+          "answer": "The query fails and an error is thrown.",
+          "explanation": "A 'UNIQUE' constraint ensures that all values in a column are unique. If an attempt is made to insert a duplicate, the query will fail with an error."
+        },
+        {
+          "id": 3,
+          "question": "What happens if you attempt to divide by zero in a SQL query?",
+          "options": [
+            "SQL returns NULL.",
+            "SQL returns 0.",
+            "SQL throws an error.",
+            "SQL allows the operation to continue."
+          ],
+          "answer": "SQL throws an error.",
+          "explanation": "In most SQL implementations, dividing by zero results in an error because it is an undefined mathematical operation."
+        },
+        {
+          "id": 4,
+          "question": "What is the behavior of LIMIT and OFFSET when their values exceed the number of rows in the result set?",
+          "options": [
+          "It raises an error",
+          "It returns all available rows",
+          "It returns an empty result set",
+          "It depends on the LIMIT and OFFSET values"
+          ],
+          "answer": "It depends on the LIMIT and OFFSET values",
+          "explanation": "If OFFSET exceeds the number of rows, an empty result set is returned. If LIMIT exceeds the remaining rows after OFFSET, all remaining rows are returned. No error is raised in either case."
+        },
+        {
+        "id": 6,
+        "question": "What is the result of comparing NULL to NULL using the = operator?",
+        "options": [
+        "TRUE",
+        "FALSE",
+        "NULL",
+        "It depends on the database system"
+        ],
+        "answer": "NULL",
+        "explanation": "When comparing NULL to NULL using the = operator, the result is NULL, not TRUE. This is because NULL represents an unknown value, and comparing two unknown values doesn't yield a boolean result. To check if a value is NULL, use IS NULL instead."
+        },
+        {
+          "id": 4,
+          "question": "What is the result of using LIMIT 0 in a SELECT statement?",
+          "options": [
+          "An empty result set",
+          "The first row of the result",
+          "An error",
+          "All rows in the table"
+          ],
+          "answer": "An empty result set",
+          "explanation": "Using LIMIT 0 in a SELECT statement returns an empty result set. This can be useful for checking the structure of a result without retrieving any actual data."
+        }
+      ]
     }
+    
   ]
 }
