@@ -201,6 +201,41 @@
           ],
           "expectedResult": "SELECT name, age FROM students WHERE major = 'Computer Science';",
           "explanation": "This query retrieves the 'name' and 'age' columns for students majoring in 'Computer Science'."
+        },
+        
+        {
+          "id": 4,
+          "question": "What is the difference between `ORDER BY` and `GROUP BY` in SQL?",
+          "options": [
+            "`ORDER BY` sorts the result set, while `GROUP BY` groups rows with the same values in specified columns.",
+            "`ORDER BY` groups rows with the same values, while `GROUP BY` sorts them.",
+            "`ORDER BY` filters out duplicate rows, while `GROUP BY` displays all rows.",
+            "`ORDER BY` is used only for text fields, while `GROUP BY` is used for numeric fields."
+          ],
+          "answer": "`ORDER BY` sorts the result set, while `GROUP BY` groups rows with the same values in specified columns.",
+          "explanation": "`ORDER BY` is used to sort the result set, whereas `GROUP BY` groups rows that have the same values in specified columns, typically used with aggregate functions."
+        },
+        {
+          "id": 5,
+          "question": "Write a SQL query that groups students by their 'class' and counts the number of students in each class.",
+          "initialData": [
+            "CREATE TABLE students (id INTEGER PRIMARY KEY, name TEXT, class TEXT);",
+            "INSERT INTO students (name, class) VALUES ('John Doe', 'CSE380'), ('Jane Smith', 'CSE380'), ('Bob Brown', 'CSE250');"
+          ],
+          "expectedResult": "SELECT class, COUNT(*) FROM students GROUP BY class;",
+          "explanation": "This query groups students by their 'class' and counts the number of students in each group."
+        },
+        {
+          "id": 6,
+          "question": "What is the purpose of the `HAVING` clause in SQL?",
+          "options": [
+            "It filters the result set after grouping.",
+            "It filters the result set before grouping.",
+            "It sorts the result set based on aggregates.",
+            "It combines two result sets into one."
+          ],
+          "answer": "It filters the result set after grouping.",
+          "explanation": "The `HAVING` clause is used to filter groups of rows after the `GROUP BY` clause has been applied."
         }
       ]
     },
@@ -653,6 +688,63 @@
           ],
           "answer": "An empty result set",
           "explanation": "Using LIMIT 0 in a SELECT statement returns an empty result set. This can be useful for checking the structure of a result without retrieving any actual data."
+        }
+      ]
+    },
+    
+    {
+      "id": "sql-views",
+      "type": "topic",
+      "title": "SQL Views",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is a SQL view?",
+          "options": [
+            "A temporary table that only exists during the current session.",
+            "A stored query that behaves like a table.",
+            "A backup of a table.",
+            "A command that formats data output."
+          ],
+          "answer": "A stored query that behaves like a table.",
+          "explanation": "A SQL view is essentially a saved query that behaves like a table, allowing you to query it as if it were a normal table."
+        },
+        {
+          "id": 2,
+          "question": "Write a SQL query to create a view named 'student_orders' that shows all students and their corresponding orders.",
+          "initialData": [
+            "CREATE TABLE students (id INTEGER PRIMARY KEY, name TEXT);",
+            "CREATE TABLE orders (id INTEGER PRIMARY KEY, student_id INTEGER, product TEXT, FOREIGN KEY(student_id) REFERENCES students(id));",
+            "INSERT INTO students (id, name) VALUES (1, 'John Doe'), (2, 'Jane Smith');",
+            "INSERT INTO orders (id, student_id, product) VALUES (1, 1, 'Laptop'), (2, 1, 'Mouse'), (3, 2, 'Keyboard');"
+          ],
+          "expectedResult": "CREATE VIEW student_orders AS SELECT s.name, o.product FROM students s JOIN orders o ON s.id = o.student_id;",
+          "explanation": "This query creates a view named 'student_orders' that combines data from both the 'students' and 'orders' tables using a JOIN."
+        },
+        {
+          "id": 3,
+          "question": "Can a SQL view be updated directly? Explain your answer.",
+          "options": [
+            "Yes, always.",
+            "No, never.",
+            "Yes, but only under certain conditions.",
+            "Yes, but the view is deleted afterward."
+          ],
+          "answer": "Yes, but only under certain conditions.",
+          "explanation": "A view can be updated directly if it is based on a single table and doesn't include complex calculations or joins. However, if it includes multiple tables, aggregate functions, or `DISTINCT`, it cannot be updated."
+        },
+        {
+          "id": 4,
+          "question": "What is a materialized view, and how does it differ from a regular SQL view?",
+          "options": [
+            "A materialized view stores the query results physically, while a regular view does not.",
+            "A materialized view cannot be updated, while a regular view can.",
+            "A materialized view is created automatically by the database, while a regular view is not.",
+            "A materialized view stores the query, while a regular view stores the results."
+          ],
+          "answer": "A materialized view stores the query results physically, while a regular view does not.",
+          "explanation": "A materialized view is a snapshot of a query's result set that is physically stored in the database. In contrast, a regular view is a virtual table that re-executes the query whenever it is accessed."
         }
       ]
     }
