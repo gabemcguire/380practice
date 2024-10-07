@@ -1,18 +1,18 @@
 <template>
-  <div class="flex justify-center items-center min-h-screen bg-gray-100">
+  <div class="flex justify-center items-center min-h-screen ">
     <div class=" p-8 rounded-lg shadow-md max-w-2xl">
-      <h1 class="font-bold text-4xl mb-6 text-center text-indigo-600">About CSE380 Study Aid</h1>
+      <h1 class="font-bold text-4xl mb-6 text-center ">About</h1>
       <div class="space-y-4">
-        <p class="text-lg text-gray-700">
-          Welcome! I'm a fellow student who created this site over a weekend to help others like me study for CSE380.
+        <p class="text-lg ">
+        I created this site to help students like myself study.
         </p>
-        <p class="text-lg text-gray-700">
-          <strong class="text-indigo-600">Important Note:</strong> This site does not distribute any course materials. All questions are original and designed to supplement your studies.
+        <p class="text-lg ">
+          <strong class="">Important Note:</strong> This site does not distribute any course materials. All questions are original.
         </p>
-        <div class="mt-8 bg-indigo-100 p-6 rounded-lg">
-          <h2 class="font-semibold text-2xl mb-4 text-indigo-800">Support This Project</h2>
-          <p class="text-lg text-indigo-700 mb-4">
-            If you've found this site helpful in your studies, consider supporting its continued development and maintenance!
+        <div class="mt-8 p-4 rounded-lg">
+          <h2 class="font-semibold text-2xl mb-4 Support This Project</h2>
+          <p class="text-lg mb-4">
+            If you found this site helpful, perhaps consider buying me a coffee  
           </p>
           <a 
             href="https://buymeacoffee.com/realgabe" 

@@ -108,119 +108,10 @@
         }
       ]
     },
-    
     {
-      "id": "entity-relationship-diagrams-II",
+      "id": "sql-basics-I",
       "type": "topic",
-      "title": "Entity-Relationship Diagrams II",
-      "difficulty": "Easy",
-      "questions": [
-        {
-          "id": 1,
-          "question": "What is the purpose of the Entity-Relationship (E/R) Model?",
-          "options": [
-            "To describe a system for designing a web page",
-            "To describe the database and capture constraints",
-            "To build front-end interfaces",
-            "To represent server connections"
-          ],
-          "answer": "To describe the database and capture constraints",
-          "explanation": "The E/R model is used to describe the system we want to represent in a database, including its constraints."
-        },
-        {
-          "id": 2,
-          "question": "What shape is used to represent an Entity Set in an ER Diagram?",
-          "options": ["Diamond", "Rectangle", "Oval", "Circle"],
-          "answer": "Rectangle",
-          "explanation": "In an ER diagram, an entity set is represented by a rectangle."
-        },
-        {
-          "id": 3,
-          "question": "Which shape is used to represent attributes in an Entity-Relationship Diagram?",
-          "options": ["Diamond", "Oval", "Rectangle", "Triangle"],
-          "answer": "Oval",
-          "explanation": "In an ER diagram, attributes are represented by ovals connected to their respective entities."
-        },
-        {
-          "id": 4,
-          "question": "What does a diamond represent in an ER diagram?",
-          "options": ["Entity", "Attribute", "Relationship", "Primary Key"],
-          "answer": "Relationship",
-          "explanation": "In an ER diagram, a diamond is used to represent relationships between entities."
-        },
-        {
-          "id": 5,
-          "question": "Which of the following is an example of an Entity Set?",
-          "options": ["Player", "name", "position", "Team"],
-          "answer": "Player",
-          "explanation": "An entity set is a collection of similar entities, such as 'Player' in a sports system."
-        },
-        {
-          "id": 6,
-          "question": "What is an Entity Set?",
-          "options": [
-            "A collection of similar entities",
-            "A collection of relationships between entities",
-            "A unique identifier for an entity",
-            "A set of attributes"
-          ],
-          "answer": "A collection of similar entities",
-          "explanation": "An entity set is a collection of similar entities, like all 'Players' in a sports team."
-        },
-        {
-          "id": 7,
-          "question": "In an ER Diagram, what is represented by a relationship?",
-          "options": [
-            "An attribute connecting two entity sets",
-            "A diamond representing the connection between two or more entity sets",
-            "A connection between an attribute and an entity set",
-            "A unique identifier for each entity"
-          ],
-          "answer": "A diamond representing the connection between two or more entity sets",
-          "explanation": "A relationship is represented by a diamond connecting two or more entity sets in an ER diagram."
-        },
-        {
-          "id": 8,
-          "question": "What type of attribute cannot be used in an ER diagram?",
-          "options": [
-            "String",
-            "Integer",
-            "List or collection",
-            "Date"
-          ],
-          "answer": "List or collection",
-          "explanation": "Attributes in ER diagrams must be simple, meaning they cannot be lists, collections, or composite structures."
-        },
-        {
-          "id": 9,
-          "question": "What is the value of an entity set?",
-          "options": [
-            "The attributes it contains",
-            "The relationships it has",
-            "The set of entities that belong to it",
-            "Its primary key"
-          ],
-          "answer": "The set of entities that belong to it",
-          "explanation": "The value of an entity set is the collection of entities that belong to that set."
-        },
-        {
-          "id": 10,
-          "question": "What is a primary key in the context of an ER diagram?",
-          "options": [
-            "An attribute that uniquely identifies each entity in an entity set",
-            "An attribute that represents a relationship between two entities",
-            "A set of entities that are related to each other",
-            "A graphical symbol used in ER diagrams"
-          ],
-          "answer": "An attribute that uniquely identifies each entity in an entity set",
-          "explanation": "A primary key is an attribute (or set of attributes) that uniquely identifies each entity in an entity set."
-        }
-      ]
-    },
-    {
-      "id": "sql-basics",
-      "type": "topic",
-      "title": "SQL Basics",
+      "title": "SQL Basics I",
       "difficulty": "Easy",
       "questions": [
         {
@@ -269,9 +160,9 @@
       
     }, 
     {
-      "id": "advanced-sql",
+      "id": "sql-basics-II",
       "type": "topic",
-      "title": "Advanced SQL",
+      "title": "SQL Basics II",
       "difficulty": "Medium",
       "questions": [
         {
@@ -366,6 +257,50 @@
           ],
           "expectedResult": "SELECT projects.project_name, managers.name FROM projects LEFT JOIN managers ON projects.manager_id = managers.manager_id;",
           "explanation": "This query uses a LEFT JOIN to return all projects, including those without an assigned manager. Projects with no manager will have NULL for the manager name."
+        }
+      ]
+    },
+    {
+      "id": "sql-joins-ii",
+      "type": "topic",
+      "title": "SQL Joins II",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": 5,
+          "question": "Write a SQL query to return the count of students enrolled in each course. Show the course name even if no students are enrolled. Use the 'courses' and 'enrollments' tables.",
+          "initialData": [
+            "CREATE TABLE courses (course_id INTEGER PRIMARY KEY, course_name TEXT);",
+            "CREATE TABLE enrollments (student_id INTEGER, course_id INTEGER);",
+            "INSERT INTO courses (course_id, course_name) VALUES (1, 'Math'), (2, 'Science'), (3, 'History');",
+            "INSERT INTO enrollments (student_id, course_id) VALUES (1, 1), (2, 1), (3, 2);"
+          ],
+          "expectedResult": "SELECT courses.course_name, COUNT(enrollments.student_id) AS student_count FROM courses LEFT JOIN enrollments ON courses.course_id = enrollments.course_id GROUP BY courses.course_name;",
+          "explanation": "This query uses a LEFT JOIN to show all courses, even those without students, and groups the result by course name to count the number of students enrolled in each course."
+        },
+        {
+          "id": 6,
+          "question": "Write a SQL query to return the names of employees and their department names, ordered by department name. Use the 'employees' and 'departments' tables.",
+          "initialData": [
+            "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY, name TEXT, department_id INTEGER);",
+            "CREATE TABLE departments (department_id INTEGER PRIMARY KEY, department_name TEXT);",
+            "INSERT INTO employees (employee_id, name, department_id) VALUES (1, 'John', 101), (2, 'Jane', 102), (3, 'Emily', 101);",
+            "INSERT INTO departments (department_id, department_name) VALUES (101, 'HR'), (102, 'Engineering');"
+          ],
+          "expectedResult": "SELECT employees.name, departments.department_name FROM employees INNER JOIN departments ON employees.department_id = departments.department_id ORDER BY departments.department_name;",
+          "explanation": "This query uses an INNER JOIN to return employees assigned to departments and orders the result by the department name."
+        },
+        {
+          "id": 7,
+          "question": "Write a SQL query to return the names of all customers whose names contain the letter 'a', along with their order count. Use the 'customers' and 'orders' tables.",
+          "initialData": [
+            "CREATE TABLE customers (customer_id INTEGER PRIMARY KEY, name TEXT);",
+            "CREATE TABLE orders (order_id INTEGER PRIMARY KEY, customer_id INTEGER);",
+            "INSERT INTO customers (customer_id, name) VALUES (1, 'Alice'), (2, 'Bob'), (3, 'Charlie');",
+            "INSERT INTO orders (order_id, customer_id) VALUES (1, 1), (2, 1), (3, 3);"
+          ],
+          "expectedResult": "SELECT customers.name, COUNT(orders.order_id) AS order_count FROM customers LEFT JOIN orders ON customers.customer_id = orders.customer_id WHERE customers.name LIKE '%a%' GROUP BY customers.name;",
+          "explanation": "This query uses a LEFT JOIN to return customers with their order count, including those with no orders. It filters the customers whose names contain the letter 'a' using the LIKE clause and groups the results by customer name."
         }
       ]
     }

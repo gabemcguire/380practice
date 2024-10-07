@@ -10,7 +10,7 @@ function toggleDark() {
 const mainNav = [
   {
     title: 'Practice',
-    href: '/practice',
+    href: '/',
   },
   {
     title: 'Challenges',
@@ -62,7 +62,7 @@ function handleSelectLink(item: any) {
       </div>
 
       <div class="flex flex-1 items-center justify-end space-x-2">
-        <div class="w-full flex-1 md:w-auto md:flex-none">
+        <div class="w-full flex-1 hidden md:w-auto md:flex-none">
           <Button
             variant="outline"
             class="relative h-8 w-full justify-start rounded-[0.5rem] bg-background text-sm text-muted-foreground font-normal shadow-none lg:w-64 md:w-40 sm:pr-12"
