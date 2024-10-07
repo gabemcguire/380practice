@@ -122,6 +122,9 @@ importers:
       radix-vue:
         specifier: ^1.9.1
         version: 1.9.1(vue@3.4.33(typescript@5.4.5))
+      simple-analytics-vue:
+        specifier: ^3.0.2
+        version: 3.0.2(vue@3.4.33(typescript@5.4.5))
       sql.js:
         specifier: ^1.11.0
         version: 1.11.0
@@ -6314,6 +6317,11 @@ packages:
   signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
+
+  simple-analytics-vue@3.0.2:
+    resolution: {integrity: sha512-YEKTvd8IlAxJcywFkdGyO8S+ZO5iL8GaX/RsPoRlQtWOV9F64HW+gYI6NL7T2/Bf3as0ucyBmXGou1q4Eq6F9A==}
+    peerDependencies:
+      vue: ^3.0.0
 
   simple-concat@1.0.1:
     resolution: {integrity: sha512-cSFtAPtRhljv69IK0hTVZQ+OfE9nePi/rtJmw5UjHeVyVroEqJXP1sFztKUy1qU+xvz3u/sfYJLa947b7nAN2Q==}
@@ -15465,6 +15473,10 @@ snapshots:
   signal-exit@3.0.7: {}
 
   signal-exit@4.1.0: {}
+
+  simple-analytics-vue@3.0.2(vue@3.4.33(typescript@5.4.5)):
+    dependencies:
+      vue: 3.4.33(typescript@5.4.5)
 
   simple-concat@1.0.1:
     optional: true
