@@ -303,6 +303,74 @@
           "explanation": "This query uses a LEFT JOIN to return customers with their order count, including those with no orders. It filters the customers whose names contain the letter 'a' using the LIKE clause and groups the results by customer name."
         }
       ]
-    }
+    },
+    {
+    "id": "json-web-tokens",
+    "type": "topic",
+    "title": "JSON Web Tokens (JWTs)",
+    "difficulty": "Easy",
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is a JSON Web Token (JWT) used for?",
+        "options": [
+          "To encrypt data",
+          "To represent a set of permissions for a user",
+          "To securely transmit information between parties as a JSON object",
+          "To store information in a database"
+        ],
+        "answer": "To securely transmit information between parties as a JSON object",
+        "explanation": "JWTs are used to securely transmit information between parties as a JSON object, typically for authentication and authorization."
+      },
+      {
+        "id": 2,
+        "question": "What are the three parts of a JWT?",
+        "options": [
+          "Header, Payload, Signature",
+          "Header, Body, Footer",
+          "Session, Token, Payload",
+          "Request, Response, Signature"
+        ],
+        "answer": "Header, Payload, Signature",
+        "explanation": "A JWT consists of three parts: the header, which defines the type of token and algorithm; the payload, which contains the claims; and the signature, which verifies the token's integrity."
+      },
+      {
+        "id": 3,
+        "question": "Which of the following is NOT typically included in the JWT header?",
+        "options": [
+          "The algorithm used",
+          "The token type",
+          "The user's password",
+          "The key ID (kid)"
+        ],
+        "answer": "The user's password",
+        "explanation": "The JWT header usually includes the algorithm and token type, but sensitive data like passwords are not included."
+      },
+      {
+        "id": 4,
+        "question": "How is a JWT typically encoded?",
+        "options": [
+          "Base64-encoded",
+          "Hexadecimal-encoded",
+          "Encrypted using RSA",
+          "ASCII-encoded"
+        ],
+        "answer": "Base64-encoded",
+        "explanation": "JWTs are Base64-encoded to ensure that the token can be easily transmitted over HTTP, which requires URL-safe characters."
+      },
+      {
+        "id": 5,
+        "question": "What is the purpose of the signature in a JWT?",
+        "options": [
+          "To encrypt the payload",
+          "To verify that the token has not been tampered with",
+          "To compress the token",
+          "To sign the user out"
+        ],
+        "answer": "To verify that the token has not been tampered with",
+        "explanation": "The signature ensures the integrity of the JWT by verifying that the token has not been altered after it was issued."
+      }
+    ]
+  }
   ]
 }
