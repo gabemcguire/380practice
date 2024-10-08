@@ -9,19 +9,29 @@
         <p class="text-lg ">
           <strong class="">Important Note:</strong> This site does not distribute any course materials. All questions are original.
         </p>
-        <div class="mt-8 p-4 rounded-lg">
+        <div class="mt-8 rounded-lg">
           <p class="text-lg mb-4">
-            If you found this site helpful, perhaps consider buying me a coffee  
+            If you found this site helpful, perhaps consider buying me a coffee!  
           </p>
-          <a 
-            href="https://buymeacoffee.com/realgabe" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="inline-flex items-center px-6 py-3 bg-yellow-400 text-yellow-900 font-bold rounded-full hover:bg-yellow-300 transition duration-300"
-          >
-            <span class="mr-2">☕</span>
-            Buy Me a Coffee
-          </a>
+          <div class="flex p-2 mb-12 justify-center">
+            <a 
+              href="https://buymeacoffee.com/realgabe" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="inline-flex items-center px-6 py-3 bg-yellow-400 text-yellow-900 font-bold rounded-full hover:bg-yellow-300 transition duration-300"
+            >
+              <span class="mr-2">☕</span>
+              Buy Me a Coffee
+            </a>
+          </div>
+            <a 
+              href="https://realgabe.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="text-emerald-500 "
+            >
+                My Personal Site
+            </a>
         </div>
       </div>
       <FAQ/>

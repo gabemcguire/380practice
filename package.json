@@ -51,6 +51,7 @@
     "iconify-icon": "^2.1.0",
     "lodash": "^4.17.21",
     "magic-string": "^0.30.10",
+    "marked": "^14.1.2",
     "nuxt": "3.12.4",
     "pinia": "^2.1.7",
     "radix-vue": "^1.9.1",

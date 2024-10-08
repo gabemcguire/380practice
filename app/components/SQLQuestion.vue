@@ -28,11 +28,11 @@
           </table>
         </div>
       </div>
-      <textarea
+      <Textarea
         v-model="userQuery"
         class="w-full h-32 p-2 border rounded mt-4"
         placeholder="Enter your SQL query here"
-      ></textarea>
+      ></Textarea>
     </CardContent>
     <CardFooter>
       <Button class="bg-emerald-500" @click="runQuery" :disabled="!userQuery">

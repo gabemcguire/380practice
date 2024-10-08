@@ -2,7 +2,6 @@
 <template>
   <div class="container mx-auto px-4 py-8 max-w-2xl">
     <h1 class="text-3xl font-bold mb-6">{{ store.selectedSection?.title }}</h1>
-    
     <!-- Quiz in Progress -->
     <div v-if="!quizCompleted">
       <!-- Display Current Question -->

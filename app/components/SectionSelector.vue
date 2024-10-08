@@ -6,7 +6,7 @@
       <Card 
         v-for="section in topicSections" 
         :key="section.id"
-        class="w-full cursor-pointer hover:shadow-md transition-shadow duration-200 flex flex-col"
+        class="w-full cursor-pointer hover:shadow-md hover:scale-105 transition-all duration-200 flex flex-col"
         @click="selectSection(section.id)"
       >
         <CardHeader class="pb-2">
@@ -20,7 +20,7 @@
         <CardContent class="flex-grow flex flex-col justify-between">
           <p class="text-sm text-gray-600 mb-4">{{ section.description }}</p>
           <div class="flex justify-between items-center mt-auto">
-            <span class="text-sm">{{ section.completedQuestions }} / {{ section.totalQuestions }} completed</span>
+            <span class="text-sm">{{ section.completedQuestions || '-' }} / {{ section.questions.length }} completed</span>
             <Progress :value="(section.completedQuestions / section.totalQuestions) * 100" class="w-1/2" />
           </div>
         </CardContent>

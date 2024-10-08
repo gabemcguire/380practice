@@ -1,0 +1,199 @@
+{
+  "featured": [
+    {
+      "id": "selecting-salaries",
+      "title": "Selecting Salaries",
+      "difficulty": "Easy",
+      "description": "Practice writing simple SELECT queries."
+    },
+    {
+      "id": "joining-departments",
+      "title": "Joining Departments",
+      "difficulty": "Medium",
+      "description": "Learn to combine data from multiple tables using JOINs."
+    },
+    {
+      "id": "advanced-aggregations",
+      "title": "Advanced Aggregations",
+      "difficulty": "Hard",
+      "description": "Master complex aggregations and grouping operations."
+    }
+  ],
+  "all": [
+    {
+      "id": "selecting-salaries",
+      "title": "Selecting Salaries",
+      "difficulty": "Easy",
+      "description": "Practice writing simple SELECT queries.",
+      "instructions": "# SQL Challenge: Employee Salaries\n\nWrite a SQL query to find the top 3 highest paid employees from the 'employees' table.\n\n**employees**\n\n| id  | name    | salary |\n|-----|---------|--------|\n| 1   | John    | 50000  |\n| 2   | Jane    | 60000  |\n| 3   | Bob     | 55000  |\n| ...  | ... | ...  |\n\nYour query should return the following columns:\n- name\n- salary\n\nOrder the results by salary in descending order.\n\nGood luck!",
+      "initialData": [
+        "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT, salary INTEGER);",
+        "INSERT INTO employees (name, salary) VALUES ('John', 50000), ('Jane', 60000), ('Bob', 55000), ('Alice', 65000), ('Charlie', 52000);"
+      ],
+      "expectedResult": "SELECT name, salary FROM employees ORDER BY salary DESC LIMIT 3;",
+      "explanation": "This query selects the name and salary from the employees table, orders them by salary in descending order, and limits the result to the top 3 entries."
+    },
+    {
+      "id": "joining-departments",
+      "title": "Joining Departments",
+      "difficulty": "Medium",
+      "description": "Combine data from multiple tables using JOINs.",
+      "instructions": "# SQL Challenge: Employee Departments\n\nWrite a SQL query to find all employees and their department names.\n\n**employees**\n\n| id  | name    | department_id |\n|-----|---------|----------------|\n| 1   | John    | 1              |\n| 2   | Jane    | 2              |\n| 3   | Bob     | 1              |\n\n**departments**\n\n| id  | name        |\n|-----|-------------|\n| 1   | Engineering |\n| 2   | Marketing   |\n\nYour query should return the following columns:\n- employee_name\n- department_name\n\nOrder the results by employee name.\n\nGood luck!",
+      "initialData": [
+        "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT, department_id INTEGER);",
+        "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT);",
+        "INSERT INTO employees (name, department_id) VALUES ('John', 1), ('Jane', 2), ('Bob', 1), ('Alice', 2);",
+        "INSERT INTO departments (id, name) VALUES (1, 'Engineering'), (2, 'Marketing');"
+      ],
+      "expectedResult": "SELECT e.name as employee_name, d.name as department_name FROM employees e JOIN departments d ON e.department_id = d.id ORDER BY e.name;",
+      "explanation": "This query uses an INNER JOIN to combine data from the employees and departments tables, matching the department_id in the employees table with the id in the departments table."
+    },
+    {
+      "id": "advanced-aggregations",
+      "title": "Advanced Aggregations",
+      "difficulty": "Hard",
+      "description": "Master complex aggregations and grouping operations.",
+      "instructions": "# SQL Challenge: Department Salary Statistics\n\nWrite a SQL query to calculate the average, minimum, and maximum salary for each department.\n\n**employees**\n\n| id  | name    | department_id | salary |\n|-----|---------|----------------|--------|\n| 1   | John    | 1              | 50000  |\n| 2   | Jane    | 2              | 60000  |\n| 3   | Bob     | 1              | 55000  |\n\n**departments**\n\n| id  | name        |\n|-----|-------------|\n| 1   | Engineering |\n| 2   | Marketing   |\n\nYour query should return the following columns:\n- department_name\n- avg_salary\n- min_salary\n- max_salary\n\nOrder the results by average salary in descending order.\n\nGood luck!",
+      "initialData": [
+        "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT, department_id INTEGER, salary INTEGER);",
+        "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT);",
+        "INSERT INTO employees (name, department_id, salary) VALUES ('John', 1, 50000), ('Jane', 2, 60000), ('Bob', 1, 55000), ('Alice', 2, 65000), ('Charlie', 1, 52000);",
+        "INSERT INTO departments (id, name) VALUES (1, 'Engineering'), (2, 'Marketing');"
+      ],
+      "expectedResult": "SELECT d.name as department_name, AVG(e.salary) as avg_salary, MIN(e.salary) as min_salary, MAX(e.salary) as max_salary FROM employees e JOIN departments d ON e.department_id = d.id GROUP BY d.id, d.name ORDER BY avg_salary DESC;",
+      "explanation": "This query uses JOIN to combine the employees and departments tables, then uses GROUP BY to aggregate the salary data for each department. It calculates the average, minimum, and maximum salary using AVG(), MIN(), and MAX() functions."
+    },
+    {
+      "id": "filter-by-date",
+      "title": "Filtering Records by Date",
+      "difficulty": "Easy",
+      "description": "Learn to filter records based on a date range.",
+      "instructions": "# SQL Challenge: Orders in 2023\n\nWrite a SQL query to find all orders placed in the year 2023.\n\n**orders**\n\n| id  | customer_id | order_date | total_amount |\n|-----|-------------|-------------|--------------|\n| 1   | 101         | 2023-01-05  | 100.50       |\n| 2   | 102         | 2022-12-21  | 150.00       |\n| 3   | 103         | 2023-03-10  | 75.25        |\n\nYour query should return the following columns:\n- id\n- customer_id\n- order_date\n- total_amount\n\nFilter orders to include only those placed in 2023.",
+      "initialData": [
+        "CREATE TABLE orders (id INTEGER PRIMARY KEY, customer_id INTEGER, order_date DATE, total_amount DECIMAL);",
+        "INSERT INTO orders (customer_id, order_date, total_amount) VALUES (101, '2023-01-05', 100.50), (102, '2022-12-21', 150.00), (103, '2023-03-10', 75.25);"
+      ],
+      "expectedResult": "SELECT * FROM orders WHERE order_date BETWEEN '2023-01-01' AND '2023-12-31';",
+      "explanation": "This query selects all orders placed between January 1, 2023, and December 31, 2023."
+    },
+    {
+      "id": "top-customers",
+      "title": "Top Customers by Spending",
+      "difficulty": "Medium",
+      "description": "Identify the customers who have spent the most money.",
+      "instructions": "# SQL Challenge: Top Spending Customers\n\nWrite a SQL query to find the top 5 customers who have spent the most money.\n\n**customers**\n\n| id  | name    | total_spent |\n|-----|---------|-------------|\n| 1   | John    | 5000        |\n| 2   | Jane    | 6000        |\n| 3   | Bob     | 4500        |\n\nYour query should return the following columns:\n- name\n- total_spent\n\nOrder the results by total_spent in descending order and limit the result to the top 5.",
+      "initialData": [
+        "CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT, total_spent INTEGER);",
+        "INSERT INTO customers (name, total_spent) VALUES ('John', 5000), ('Jane', 6000), ('Bob', 4500), ('Alice', 7000), ('Charlie', 3500);"
+      ],
+      "expectedResult": "SELECT name, total_spent FROM customers ORDER BY total_spent DESC LIMIT 5;",
+      "explanation": "This query selects the name and total_spent from customers and orders them by total_spent in descending order, limiting the result to the top 5."
+    },
+    {
+      "id": "group-by-category",
+      "title": "Group By Product Category",
+      "difficulty": "Medium",
+      "description": "Use GROUP BY to summarize data by category.",
+      "instructions": "# SQL Challenge: Total Sales by Category\n\nWrite a SQL query to find the total sales for each product category.\n\n**products**\n\n| id  | name    | category    | price |\n|-----|---------|-------------|-------|\n| 1   | Laptop  | Electronics | 1200  |\n| 2   | Phone   | Electronics | 800   |\n| 3   | Shirt   | Clothing    | 50    |\n\nYour query should return the following columns:\n- category\n- total_sales\n\nOrder the results by total_sales in descending order.",
+      "initialData": [
+        "CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT, category TEXT, price INTEGER);",
+        "INSERT INTO products (name, category, price) VALUES ('Laptop', 'Electronics', 1200), ('Phone', 'Electronics', 800), ('Shirt', 'Clothing', 50), ('Pants', 'Clothing', 60);"
+      ],
+      "expectedResult": "SELECT category, SUM(price) as total_sales FROM products GROUP BY category ORDER BY total_sales DESC;",
+      "explanation": "This query groups the products by category, calculates the total sales for each category using SUM(), and orders the result by total sales in descending order."
+    },
+    {
+      "id": "counting-employees",
+      "title": "Counting Employees per Department",
+      "difficulty": "Easy",
+      "description": "Use COUNT and GROUP BY to summarize data.",
+      "instructions": "# SQL Challenge: Employees per Department\n\nWrite a SQL query to find the number of employees in each department.\n\n**employees**\n\n| id  | name    | department_id |\n|-----|---------|----------------|\n| 1   | John    | 1              |\n| 2   | Jane    | 2              |\n| 3   | Bob     | 1              |\n\nYour query should return the following columns:\n- department_id\n- employee_count\n\nOrder the results by employee_count in descending order.",
+      "initialData": [
+        "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT, department_id INTEGER);",
+        "INSERT INTO employees (name, department_id) VALUES ('John', 1), ('Jane', 2), ('Bob', 1), ('Alice', 2);"
+      ],
+      "expectedResult": "SELECT department_id, COUNT(*) as employee_count FROM employees GROUP BY department_id ORDER BY employee_count DESC;",
+      "explanation": "This query counts the number of employees in each department using COUNT() and groups by department_id."
+    },
+    {
+      "id": "total-sales",
+      "title": "Calculating Total Sales",
+      "difficulty": "Easy",
+      "description": "Practice using aggregate functions to calculate totals.",
+      "instructions": "# SQL Challenge: Calculate Total Sales\n\nWrite a SQL query to calculate the total sales amount from the orders table.\n\n**orders**\n\n| id  | customer_id | order_date | total_amount |\n|-----|-------------|-------------|--------------|\n| 1   | 101         | 2023-01-05  | 100.50       |\n| 2   | 102         | 2022-12-21  | 150.00       |\n| 3   | 103         | 2023-03-10  | 75.25        |\n\nYour query should return the total sales amount.",
+      "initialData": [
+        "CREATE TABLE orders (id INTEGER PRIMARY KEY, customer_id INTEGER, order_date DATE, total_amount DECIMAL);",
+        "INSERT INTO orders (customer_id, order_date, total_amount) VALUES (101, '2023-01-05', 100.50), (102, '2022-12-21', 150.00), (103, '2023-03-10', 75.25);"
+      ],
+      "expectedResult": "SELECT SUM(total_amount) as total_sales FROM orders;",
+      "explanation": "This query calculates the total sales amount by summing the total_amount from the orders table."
+    },
+    {
+      "id": "average-salary-by-department",
+      "title": "Average Salary by Department",
+      "difficulty": "Medium",
+      "description": "Use GROUP BY to calculate averages by department.",
+      "instructions": "# SQL Challenge: Average Salary by Department\n\nWrite a SQL query to find the average salary for each department.\n\n**employees**\n\n| id  | name    | department_id | salary |\n|-----|---------|----------------|--------|\n| 1   | John    | 1              | 50000  |\n| 2   | Jane    | 2              | 60000  |\n| 3   | Bob     | 1              | 55000  |\n\nYour query should return the following columns:\n- department_id\n- avg_salary\n\nOrder the results by avg_salary in descending order.",
+      "initialData": [
+        "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT, department_id INTEGER, salary INTEGER);",
+        "INSERT INTO employees (name, department_id, salary) VALUES ('John', 1, 50000), ('Jane', 2, 60000), ('Bob', 1, 55000), ('Alice', 2, 65000);"
+      ],
+      "expectedResult": "SELECT department_id, AVG(salary) as avg_salary FROM employees GROUP BY department_id ORDER BY avg_salary DESC;",
+      "explanation": "This query calculates the average salary for each department using AVG() and groups by department_id."
+    },
+    {
+      "id": "customer-orders",
+      "title": "Customer Orders",
+      "difficulty": "Medium",
+      "description": "Learn how to join tables and group data.",
+      "instructions": "# SQL Challenge: Total Orders per Customer\n\nWrite a SQL query to find the total number of orders placed by each customer.\n\n**orders**\n\n| id  | customer_id | total_amount |\n|-----|-------------|--------------|\n| 1   | 101         | 100.50       |\n| 2   | 102         | 150.00       |\n| 3   | 101         | 75.25        |\n\nYour query should return the following columns:\n- customer_id\n- total_orders\n\nOrder the results by total_orders in descending order.",
+      "initialData": [
+        "CREATE TABLE orders (id INTEGER PRIMARY KEY, customer_id INTEGER, total_amount DECIMAL);",
+        "INSERT INTO orders (customer_id, total_amount) VALUES (101, 100.50), (102, 150.00), (101, 75.25);"
+      ],
+      "expectedResult": "SELECT customer_id, COUNT(*) as total_orders FROM orders GROUP BY customer_id ORDER BY total_orders DESC;",
+      "explanation": "This query counts the total number of orders placed by each customer using COUNT() and groups by customer_id."
+    },
+    {
+      "id": "employee-salaries-above-average",
+      "title": "Employees with Salaries Above Average",
+      "difficulty": "Hard",
+      "description": "Use subqueries to filter results based on an average.",
+      "instructions": "# SQL Challenge: Employees Earning Above Average\n\nWrite a SQL query to find all employees whose salary is above the average salary of all employees.\n\n**employees**\n\n| id  | name    | salary |\n|-----|---------|--------|\n| 1   | John    | 50000  |\n| 2   | Jane    | 60000  |\n| 3   | Bob     | 55000  |\n\nYour query should return the following columns:\n- name\n- salary\n\nOrder the results by salary in descending order.",
+      "initialData": [
+        "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT, salary INTEGER);",
+        "INSERT INTO employees (name, salary) VALUES ('John', 50000), ('Jane', 60000), ('Bob', 55000), ('Alice', 65000), ('Charlie', 52000);"
+      ],
+      "expectedResult": "SELECT name, salary FROM employees WHERE salary > (SELECT AVG(salary) FROM employees) ORDER BY salary DESC;",
+      "explanation": "This query selects all employees whose salary is greater than the average salary of all employees using a subquery to calculate the average."
+    },
+    {
+      "id": "products-above-average-price",
+      "title": "Products Above Average Price",
+      "difficulty": "Medium",
+      "description": "Practice filtering results based on a calculated average.",
+      "instructions": "# SQL Challenge: Products Above Average Price\n\nWrite a SQL query to find all products priced above the average product price.\n\n**products**\n\n| id  | name    | price |\n|-----|---------|-------|\n| 1   | Laptop  | 1200  |\n| 2   | Phone   | 800   |\n| 3   | Shirt   | 50    |\n\nYour query should return the following columns:\n- name\n- price\n\nOrder the results by price in descending order.",
+      "initialData": [
+        "CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT, price INTEGER);",
+        "INSERT INTO products (name, price) VALUES ('Laptop', 1200), ('Phone', 800), ('Shirt', 50), ('Pants', 60), ('Tablet', 400);"
+      ],
+      "expectedResult": "SELECT name, price FROM products WHERE price > (SELECT AVG(price) FROM products) ORDER BY price DESC;",
+      "explanation": "This query selects all products whose price is greater than the average price of all products using a subquery to calculate the average."
+    },
+    {
+      "id": "highest-order-customer",
+      "title": "Highest Spending Customer",
+      "difficulty": "Medium",
+      "description": "Use aggregate functions and joins to calculate total spending per customer.",
+      "instructions": "# SQL Challenge: Find the Highest Spending Customer\n\nWrite a SQL query to find the customer who has spent the most across all orders.\n\n**customers**\n\n| id  | name    |\n|-----|---------|\n| 1   | John    |\n| 2   | Jane    |\n| 3   | Bob     |\n\n**orders**\n\n| id  | customer_id | total_amount |\n|-----|-------------|--------------|\n| 1   | 1           | 100.50       |\n| 2   | 2           | 150.00       |\n| 3   | 1           | 75.25        |\n\nYour query should return the following columns:\n- customer_name\n- total_spent\n\nOrder the result by total_spent in descending order and limit to 1.",
+      "initialData": [
+        "CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT);",
+        "CREATE TABLE orders (id INTEGER PRIMARY KEY, customer_id INTEGER, total_amount DECIMAL);",
+        "INSERT INTO customers (name) VALUES ('John'), ('Jane'), ('Bob');",
+        "INSERT INTO orders (customer_id, total_amount) VALUES (1, 100.50), (2, 150.00), (1, 75.25);"
+      ],
+      "expectedResult": "SELECT c.name as customer_name, SUM(o.total_amount) as total_spent FROM customers c JOIN orders o ON c.id = o.customer_id GROUP BY c.name ORDER BY total_spent DESC LIMIT 1;",
+      "explanation": "This query joins the customers and orders tables, groups by customer name, and calculates the total spending using SUM(). The result is ordered by total spending in descending order, limited to 1 result."
+    }
+  ]
+}
