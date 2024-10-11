@@ -9,7 +9,6 @@
       </div>
     </CardHeader>
     <CardContent>
-      <!-- Display database tables -->
       <div class="mt-4">
         <h3 class="text-lg font-semibold">Database Tables:</h3>
         <div v-for="table in dbTables" :key="table.name" class="mt-2">
@@ -63,6 +62,13 @@
   </div>
   <!-- Display feedback -->
   <div v-if="submitted" class="mt-4">
+    <Button variant="outline" @click="toggleAnswer">Show Answer</Button>
+    
+    <Card v-if="showAnswer" class="w-fit flex items-center mt-2 bg-background">
+      <CardContent>
+        <p class="m-1" v-if="showAnswer">{{ question.expectedResult }}</p>
+      </CardContent>
+    </Card>
     <!-- <Feedback :isCorrect="isCorrect" :explanation="explanation" @next="nextQuestion" /> -->
   </div>
 </template>
@@ -76,7 +82,6 @@ import { Button } from '@/components/ui/button'
 import initSqlJs from 'sql.js'
 import Feedback from '@/components/Feedback.vue'
 import { useQuestionStore } from '@/stores/questionStore'
-
 const props = defineProps<{
   question: SQLQuestion | null
 }>()
@@ -85,6 +90,7 @@ const emit = defineEmits(['answer'])
 
 const question = computed(() => props.question)
 const store = useQuestionStore()
+const showAnswer = ref(false);
 const currentQuestionNumber = computed(() => store.currentQuestionIndex + 1)
 const totalQuestions = computed(() => store.totalQuestions)
 
@@ -99,6 +105,9 @@ const explanation = computed(() => question.value ? question.value.explanation :
 // Store the SQL module globally
 const SQL = ref(null)
 
+const toggleAnswer =  () => {
+  showAnswer.value = !showAnswer.value;
+}
 const getDatabaseTables = () => {
   if (!db.value) return
 
@@ -194,8 +203,10 @@ const checkAnswer = () => {
     }
 
     // Execute the expected query
+    console.log('is query? ', question.value.expectedResult);
     const expectedResult = correctDb.exec(question.value.expectedResult)
-
+    console.log('user', JSON.stringify(userResult))
+    console.log('expected', JSON.stringify(expectedResult))
     // Compare userResult with expectedResult
     if (JSON.stringify(userResult) === JSON.stringify(expectedResult)) {
       isCorrect.value = true

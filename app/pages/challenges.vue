@@ -56,7 +56,6 @@ const formatDifficulty = (difficulty: string) => {
         <CardHeader>
           <CardTitle>{{ challenge.title }}</CardTitle>
           <CardDescription>
-          
             <Badge :class="[difficultyColors[challenge.difficulty], 'text-white']" class="p-1">{{ challenge.difficulty }}</Badge>
           </CardDescription>
         </CardHeader>

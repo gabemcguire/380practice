@@ -59,6 +59,7 @@
     </Card>
 
     <!-- Feedback -->
+    <ClientOnly>
     <Card v-if="showFeedback" class="mt-6">
       <CardHeader>
         <CardTitle>Feedback</CardTitle>
@@ -67,17 +68,28 @@
         <p v-if="isCorrect" class="text-green-600">Correct! Well done!</p>
         <p v-else class="text-red-600">Not quite right. Try again!</p>
         <p class="mt-2">{{ challenge.explanation }}</p>
+        <Button class="mt-4" variant="outline" @click="toggleAnswer">
+          {{ showAnswer ? 'Hide Answer' : 'Show Answer' }}
+        </Button>
+        <Card v-if="showAnswer" class="w-fit mt-2 bg-background">
+          <CardContent> <p class="mt-2"> {{ challenge.expectedResult }}</p>
+          </CardContent>
+        </Card>
       </CardContent>
       <CardFooter>
-        <Button @click="nextChallenge" class="bg-emerald-600 hover:bg-emerald-500">
+        <Button @click="nextChallenge" class=" hidden jbg-emerald-600 hover:bg-emerald-500">
           Next Challenge
         </Button>
       </CardFooter>
     </Card>
+    
+    </ClientOnly>
   </div>
 </template>
 
 <script setup lang="ts">
+  
+const isOpen = ref(false)
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from '#app'
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'
@@ -94,12 +106,16 @@ const userQuery = ref('')
 const queryResult = ref(null)
 const showFeedback = ref(false)
 const isCorrect = ref(false)
+const showAnswer = ref(false);
 const db = ref(null)
 
 const renderedInstructions = computed(() => {
   return challenge.value.instructions ? marked(challenge.value.instructions) : ''
 })
 
+const toggleAnswer = () => {
+  showAnswer.value = !showAnswer.value;
+}
 onMounted(async () => {
   const challengeId = route.params.id
   await loadChallenge(challengeId)
