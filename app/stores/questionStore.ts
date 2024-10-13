@@ -51,10 +51,79 @@ export const useQuestionStore = defineStore('question', {
       }
     },
     
+    async loadProgress() {
+      if (process.client) {
+        // Load from localStorage
+        const storedProgress = localStorage.getItem('quizProgress')
+        if (storedProgress) {
+          const progress = JSON.parse(storedProgress)
+          this.selectedSection = progress.selectedSection
+          this.currentQuestionIndex = progress.currentQuestionIndex
+          this.userAnswers = progress.userAnswers
+          this.score = progress.score
+        }
+
+        // Load from IndexedDB
+        try {
+          const db = await this.openIndexedDB()
+          const transaction = db.transaction(['quizProgress'], 'readonly')
+          const objectStore = transaction.objectStore('quizProgress')
+          const request = objectStore.get('currentProgress')
+          request.onsuccess = (event) => {
+            const progress = event.target.result
+            if (progress) {
+              this.selectedSection = progress.selectedSection
+              this.currentQuestionIndex = progress.currentQuestionIndex
+              this.userAnswers = progress.userAnswers
+              this.score = progress.score
+            }
+          }
+        } catch (error) {
+          console.error('Error loading progress from IndexedDB:', error)
+        }
+      }
+    },
+    async saveProgress() {
+      if (process.client) {
+        const progress = {
+          selectedSection: this.selectedSection,
+          currentQuestionIndex: this.currentQuestionIndex,
+          userAnswers: this.userAnswers,
+          score: this.score,
+        }
+
+        // Save to localStorage
+        localStorage.setItem('quizProgress', JSON.stringify(progress))
+
+        // Save to IndexedDB
+        try {
+          const db = await this.openIndexedDB()
+          const transaction = db.transaction(['quizProgress'], 'readwrite')
+          const objectStore = transaction.objectStore('quizProgress')
+          objectStore.put(progress, 'currentProgress')
+        } catch (error) {
+          console.error('Error saving progress to IndexedDB:', error)
+        }
+      }
+    },
+    
+    async openIndexedDB() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open('QuizDatabase', 1)
+        request.onerror = (event) => reject('IndexedDB error: ' + event.target.error)
+        request.onsuccess = (event) => resolve(event.target.result)
+        request.onupgradeneeded = (event) => {
+          const db = event.target.result
+          db.createObjectStore('quizProgress')
+        }
+      })
+    },
     nextQuestion() {
       if (this.selectedSection && this.currentQuestionIndex < this.selectedSection.questions.length - 0) {
         this.currentQuestionIndex++
         this.isCorrect = false // Reset correctness for the new question
+        
+        this.saveProgress()
       }
     },
     
@@ -143,6 +212,8 @@ export const useQuestionStore = defineStore('question', {
           this.isCorrect = false
         }
       }
+      
+      this.saveProgress()
     },
     reset() {
       this.selectedSection = null

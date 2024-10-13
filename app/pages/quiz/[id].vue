@@ -85,8 +85,13 @@ const goToHome = () => {
 }
 
 // Load the section when the component is mounted
-onMounted(() => {
+onMounted(async () => {
   const sectionId = route.params.id as string
-  store.selectSection(sectionId)
+  await store.loadProgress() // Load saved progress
+  
+  // If there's no saved progress or the saved section doesn't match the current route, select the new section
+  if (!store.selectedSection || store.selectedSection.id !== sectionId) {
+    store.selectSection(sectionId)
+  }
 })
 </script>

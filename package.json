@@ -60,6 +60,7 @@
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.4.5",
+    "unocss-preset-animations": "^1.1.0",
     "unocss-preset-shadcn": "^0.3.0",
     "vaul-vue": "^0.1.2",
     "vee-validate": "4.12.8",
