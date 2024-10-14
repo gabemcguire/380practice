@@ -1,4 +1,5 @@
 {
+  "version": 4,
   "sections": [
     {
       "id": "entity-relationship-diagrams",
@@ -153,8 +154,10 @@
             "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);",
             "INSERT INTO users (name) VALUES ('Alice'), ('Bob');"
           ],
-          "expectedResult": "SELECT * FROM users;"
+          "expectedResult": "SELECT * FROM users;",
+          "explanation": "By using SELECT * you can select all columns of the table."
         }
+        
       ]
     },
     {
@@ -689,6 +692,87 @@
         }
       ]
     },
+    
+    {
+      "id": "sql-edge-cases-ii",
+      "type": "topic",
+      "title": "SQL Edge Cases II",
+      "difficulty": "Hard",
+      "questions": [
+        {
+          "id": "sql-edge-ii-1",
+          "question": "What happens if a GROUP BY column contains NULL values?",
+          "options": [
+            "The query fails with an error.",
+            "Rows with NULL values are excluded from the result.",
+            "Rows with NULL values are grouped together.",
+            "Each NULL value is treated as a separate group."
+          ],
+          "answer": "Rows with NULL values are grouped together.",
+          "explanation": "In SQL, rows with NULL values in a GROUP BY column are grouped together in a single group because NULL is treated as an unknown value but is grouped as one set."
+        },
+        {
+          "id": "sql-edge-ii-2",
+          "question": "What is the result of a LEFT JOIN when there are no matching rows in the right table?",
+          "options": [
+            "An empty result set.",
+            "The query fails with an error.",
+            "NULLs are returned for columns from the right table.",
+            "Rows from the left table are excluded from the result."
+          ],
+          "answer": "NULLs are returned for columns from the right table.",
+          "explanation": "In a LEFT JOIN, if there are no matching rows in the right table, SQL will return NULLs for the columns of the right table while including all rows from the left table."
+        },
+        {
+          "id": "sql-edge-ii-3",
+          "question": "What is the result of using the HAVING clause without a GROUP BY?",
+          "options": [
+            "The query succeeds but ignores the HAVING clause.",
+            "The query fails with an error.",
+            "The HAVING clause acts as a WHERE clause.",
+            "The query returns an empty result set."
+          ],
+          "answer": "The HAVING clause acts as a WHERE clause.",
+          "explanation": "In some SQL implementations, if a HAVING clause is used without a GROUP BY clause, it behaves like a WHERE clause, filtering rows based on the conditions specified."
+        },
+        {
+          "id": "sql-edge-ii-4",
+          "question": "What happens when a subquery returns more than one row in a single-row subquery context (e.g., in a WHERE clause using '=')?",
+          "options": [
+            "The query returns the first row from the subquery.",
+            "SQL throws an error.",
+            "SQL ignores the additional rows and proceeds with the first one.",
+            "SQL returns all rows from the subquery."
+          ],
+          "answer": "SQL throws an error.",
+          "explanation": "If a subquery returns more than one row when only a single value is expected (as in a single-row subquery), SQL will throw an error, as it cannot compare multiple values with a scalar value."
+        },
+        {
+          "id": "sql-edge-ii-5",
+          "question": "What happens when you use UNION ALL instead of UNION, but the result sets contain duplicate rows?",
+          "options": [
+            "Duplicate rows are automatically removed.",
+            "An error is thrown due to duplicates.",
+            "The duplicate rows are included in the result.",
+            "The result set ignores all duplicates and returns distinct rows."
+          ],
+          "answer": "The duplicate rows are included in the result.",
+          "explanation": "UNION ALL includes all rows, including duplicates, in the result set, whereas UNION removes duplicate rows."
+        },
+        {
+          "id": "sql-edge-ii-6",
+          "question": "What is the behavior when an aggregate function like SUM() is applied to a column that contains only NULL values?",
+          "options": [
+            "The result is NULL.",
+            "The result is 0.",
+            "The query fails with an error.",
+            "The result is undefined."
+          ],
+          "answer": "The result is 0.",
+          "explanation": "When an aggregate function like SUM() is applied to a column containing only NULL values, the result is 0. Aggregate functions generally ignore NULL values."
+        }
+      ]
+    },
     {
       "id": "sql-views",
       "type": "topic",
@@ -894,6 +978,238 @@
           ],
           "answer": "Data can be accessed without authorization.",
           "explanation": "Without encryption, sensitive data is vulnerable to unauthorized access and potential data breaches."
+        }
+      ]
+    },
+    {
+      "id": "database-design-theory",
+      "type": "topic",
+      "title": "Database Design Theory",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "design-theory-1",
+          "question": "What is a weak entity in an Entity-Relationship (ER) diagram?",
+          "options": [
+            "An entity that does not have any attributes.",
+            "An entity that cannot be uniquely identified by its own attributes.",
+            "An entity that has a 1:1 relationship with another entity.",
+            "An entity that does not participate in relationships."
+          ],
+          "answer": "An entity that cannot be uniquely identified by its own attributes.",
+          "explanation": "A weak entity is an entity that cannot be uniquely identified by its own attributes alone. It relies on a foreign key (typically from a related entity) along with its own attributes to form a composite primary key."
+        },
+        {
+          "id": "design-theory-2",
+          "question": "Which of the following is true about a strong entity?",
+          "options": [
+            "It always has a composite primary key.",
+            "It can be uniquely identified by its own attributes.",
+            "It cannot exist without a relationship to another entity.",
+            "It always participates in a 1:N relationship."
+          ],
+          "answer": "It can be uniquely identified by its own attributes.",
+          "explanation": "A strong entity can be uniquely identified by its own attributes without requiring foreign key dependency from another entity."
+        },
+        {
+          "id": "design-theory-3",
+          "question": "How is a weak entity typically represented in an ER diagram?",
+          "options": [
+            "As a rectangle with a single line border.",
+            "As a rectangle with a double line border.",
+            "As an oval with a single line border.",
+            "As a circle with a dotted line."
+          ],
+          "answer": "As a rectangle with a double line border.",
+          "explanation": "In ER diagrams, weak entities are often represented by rectangles with double line borders to distinguish them from strong entities."
+        },
+        {
+          "id": "design-theory-4",
+          "question": "In a relationship between a weak entity and a strong entity, what is the minimum cardinality on the strong entity side?",
+          "options": [
+            "1",
+            "0",
+            "N",
+            "It depends on the relationship type."
+          ],
+          "answer": "1",
+          "explanation": "In a relationship between a weak entity and a strong entity, the minimum cardinality on the strong entity side is typically 1, since the weak entity depends on the strong entity for identification."
+        },
+        {
+          "id": "design-theory-5",
+          "question": "What is a composite attribute in database design?",
+          "options": [
+            "An attribute that stores multiple values for each entity.",
+            "An attribute that can be broken down into smaller parts.",
+            "An attribute that uniquely identifies an entity.",
+            "An attribute that consists of two foreign keys."
+          ],
+          "answer": "An attribute that can be broken down into smaller parts.",
+          "explanation": "A composite attribute is one that can be divided into smaller sub-attributes. For example, an address attribute could be split into street, city, state, and zip code."
+        },
+        {
+          "id": "design-theory-6",
+          "question": "Which of the following is an identifying relationship?",
+          "options": [
+            "A relationship where a foreign key exists but is not part of the primary key.",
+            "A relationship where the foreign key is part of the primary key of the weak entity.",
+            "A 1:N relationship between two strong entities.",
+            "A many-to-many relationship between any two entities."
+          ],
+          "answer": "A relationship where the foreign key is part of the primary key of the weak entity.",
+          "explanation": "In an identifying relationship, the foreign key from the strong entity is part of the primary key of the weak entity, making it essential for the identification of the weak entity."
+        },
+        {
+          "id": "design-theory-7",
+          "question": "What is the main difference between a total participation and a partial participation in an ER diagram?",
+          "options": [
+            "Total participation means all instances of the entity must be involved in the relationship, while partial participation means only some instances are involved.",
+            "Total participation requires a foreign key, while partial participation does not.",
+            "Total participation occurs only in weak entities, while partial participation occurs only in strong entities.",
+            "Total participation is always represented with a dashed line, while partial participation is represented with a solid line."
+          ],
+          "answer": "Total participation means all instances of the entity must be involved in the relationship, while partial participation means only some instances are involved.",
+          "explanation": "Total participation means every instance of the entity must be involved in the relationship, whereas partial participation means that some instances of the entity are not necessarily involved in the relationship."
+        },
+        {
+          "id": "design-theory-8",
+          "question": "Which of the following is an example of a multivalued attribute?",
+          "options": [
+            "An employee's name.",
+            "A customer's phone numbers.",
+            "A product's price.",
+            "An order's shipping address."
+          ],
+          "answer": "A customer's phone numbers.",
+          "explanation": "A multivalued attribute can store more than one value for a single entity. In this case, a customer can have multiple phone numbers."
+        },
+        {
+          "id": "design-theory-9",
+          "question": "How is a many-to-many (M:N) relationship represented in a relational database?",
+          "options": [
+            "As a single table with two primary keys.",
+            "By splitting the M:N relationship into two 1:N relationships using an associative entity.",
+            "As a composite key within the same entity.",
+            "Using a foreign key in one of the tables."
+          ],
+          "answer": "By splitting the M:N relationship into two 1:N relationships using an associative entity.",
+          "explanation": "In relational databases, many-to-many relationships are typically broken down into two one-to-many relationships by introducing an associative (or junction) table."
+        },
+        {
+          "id": "design-theory-10",
+          "question": "What is an entity’s primary key composed of in a one-to-one (1:1) relationship?",
+          "options": [
+            "A composite key consisting of foreign keys from both entities.",
+            "The primary key of either entity can be used.",
+            "A new attribute that is unique across both entities.",
+            "A combination of foreign keys from other related entities."
+          ],
+          "answer": "The primary key of either entity can be used.",
+          "explanation": "In a one-to-one relationship, either entity’s primary key can be used as the foreign key in the other entity because there is a direct one-to-one correspondence between the instances of the two entities."
+        }
+      ]
+    },
+    {
+      "id": "sql-optimization-performance",
+      "type": "topic",
+      "title": "SQL Optimization & Performance",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "sql-indexing-1",
+          "question": "What is the purpose of using indexes in a SQL database?",
+          "options": [
+            "To store duplicate records more efficiently",
+            "To speed up data retrieval operations",
+            "To encrypt sensitive data",
+            "To manage relationships between tables"
+          ],
+          "answer": "To speed up data retrieval operations",
+          "explanation": "Indexes are used to speed up queries by providing a fast way to look up records without scanning the entire table."
+        },
+        {
+          "id": "sql-indexing-2",
+          "question": "Which of the following types of queries benefit the most from using an index?",
+          "options": [
+            "Queries that perform frequent updates on a table",
+            "Queries that search for data based on specific column values",
+            "Queries that create new tables",
+            "Queries that aggregate data using GROUP BY"
+          ],
+          "answer": "Queries that search for data based on specific column values",
+          "explanation": "Indexes are most useful for queries that frequently search for data based on specific column values, as they reduce the amount of data scanned during a search."
+        },
+        {
+          "id": "sql-indexing-3",
+          "question": "What is a clustered index in SQL?",
+          "options": [
+            "An index that stores data in a non-sequential order",
+            "An index where the physical order of rows in the table matches the order of the index",
+            "An index that stores duplicate rows more efficiently",
+            "An index that can be applied to multiple columns"
+          ],
+          "answer": "An index where the physical order of rows in the table matches the order of the index",
+          "explanation": "A clustered index sorts and stores the data rows in the table based on the index key. The table can have only one clustered index, as the data rows themselves can only be stored in one order."
+        },
+        {
+          "id": "sql-indexing-4",
+          "question": "What is a non-clustered index in SQL?",
+          "options": [
+            "An index that stores a separate copy of the data with pointers to the table rows",
+            "An index that automatically updates when data is inserted",
+            "An index that allows duplicate values in a column",
+            "An index that can only be created on unique columns"
+          ],
+          "answer": "An index that stores a separate copy of the data with pointers to the table rows",
+          "explanation": "A non-clustered index stores a separate copy of the indexed data and includes pointers to the actual rows in the table. Multiple non-clustered indexes can exist on a table."
+        },
+        {
+          "id": "sql-indexing-5",
+          "question": "What is a composite index?",
+          "options": [
+            "An index created on more than one column",
+            "An index that combines clustered and non-clustered indexes",
+            "An index created automatically by the database system",
+            "An index that allows duplicate values"
+          ],
+          "answer": "An index created on more than one column",
+          "explanation": "A composite index is created on two or more columns of a table and is useful when queries frequently filter on a combination of those columns."
+        },
+        {
+          "id": "sql-indexing-6",
+          "question": "What is the downside of using too many indexes on a table?",
+          "options": [
+            "Indexes can lead to slower data retrieval operations",
+            "Indexes can cause tables to become corrupted",
+            "Indexes can negatively impact the performance of INSERT, UPDATE, and DELETE operations",
+            "Indexes prevent you from creating foreign key constraints"
+          ],
+          "answer": "Indexes can negatively impact the performance of INSERT, UPDATE, and DELETE operations",
+          "explanation": "Although indexes improve query performance for data retrieval, they can slow down INSERT, UPDATE, and DELETE operations because the database has to update the indexes whenever data changes."
+        },
+        {
+          "id": "sql-indexing-7",
+          "question": "What is the difference between a unique index and a regular index?",
+          "options": [
+            "A unique index allows duplicate values, while a regular index does not",
+            "A unique index does not allow duplicate values, while a regular index does",
+            "A unique index is faster than a regular index",
+            "A unique index is always clustered, while a regular index is not"
+          ],
+          "answer": "A unique index does not allow duplicate values, while a regular index does",
+          "explanation": "A unique index ensures that all values in the indexed column(s) are unique, whereas a regular index allows duplicate values."
+        },
+        {
+          "id": "sql-indexing-8",
+          "question": "When should you avoid using indexes?",
+          "options": [
+            "On columns that are frequently queried",
+            "On columns that have low cardinality (few unique values)",
+            "On columns that are part of foreign key constraints",
+            "On tables that rarely change"
+          ],
+          "answer": "On columns that have low cardinality (few unique values)",
+          "explanation": "Indexes are less useful on columns with low cardinality (few unique values), such as columns with boolean values or status flags, because they provide little benefit over scanning the entire table."
         }
       ]
     }

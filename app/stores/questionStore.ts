@@ -34,10 +34,12 @@ export const useQuestionStore = defineStore('question', {
     },
     isQuizCompleted(state): boolean {
       if (!state.selectedSection) return false
-      const lastIndex = state.selectedSection.questions.length - 1
-      const lastQuestion = state.selectedSection.questions[lastIndex]
-      return state.currentQuestionIndex === lastIndex &&
-             state.userAnswers[lastQuestion.id] !== undefined
+      const lastIndex = state.selectedSection.questions.length - 1 
+      // const lastQuestion = state.selectedSection.questions[lastIndex]
+      return state.currentQuestionIndex > lastIndex
+        
+      // return state.currentQuestionIndex === (lastIndex +1) &&
+      //        state.userAnswers[lastQuestion.id] !== undefined
     },
     
     sectionsWithProgress(state): Array<Section & { completedQuestions: number; totalQuestions: number }> {
@@ -106,58 +108,66 @@ export const useQuestionStore = defineStore('question', {
             progressStore.createIndex('userId', 'userId', { unique: false })
             progressStore.createIndex('sectionId', 'sectionId', { unique: false })
           }
+          if (!db.objectStoreNames.contains('metadata')) {
+            db.createObjectStore('metadata', { keyPath: 'key' });
+          }
         }
       })
     },
 
     async populateInitialData() {
       if (!this.db) return;
-      console.log('in populate initial data');
-      const transaction = this.db.transaction(['sections', 'questions'], 'readwrite');
+      const transaction = this.db.transaction(['sections', 'questions', 'metadata'], 'readwrite');
       const sectionsStore = transaction.objectStore('sections');
       const questionsStore = transaction.objectStore('questions');
+      const metadataStore = transaction.objectStore('metadata');
 
-      // Check if sections are already populated
-      const sectionsCount = await new Promise<number>((resolve, reject) => {
-        const countRequest = sectionsStore.count();
-        countRequest.onsuccess = () => resolve(countRequest.result);
-        countRequest.onerror = () => reject(countRequest.error);
+      const storedVersion = await new Promise<number>((resolve) => {
+        const request = metadataStore.get('version');
+        request.onsuccess = () => resolve(request.result?.version || 0);
       });
 
-      if (sectionsCount === 0) {
-        // Populate sections
-        console.log('populating sections');
+      const currentVersion = (questionsData as any).version || 0;
+
+      if (currentVersion > storedVersion) {
+        // Clear existing data
+        await Promise.all([
+          new Promise<void>((resolve) => {
+            const clearRequest = sectionsStore.clear();
+            clearRequest.onsuccess = () => resolve();
+          }),
+          new Promise<void>((resolve) => {
+            const clearRequest = questionsStore.clear();
+            clearRequest.onsuccess = () => resolve();
+          })
+        ]);
+
+        // Populate with new data
         const sections = (questionsData as any).sections as Section[];
-
         for (const section of sections) {
-          console.log('adding section:', section.title);
-
-          await new Promise<void>((resolve, reject) => {
+          await new Promise<void>((resolve) => {
             const addSectionRequest = sectionsStore.add(section);
             addSectionRequest.onsuccess = () => resolve();
-            addSectionRequest.onerror = (event) => {
-              console.error('Error adding section:', section.title, addSectionRequest.error);
-              reject(addSectionRequest.error);
-            };
           });
 
           for (const question of section.questions) {
-            await new Promise<void>((resolve, reject) => {
+            await new Promise<void>((resolve) => {
               const addQuestionRequest = questionsStore.add({ ...question, sectionId: section.id });
               addQuestionRequest.onsuccess = () => resolve();
-              addQuestionRequest.onerror = (event) => {
-                console.error('Error adding question:', question, addQuestionRequest.error);
-                reject(addQuestionRequest.error);
-              };
             });
           }
         }
-      }
 
-      return new Promise<void>((resolve, reject) => {
-        transaction.oncomplete = () => resolve();
-        transaction.onerror = () => reject(transaction.error);
-      });
+        // Update version in metadata
+        await new Promise<void>((resolve) => {
+          const updateVersionRequest = metadataStore.put({ key: 'version', version: currentVersion });
+          updateVersionRequest.onsuccess = () => resolve();
+        });
+
+        console.log(`Database updated to version ${currentVersion}`);
+      } else {
+        console.log('Database is up to date');
+      }
     },
 
 
@@ -281,7 +291,7 @@ export const useQuestionStore = defineStore('question', {
     },
     
     nextQuestion() {
-      if (this.selectedSection && this.currentQuestionIndex < this.selectedSection.questions.length - 1) {
+      if (this.selectedSection && this.currentQuestionIndex < this.selectedSection.questions.length - 0) {
         this.currentQuestionIndex++
         this.isCorrect = false // Reset correctness for the new question
         

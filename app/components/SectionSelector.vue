@@ -4,7 +4,6 @@
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold">Select a Topic</h2>
       <Button @click="shuffleSections" variant="outline"> 
-        
         <Icon name="radix-icons:shuffle" class="mr-2 h-4 w-4" />
         Shuffle
       </Button>
