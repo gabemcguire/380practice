@@ -17,6 +17,7 @@ const store = useQuestionStore()
 
 onMounted(() => {
   const sectionId = route.params.sectionId as string
+  store.initDatabase()
   store.selectSection(sectionId)
   if (!store.selectedSection) {
     // If section not found, redirect or handle error

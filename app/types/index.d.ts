@@ -24,3 +24,11 @@ export interface Section {
 export interface QuestionsData {
   sections: Section[];
 }
+
+export interface UserProgress {
+  userId: string;
+  sectionId: string;
+  currentQuestionIndex: number;
+  userAnswers: Record<number, string>;
+  score: number;
+}

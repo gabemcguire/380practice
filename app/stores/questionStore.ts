@@ -1,19 +1,22 @@
 // stores/questionStore.ts
-import _ from 'lodash' // Install lodash for deep comparison
+import _ from 'lodash' // Ensure lodash is installed
 import { defineStore } from 'pinia'
 import questionsData from '~/data/questions.json'
 import initSqlJs from 'sql.js'
-import type { Section, Question, SQLQuestion } from '~/types'
+import type { Section, Question, UserProgress } from '~/types'
 
 export const useQuestionStore = defineStore('question', {
   state: () => ({
-    sections: (questionsData as any).sections as Section[],
+    db: null as IDBDatabase | null,
+    sections: [] as Section[],
     selectedSection: null as Section | null,
+    userProgressMap: {} as Record<string, UserProgress>, // New state property
     currentQuestionIndex: 0,
     userAnswers: {} as Record<number, string>,
     SQL: null as any,
+    userId: 'localuser',
     score: 0,
-    isCorrect: false, // New state property
+    isCorrect: false,
   }),
   
   getters: {
@@ -31,95 +34,254 @@ export const useQuestionStore = defineStore('question', {
     },
     isQuizCompleted(state): boolean {
       if (!state.selectedSection) return false
-      const lastIndex = state.selectedSection.questions.length - 0 
-      return state.currentQuestionIndex === lastIndex
+      const lastIndex = state.selectedSection.questions.length - 1
       const lastQuestion = state.selectedSection.questions[lastIndex]
       return state.currentQuestionIndex === lastIndex &&
              state.userAnswers[lastQuestion.id] !== undefined
-    }
+    },
+    
+    sectionsWithProgress(state): Array<Section & { completedQuestions: number; totalQuestions: number }> {
+      return state.sections.map(section => {
+        const progress = state.userProgressMap[section.id]
+        const completedQuestions = progress ? Object.keys(progress.userAnswers).length : 0
+        return {
+          ...section,
+          completedQuestions,
+          totalQuestions: section.questions.length, // Ensure totalQuestions is set when loading sections
+        }
+      })
+    },
   },
   
   actions: {
-    selectSection(sectionId: string) {
-      const section = this.sections.find(sec => sec.id === sectionId)
-      if (section) {
-        this.selectedSection = section
+    async initDatabase() {
+      if (process.client) {
+        try {
+          this.db = await this.openDB()
+          await this.populateInitialData()
+          await this.loadSections()
+          await this.loadAllProgress(this.userId); // Load all progress here
+          console.log('Database initialization complete')
+        } catch (error) {
+          console.error('Database initialization failed:', error)
+        }
+      }
+    },
+    
+    async loadAllProgress(userId: string) {
+      if (!this.db) return;
+      const transaction = this.db.transaction(['userProgress'], 'readonly');
+      const store = transaction.objectStore('userProgress');
+      const index = store.index('userId');
+      const userProgress: UserProgress[] = await new Promise((resolve, reject) => {
+        const request = index.getAll(userId);
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      });
+
+      userProgress.forEach(progress => {
+        this.userProgressMap[progress.sectionId] = progress;
+      });
+    },
+    openDB(): Promise<IDBDatabase> {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open('QuizDatabase', 1)
+        request.onerror = (event) => reject('IndexedDB error: ' + (event.target as IDBOpenDBRequest).error)
+        request.onsuccess = (event) => resolve((event.target as IDBOpenDBRequest).result)
+        request.onupgradeneeded = (event) => {
+          const db = (event.target as IDBOpenDBRequest).result
+          
+          if (!db.objectStoreNames.contains('sections')) {
+            const sectionsStore = db.createObjectStore('sections', { keyPath: 'id' })
+            sectionsStore.createIndex('type', 'type', { unique: false })
+          }
+          
+          if (!db.objectStoreNames.contains('questions')) {
+            const questionsStore = db.createObjectStore('questions', { keyPath: 'id' })
+            questionsStore.createIndex('sectionId', 'sectionId', { unique: false })
+          }
+          
+          if (!db.objectStoreNames.contains('userProgress')) {
+            const progressStore = db.createObjectStore('userProgress', { keyPath: ['userId', 'sectionId'] })
+            progressStore.createIndex('userId', 'userId', { unique: false })
+            progressStore.createIndex('sectionId', 'sectionId', { unique: false })
+          }
+        }
+      })
+    },
+
+    async populateInitialData() {
+      if (!this.db) return;
+      console.log('in populate initial data');
+      const transaction = this.db.transaction(['sections', 'questions'], 'readwrite');
+      const sectionsStore = transaction.objectStore('sections');
+      const questionsStore = transaction.objectStore('questions');
+
+      // Check if sections are already populated
+      const sectionsCount = await new Promise<number>((resolve, reject) => {
+        const countRequest = sectionsStore.count();
+        countRequest.onsuccess = () => resolve(countRequest.result);
+        countRequest.onerror = () => reject(countRequest.error);
+      });
+
+      if (sectionsCount === 0) {
+        // Populate sections
+        console.log('populating sections');
+        const sections = (questionsData as any).sections as Section[];
+
+        for (const section of sections) {
+          console.log('adding section:', section.title);
+
+          await new Promise<void>((resolve, reject) => {
+            const addSectionRequest = sectionsStore.add(section);
+            addSectionRequest.onsuccess = () => resolve();
+            addSectionRequest.onerror = (event) => {
+              console.error('Error adding section:', section.title, addSectionRequest.error);
+              reject(addSectionRequest.error);
+            };
+          });
+
+          for (const question of section.questions) {
+            await new Promise<void>((resolve, reject) => {
+              const addQuestionRequest = questionsStore.add({ ...question, sectionId: section.id });
+              addQuestionRequest.onsuccess = () => resolve();
+              addQuestionRequest.onerror = (event) => {
+                console.error('Error adding question:', question, addQuestionRequest.error);
+                reject(addQuestionRequest.error);
+              };
+            });
+          }
+        }
+      }
+
+      return new Promise<void>((resolve, reject) => {
+        transaction.oncomplete = () => resolve();
+        transaction.onerror = () => reject(transaction.error);
+      });
+    },
+
+
+    async loadSections() {
+      if (!this.db) return
+      const transaction = this.db.transaction(['sections'], 'readonly')
+      const store = transaction.objectStore('sections')
+      this.sections = await new Promise<Section[]>((resolve) => {
+        const request = store.getAll()
+        request.onsuccess = () => resolve(request.result)
+      })
+    },
+    /**
+     * Restart the quiz for a specific section.
+     * This deletes the user's progress for the section and resets state variables.
+     */
+    async restartSection(sectionId: string) {
+      if (!this.db) return
+
+      // Delete progress from IndexedDB
+      const transaction = this.db.transaction(['userProgress'], 'readwrite')
+      const store = transaction.objectStore('userProgress')
+      await new Promise<void>((resolve, reject) => {
+        const request = store.delete([this.userId, sectionId])
+        request.onsuccess = () => resolve()
+        request.onerror = () => reject(request.error)
+      })
+
+      // Remove from userProgressMap
+      delete this.userProgressMap[sectionId]
+
+      // If the restarted section is currently selected, reset the state
+      if (this.selectedSection && this.selectedSection.id === sectionId) {
+        this.resetProgress()
         this.currentQuestionIndex = 0
         this.userAnswers = {}
         this.score = 0
         this.isCorrect = false
+        // Optionally, reload progress if needed
+      }
+
+      console.log(`Progress for section ${sectionId} has been restarted.`)
+    },
+    async selectSection(sectionId: string) {
+      if (!this.db) return
+      const section = await this.getSection(sectionId)
+      if (section) {
+        this.selectedSection = section
+        this.selectedSection.questions = await this.getQuestionsForSection(sectionId)
+        await this.loadProgress(this.userId, sectionId)
       }
     },
-    
-    async loadProgress() {
-      if (process.client) {
-        // Load from localStorage
-        const storedProgress = localStorage.getItem('quizProgress')
-        if (storedProgress) {
-          const progress = JSON.parse(storedProgress)
-          this.selectedSection = progress.selectedSection
-          this.currentQuestionIndex = progress.currentQuestionIndex
-          this.userAnswers = progress.userAnswers
-          this.score = progress.score
-        }
 
-        // Load from IndexedDB
-        try {
-          const db = await this.openIndexedDB()
-          const transaction = db.transaction(['quizProgress'], 'readonly')
-          const objectStore = transaction.objectStore('quizProgress')
-          const request = objectStore.get('currentProgress')
-          request.onsuccess = (event) => {
-            const progress = event.target.result
-            if (progress) {
-              this.selectedSection = progress.selectedSection
-              this.currentQuestionIndex = progress.currentQuestionIndex
-              this.userAnswers = progress.userAnswers
-              this.score = progress.score
-            }
-          }
-        } catch (error) {
-          console.error('Error loading progress from IndexedDB:', error)
-        }
-      }
-    },
-    async saveProgress() {
-      if (process.client) {
-        const progress = {
-          selectedSection: this.selectedSection,
-          currentQuestionIndex: this.currentQuestionIndex,
-          userAnswers: this.userAnswers,
-          score: this.score,
-        }
-
-        // Save to localStorage
-        localStorage.setItem('quizProgress', JSON.stringify(progress))
-
-        // Save to IndexedDB
-        try {
-          const db = await this.openIndexedDB()
-          const transaction = db.transaction(['quizProgress'], 'readwrite')
-          const objectStore = transaction.objectStore('quizProgress')
-          objectStore.put(progress, 'currentProgress')
-        } catch (error) {
-          console.error('Error saving progress to IndexedDB:', error)
-        }
-      }
-    },
-    
-    async openIndexedDB() {
-      return new Promise((resolve, reject) => {
-        const request = indexedDB.open('QuizDatabase', 1)
-        request.onerror = (event) => reject('IndexedDB error: ' + event.target.error)
-        request.onsuccess = (event) => resolve(event.target.result)
-        request.onupgradeneeded = (event) => {
-          const db = event.target.result
-          db.createObjectStore('quizProgress')
-        }
+    async getSection(sectionId: string): Promise<Section | undefined> {
+      if (!this.db) return undefined
+      const transaction = this.db.transaction(['sections'], 'readonly')
+      const store = transaction.objectStore('sections')
+      return new Promise<Section | undefined>((resolve) => {
+        const request = store.get(sectionId)
+        request.onsuccess = () => resolve(request.result)
       })
     },
+
+    async getQuestionsForSection(sectionId: string): Promise<Question[]> {
+      if (!this.db) return []
+      const transaction = this.db.transaction(['questions'], 'readonly')
+      const store = transaction.objectStore('questions')
+      const index = store.index('sectionId')
+      return new Promise<Question[]>((resolve) => {
+        const request = index.getAll(sectionId)
+        request.onsuccess = () => resolve(request.result)
+      })
+    },
+
+    async saveProgress() {
+      if (!this.db || !this.selectedSection) return
+      const progress: UserProgress = {
+        userId: this.userId,
+        sectionId: this.selectedSection.id,
+        currentQuestionIndex: this.currentQuestionIndex,
+        // userAnswers: {},
+        // userAnswers: this.userAnswers,
+        // 
+        userAnswers: JSON.parse(JSON.stringify(this.userAnswers)), // Break the proxy and get the actual object
+        score: this.score
+      }
+      console.log('Progress to be saved:', progress) // Debugging log
+      const transaction = this.db.transaction(['userProgress'], 'readwrite')
+      const store = transaction.objectStore('userProgress')
+      await new Promise<void>((resolve, reject) => {
+        const request = store.put(progress)
+        request.onsuccess = () => resolve()
+        request.onerror = () => reject(request.error)
+      })
+      
+      this.userProgressMap[this.selectedSection.id] = progress
+    },
+
+    async loadProgress(userId: string, sectionId: string) {
+      if (!this.db) return
+      const transaction = this.db.transaction(['userProgress'], 'readonly')
+      const store = transaction.objectStore('userProgress')
+      const progress: UserProgress | undefined = await new Promise((resolve) => {
+        const request = store.get([userId, sectionId])
+        request.onsuccess = () => resolve(request.result)
+      })
+      if (progress) {
+        this.currentQuestionIndex = progress.currentQuestionIndex
+        this.userAnswers = progress.userAnswers
+        this.score = progress.score
+      } else {
+        this.resetProgress()
+      }
+    },
+
+    resetProgress() {
+      this.currentQuestionIndex = 0
+      this.userAnswers = {}
+      this.score = 0
+      this.isCorrect = false
+    },
+    
     nextQuestion() {
-      if (this.selectedSection && this.currentQuestionIndex < this.selectedSection.questions.length - 0) {
+      if (this.selectedSection && this.currentQuestionIndex < this.selectedSection.questions.length - 1) {
         this.currentQuestionIndex++
         this.isCorrect = false // Reset correctness for the new question
         
@@ -129,7 +291,7 @@ export const useQuestionStore = defineStore('question', {
     
     async initSQLJS() {
       if (!this.SQL) {
-        this.SQL = await  initSqlJs({
+        this.SQL = await initSqlJs({
           locateFile: file => `/sql-wasm.wasm` // Adjust the path if necessary
         })
       }
@@ -149,8 +311,7 @@ export const useQuestionStore = defineStore('question', {
         const userDb = new this.SQL.Database()
         const correctDb = new this.SQL.Database()
         
-        // Run initial data on both databases
-     // Execute initial data statements one by one
+        // Run initial data statements on both databases
         for (const statement of question.initialData) {
           try {
             console.log('running statement:', statement);
@@ -215,6 +376,7 @@ export const useQuestionStore = defineStore('question', {
       
       this.saveProgress()
     },
+
     reset() {
       this.selectedSection = null
       this.currentQuestionIndex = 0

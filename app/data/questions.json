@@ -7,7 +7,7 @@
       "difficulty": "Easy",
       "questions": [
         {
-          "id": 1,
+          "id": "erd-q1",
           "question": "What is the purpose of the Entity-Relationship (E/R) Model?",
           "options": [
             "To describe a system for designing a web page",
@@ -19,35 +19,35 @@
           "explanation": "The E/R model is used to describe the system we want to represent in a database, including its constraints."
         },
         {
-          "id": 2,
+          "id": "erd-q2",
           "question": "What shape is used to represent an Entity Set in an ER Diagram?",
           "options": ["Diamond", "Rectangle", "Oval", "Circle"],
           "answer": "Rectangle",
           "explanation": "In an ER diagram, an entity set is represented by a rectangle."
         },
         {
-          "id": 3,
+          "id": "erd-q3",
           "question": "Which shape is used to represent attributes in an Entity-Relationship Diagram?",
           "options": ["Diamond", "Oval", "Rectangle", "Triangle"],
           "answer": "Oval",
           "explanation": "In an ER diagram, attributes are represented by ovals connected to their respective entities."
         },
         {
-          "id": 4,
+          "id": "erd-q4",
           "question": "What does a diamond represent in an ER diagram?",
           "options": ["Entity", "Attribute", "Relationship", "Primary Key"],
           "answer": "Relationship",
           "explanation": "In an ER diagram, a diamond is used to represent relationships between entities."
         },
         {
-          "id": 5,
+          "id": "erd-q5",
           "question": "Which of the following is an example of an Entity Set?",
           "options": ["Player", "name", "position", "Team"],
           "answer": "Player",
           "explanation": "An entity set is a collection of similar entities, such as 'Player' in a sports system."
         },
         {
-          "id": 6,
+          "id": "erd-q6",
           "question": "What is an Entity Set?",
           "options": [
             "A collection of similar entities",
@@ -59,7 +59,7 @@
           "explanation": "An entity set is a collection of similar entities, like all 'Players' in a sports team."
         },
         {
-          "id": 7,
+          "id": "erd-q7",
           "question": "In an ER Diagram, what is represented by a relationship?",
           "options": [
             "An attribute connecting two entity sets",
@@ -71,7 +71,7 @@
           "explanation": "A relationship is represented by a diamond connecting two or more entity sets in an ER diagram."
         },
         {
-          "id": 8,
+          "id": "erd-q8",
           "question": "What type of attribute cannot be used in an ER diagram?",
           "options": [
             "String",
@@ -83,7 +83,7 @@
           "explanation": "Attributes in ER diagrams must be simple, meaning they cannot be lists, collections, or composite structures."
         },
         {
-          "id": 9,
+          "id": "erd-q9",
           "question": "What is the value of an entity set?",
           "options": [
             "The attributes it contains",
@@ -95,7 +95,7 @@
           "explanation": "The value of an entity set is the collection of entities that belong to that set."
         },
         {
-          "id": 10,
+          "id": "erd-q10",
           "question": "What is a primary key in the context of an ER diagram?",
           "options": [
             "An attribute that uniquely identifies each entity in an entity set",
@@ -115,7 +115,7 @@
       "difficulty": "Easy",
       "questions": [
         {
-          "id": 1,
+          "id": "sqlb1-q1",
           "question": "What does SQL stand for?",
           "options": [
             "Structured Query Language",
@@ -127,7 +127,7 @@
           "explanation": "SQL stands for Structured Query Language, which is used for managing and manipulating relational databases."
         },
         {
-          "id": 2,
+          "id": "sqlb1-q2",
           "question": "Write a SQL query to select all columns from the 'users' table.",
           "initialData": [
             "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, email TEXT);",
@@ -138,7 +138,7 @@
           "explanation": "The query 'SELECT * FROM users;' selects all columns and rows from the 'users' table."
         },
         {
-          "id": 3,
+          "id": "sqlb1-q3",
           "question": "Suppose you have two tables, 'users' and 'orders'. The 'users' table has columns 'id', 'name', and 'email'. The 'orders' table has columns 'id', 'user_id', 'product', and 'order_date'. Write a SQL query to list all users along with the number of orders they have placed. Make sure you have columns id, name, and email in that order. The list should include users who have not placed any orders.",
           "initialData": [
             "CREATE TABLE users ( id INTEGER PRIMARY KEY, name TEXT NOT NULL, email TEXT UNIQUE NOT NULL ); CREATE TABLE orders ( id INTEGER PRIMARY KEY, user_id INTEGER, product TEXT NOT NULL, order_date DATE NOT NULL, FOREIGN KEY(user_id) REFERENCES users(id) ); INSERT INTO users (id, name, email) VALUES (1, 'John Doe', 'john@example.com'), (2, 'Jane Smith', 'jane@sample.com'), (3, 'Alice Johnson', 'alice@example.com'), (4, 'Bob Brown', 'bob@another.com'); INSERT INTO orders (id, user_id, product, order_date) VALUES (1, 1, 'Laptop', '2023-01-15'), (2, 1, 'Mouse', '2023-02-20'), (3, 3, 'Keyboard', '2023-03-10');"
@@ -147,7 +147,7 @@
           "explanation": "This query performs a LEFT JOIN between the 'users' and 'orders' tables to ensure all users are included, even those without any orders. It then groups the results by user ID and name, counting the number of orders each user has placed using the COUNT() function. Users with no orders will have an order_count of 0."
         },
         {
-          "id": 4,
+          "id": "sqlb1-q4",
           "question": "Retrieve all records from the 'users' table.",
           "initialData": [
             "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);",
@@ -156,8 +156,7 @@
           "expectedResult": "SELECT * FROM users;"
         }
       ]
-      
-    }, 
+    },
     {
       "id": "sql-basics-II",
       "type": "topic",
@@ -165,7 +164,7 @@
       "difficulty": "Medium",
       "questions": [
         {
-          "id": 1,
+          "id": "sql-basics-1",
           "question": "Write a SQL query to return the total number of unique book titles in the 'library' table.",
           "initialData": [
             "CREATE TABLE library (book_id INTEGER PRIMARY KEY, title TEXT, author TEXT, genre TEXT);",
@@ -175,7 +174,7 @@
           "explanation": "This query counts the number of distinct book titles in the 'library' table."
         },
         {
-          "id": 2,
+          "id": "sql-basics-2",
           "question": "Write a SQL query to return all employees from the 'employees' table, ordered by salary from highest to lowest.",
           "initialData": [
             "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY, name TEXT, salary DECIMAL);",
@@ -185,14 +184,14 @@
           "explanation": "This query selects all columns from the 'employees' table and orders the results by salary in descending order."
         },
         {
-          "id": 3,
+          "id": "sql-basics-3",
           "question": "Write a SQL query to create a table called 'students' with columns: student_id (integer, primary key), name (text), age (integer), and major (text).",
           "initialData": [],
           "expectedResult": "CREATE TABLE students (student_id INTEGER PRIMARY KEY, name TEXT, age INTEGER, major TEXT);",
           "explanation": "This query creates a 'students' table with columns for student ID, name, age, and major, defining 'student_id' as the primary key."
         },
         {
-          "id": 4,
+          "id": "sql-basics-4",
           "question": "Write a SQL query to return the names and ages of all students who are majoring in 'Computer Science'.",
           "initialData": [
             "CREATE TABLE students (student_id INTEGER PRIMARY KEY, name TEXT, age INTEGER, major TEXT);",
@@ -201,9 +200,8 @@
           "expectedResult": "SELECT name, age FROM students WHERE major = 'Computer Science';",
           "explanation": "This query retrieves the 'name' and 'age' columns for students majoring in 'Computer Science'."
         },
-        
         {
-          "id": 4,
+          "id": "sql-basics-5",
           "question": "What is the difference between `ORDER BY` and `GROUP BY` in SQL?",
           "options": [
             "`ORDER BY` sorts the result set, while `GROUP BY` groups rows with the same values in specified columns.",
@@ -215,7 +213,7 @@
           "explanation": "`ORDER BY` is used to sort the result set, whereas `GROUP BY` groups rows that have the same values in specified columns, typically used with aggregate functions."
         },
         {
-          "id": 5,
+          "id": "sql-basics-6",
           "question": "Write a SQL query that groups students by their 'class' and counts the number of students in each class.",
           "initialData": [
             "CREATE TABLE students (id INTEGER PRIMARY KEY, name TEXT, class TEXT);",
@@ -225,7 +223,7 @@
           "explanation": "This query groups students by their 'class' and counts the number of students in each group."
         },
         {
-          "id": 6,
+          "id": "sql-basics-7",
           "question": "What is the purpose of the `HAVING` clause in SQL?",
           "options": [
             "It filters the result set after grouping.",
@@ -238,6 +236,7 @@
         }
       ]
     },
+    
     {
       "id": "sql-joins",
       "type": "topic",
@@ -245,7 +244,7 @@
       "difficulty": "Medium",
       "questions": [
         {
-          "id": 1,
+          "id": "sql-joins-1",
           "question": "What type of join is used to return all records from both tables, with matching records from both sides where available?",
           "options": [
             "INNER JOIN",
@@ -257,7 +256,7 @@
           "explanation": "A FULL OUTER JOIN returns all rows from both tables, matching rows where possible, and filling in NULLs where there are no matches."
         },
         {
-          "id": 2,
+          "id": "sql-joins-2",
           "question": "Write a SQL query to return the names of students and the courses they are enrolled in, showing students even if they are not enrolled in any course. Use the 'students' and 'enrollments' tables.",
           "initialData": [
             "CREATE TABLE students (student_id INTEGER PRIMARY KEY, name TEXT);",
@@ -269,7 +268,7 @@
           "explanation": "This query uses a LEFT JOIN to include all students, even those not enrolled in any courses. It matches students with their courses based on the 'student_id'."
         },
         {
-          "id": 3,
+          "id": "sql-joins-3",
           "question": "Write a SQL query to return the names of employees and their department names, but only show employees who are assigned to a department. Use the 'employees' and 'departments' tables.",
           "initialData": [
             "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY, name TEXT, department_id INTEGER);",
@@ -281,7 +280,7 @@
           "explanation": "This query uses an INNER JOIN to return only employees who are assigned to a department, matching records on 'department_id'."
         },
         {
-          "id": 4,
+          "id": "sql-joins-4",
           "question": "Write a SQL query to return the names of all projects and the names of their assigned managers, even if the project has no manager. Use the 'projects' and 'managers' tables.",
           "initialData": [
             "CREATE TABLE projects (project_id INTEGER PRIMARY KEY, project_name TEXT, manager_id INTEGER);",
@@ -301,7 +300,7 @@
       "difficulty": "Medium",
       "questions": [
         {
-          "id": 5,
+          "id": "sql-joins-ii-5",
           "question": "Write a SQL query to return the count of students enrolled in each course. Show the course name even if no students are enrolled. Use the 'courses' and 'enrollments' tables.",
           "initialData": [
             "CREATE TABLE courses (course_id INTEGER PRIMARY KEY, course_name TEXT);",
@@ -313,7 +312,7 @@
           "explanation": "This query uses a LEFT JOIN to show all courses, even those without students, and groups the result by course name to count the number of students enrolled in each course."
         },
         {
-          "id": 6,
+          "id": "sql-joins-ii-6",
           "question": "Write a SQL query to return the names of employees and their department names, ordered by department name. Use the 'employees' and 'departments' tables.",
           "initialData": [
             "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY, name TEXT, department_id INTEGER);",
@@ -325,7 +324,7 @@
           "explanation": "This query uses an INNER JOIN to return employees assigned to departments and orders the result by the department name."
         },
         {
-          "id": 7,
+          "id": "sql-joins-ii-7",
           "question": "Write a SQL query to return the names of all customers whose names contain the letter 'a', along with their order count. Use the 'customers' and 'orders' tables.",
           "initialData": [
             "CREATE TABLE customers (customer_id INTEGER PRIMARY KEY, name TEXT);",
@@ -338,6 +337,7 @@
         }
       ]
     },
+    
     {
       "id": "sql-joins-iii",
       "type": "topic",
@@ -345,7 +345,7 @@
       "difficulty": "Hard",
       "questions": [
         {
-          "id": 1,
+          "id": "sql-joins-iii-1",
           "question": "Write a SQL query to return the names of employees, their department names, and their managers' names. Return all employees, including those without a department or manager. Use the 'employees', 'departments', and 'managers' tables.",
           "initialData": [
             "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY, name TEXT, department_id INTEGER, manager_id INTEGER);",
@@ -359,7 +359,7 @@
           "explanation": "This query uses two LEFT JOINs to return all employees, including those without a department or manager, and matches them with their respective department and manager."
         },
         {
-          "id": 2,
+          "id": "sql-joins-iii-2",
           "question": "Write a SQL query to return the names of all products and the total quantity ordered for each product, including products that have never been ordered. Use the 'products' and 'orders' tables.",
           "initialData": [
             "CREATE TABLE products (product_id INTEGER PRIMARY KEY, product_name TEXT);",
@@ -371,7 +371,7 @@
           "explanation": "This query uses a LEFT JOIN to include all products, even those with no orders. The COALESCE function ensures that products without orders will have a total quantity of 0."
         },
         {
-          "id": 3,
+          "id": "sql-joins-iii-3",
           "question": "Write a SQL query to return the names of customers and the total amount they spent, including customers who have not placed any orders. Use the 'customers', 'orders', and 'order_items' tables.",
           "initialData": [
             "CREATE TABLE customers (customer_id INTEGER PRIMARY KEY, name TEXT);",
@@ -385,7 +385,7 @@
           "explanation": "This query uses LEFT JOINs to include customers who have not placed any orders and calculates the total amount spent for each customer. The COALESCE function ensures customers with no orders show a total of 0."
         },
         {
-          "id": 4,
+          "id": "sql-joins-iii-4",
           "question": "Write a SQL query to return the names of employees and their projects, including employees not assigned to any projects. Use the 'employees' and 'projects' tables.",
           "initialData": [
             "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY, name TEXT);",
@@ -397,7 +397,7 @@
           "explanation": "This query uses a LEFT JOIN to return all employees, including those without any projects, and matches them with their respective project if assigned."
         },
         {
-          "id": 5,
+          "id": "sql-joins-iii-5",
           "question": "Write a SQL query to return all departments and the total number of employees in each department, including departments with no employees. Use the 'departments' and 'employees' tables.",
           "initialData": [
             "CREATE TABLE departments (department_id INTEGER PRIMARY KEY, department_name TEXT);",
@@ -411,93 +411,93 @@
       ]
     },
     {
-    "id": "json-web-tokens",
-    "type": "topic",
-    "title": "JSON Web Tokens (JWTs)",
-    "difficulty": "Easy",
-    "questions": [
-      {
-        "id": 1,
-        "question": "What is a JSON Web Token (JWT) used for?",
-        "options": [
-          "To encrypt data",
-          "To represent a set of permissions for a user",
-          "To securely transmit information between parties as a JSON object",
-          "To store information in a database"
-        ],
-        "answer": "To securely transmit information between parties as a JSON object",
-        "explanation": "JWTs are used to securely transmit information between parties as a JSON object, typically for authentication and authorization."
-      },
-      {
-        "id": 2,
-        "question": "What are the three parts of a JWT?",
-        "options": [
-          "Header, Payload, Signature",
-          "Header, Body, Footer",
-          "Session, Token, Payload",
-          "Request, Response, Signature"
-        ],
-        "answer": "Header, Payload, Signature",
-        "explanation": "A JWT consists of three parts: the header, which defines the type of token and algorithm; the payload, which contains the claims; and the signature, which verifies the token's integrity."
-      },
-      {
-        "id": 3,
-        "question": "Which of the following is NOT typically included in the JWT header?",
-        "options": [
-          "The algorithm used",
-          "The token type",
-          "The user's password",
-          "The key ID (kid)"
-        ],
-        "answer": "The user's password",
-        "explanation": "The JWT header usually includes the algorithm and token type, but sensitive data like passwords are not included."
-      },
-      {
-        "id": 4,
-        "question": "How is a JWT typically encoded?",
-        "options": [
-          "Base64-encoded",
-          "Hexadecimal-encoded",
-          "Encrypted using RSA",
-          "ASCII-encoded"
-        ],
-        "answer": "Base64-encoded",
-        "explanation": "JWTs are Base64-encoded to ensure that the token can be easily transmitted over HTTP, which requires URL-safe characters."
-      },
-      {
-        "id": 5,
-        "question": "What is the purpose of the signature in a JWT?",
-        "options": [
-          "To encrypt the payload",
-          "To verify that the token has not been tampered with",
-          "To compress the token",
-          "To sign the user out"
-        ],
-        "answer": "To verify that the token has not been tampered with",
-        "explanation": "The signature ensures the integrity of the JWT by verifying that the token has not been altered after it was issued."
-      },
-      {
-        "id": 6,
-        "question": "What is the middle part of a JWT?",
-        "options": [
-          "The base 64 header",
-          "The signature",
-          "The base 64 payload",
-          "The base 64 signature"
-        ],
-        "answer": "The base 64 payload",
-        "explanation": "The middle part of the JWT is the Base64-encoded payload."
-      }
-    ]
+      "id": "json-web-tokens",
+      "type": "topic",
+      "title": "JSON Web Tokens (JWTs)",
+      "difficulty": "Easy",
+      "questions": [
+        {
+          "id": "jwt-1",
+          "question": "What is a JSON Web Token (JWT) used for?",
+          "options": [
+            "To encrypt data",
+            "To represent a set of permissions for a user",
+            "To securely transmit information between parties as a JSON object",
+            "To store information in a database"
+          ],
+          "answer": "To securely transmit information between parties as a JSON object",
+          "explanation": "JWTs are used to securely transmit information between parties as a JSON object, typically for authentication and authorization."
+        },
+        {
+          "id": "jwt-2",
+          "question": "What are the three parts of a JWT?",
+          "options": [
+            "Header, Payload, Signature",
+            "Header, Body, Footer",
+            "Session, Token, Payload",
+            "Request, Response, Signature"
+          ],
+          "answer": "Header, Payload, Signature",
+          "explanation": "A JWT consists of three parts: the header, which defines the type of token and algorithm; the payload, which contains the claims; and the signature, which verifies the token's integrity."
+        },
+        {
+          "id": "jwt-3",
+          "question": "Which of the following is NOT typically included in the JWT header?",
+          "options": [
+            "The algorithm used",
+            "The token type",
+            "The user's password",
+            "The key ID (kid)"
+          ],
+          "answer": "The user's password",
+          "explanation": "The JWT header usually includes the algorithm and token type, but sensitive data like passwords are not included."
+        },
+        {
+          "id": "jwt-4",
+          "question": "How is a JWT typically encoded?",
+          "options": [
+            "Base64-encoded",
+            "Hexadecimal-encoded",
+            "Encrypted using RSA",
+            "ASCII-encoded"
+          ],
+          "answer": "Base64-encoded",
+          "explanation": "JWTs are Base64-encoded to ensure that the token can be easily transmitted over HTTP, which requires URL-safe characters."
+        },
+        {
+          "id": "jwt-5",
+          "question": "What is the purpose of the signature in a JWT?",
+          "options": [
+            "To encrypt the payload",
+            "To verify that the token has not been tampered with",
+            "To compress the token",
+            "To sign the user out"
+          ],
+          "answer": "To verify that the token has not been tampered with",
+          "explanation": "The signature ensures the integrity of the JWT by verifying that the token has not been altered after it was issued."
+        },
+        {
+          "id": "jwt-6",
+          "question": "What is the middle part of a JWT?",
+          "options": [
+            "The base 64 header",
+            "The signature",
+            "The base 64 payload",
+            "The base 64 signature"
+          ],
+          "answer": "The base 64 payload",
+          "explanation": "The middle part of the JWT is the Base64-encoded payload."
+        }
+      ]
     },
     {
-  "id": "json-web-tokens-advanced",
+      "id": "json-web-tokens-advanced",
       "type": "topic",
       "title": "JSON Web Tokens (JWTs) - Advanced",
       "difficulty": "Hard",
       "questions": [
         {
-          "id": 1,
+          "id": "jwt-advanced-1",
           "question": "What algorithm is used in a JWT with the header specifying 'alg': 'HS256'?",
           "options": [
             "HMAC using SHA-256",
@@ -509,7 +509,7 @@
           "explanation": "HS256 specifies the use of HMAC with SHA-256 to create the signature in the JWT, combining the secret key with the hash algorithm."
         },
         {
-          "id": 2,
+          "id": "jwt-advanced-2",
           "question": "What vulnerability could arise if a JWT token's algorithm is changed from RS256 to none?",
           "options": [
             "The token can be altered without needing to resign it",
@@ -521,7 +521,7 @@
           "explanation": "If the algorithm is set to 'none,' the token's signature is effectively disabled, allowing attackers to modify the payload without needing to re-sign the token."
         },
         {
-          "id": 3,
+          "id": "jwt-advanced-3",
           "question": "Which of the following is a best practice for securing JWTs?",
           "options": [
             "Storing JWTs in local storage",
@@ -533,7 +533,7 @@
           "explanation": "JWTs should be stored in secure cookies with 'HttpOnly' to prevent JavaScript access and 'Secure' to ensure they're transmitted over HTTPS only."
         },
         {
-          "id": 4,
+          "id": "jwt-advanced-4",
           "question": "What is the primary difference between symmetric and asymmetric encryption in the context of JWTs?",
           "options": [
             "Symmetric encryption uses one key, while asymmetric encryption uses a public/private key pair",
@@ -545,7 +545,7 @@
           "explanation": "In JWTs, symmetric encryption (e.g., HS256) uses a single secret key for both signing and verifying, while asymmetric encryption (e.g., RS256) uses a public/private key pair for signing and verification."
         },
         {
-          "id": 5,
+          "id": "jwt-advanced-5",
           "question": "Which claim is used in JWTs to define an expiration time for the token?",
           "options": [
             "iat",
@@ -557,7 +557,7 @@
           "explanation": "The 'exp' (expiration) claim is used to define the time at which the JWT will expire. After this time, the token is no longer valid."
         },
         {
-          "id": 6,
+          "id": "jwt-advanced-6",
           "question": "What potential security risk exists if the 'exp' claim is omitted from a JWT?",
           "options": [
             "The token will never expire and can be used indefinitely",
@@ -570,7 +570,6 @@
         }
       ]
     },
-    
     {
       "id": "sql-create-table",
       "type": "topic",
@@ -578,7 +577,7 @@
       "difficulty": "Easy",
       "questions": [
         {
-          "id": 1,
+          "id": "sql-create-1",
           "question": "What is the basic syntax for creating a table in SQL?",
           "options": [
             "CREATE DATABASE table_name (column_name data_type);",
@@ -590,14 +589,14 @@
           "explanation": "The basic syntax for creating a table in SQL is 'CREATE TABLE table_name (column_name data_type);'."
         },
         {
-          "id": 2,
+          "id": "sql-create-2",
           "question": "Write a `CREATE TABLE` statement to create a 'courses' table with the following columns: 'id' (integer primary key), 'course_name' (text), 'instructor' (text), and 'credits' (integer).",
           "initialData": [],
           "expectedResult": "CREATE TABLE courses (id INTEGER PRIMARY KEY, course_name TEXT, instructor TEXT, credits INTEGER);",
           "explanation": "This SQL command creates a 'courses' table with the necessary columns and their respective data types."
         },
         {
-          "id": 3,
+          "id": "sql-create-3",
           "question": "Explain the purpose of using constraints like 'PRIMARY KEY' or 'NOT NULL' in a `CREATE TABLE` statement.",
           "options": [
             "Constraints enforce database integrity and ensure data accuracy.",
@@ -617,7 +616,7 @@
       "difficulty": "Medium",
       "questions": [
         {
-          "id": 1,
+          "id": "sql-edge-1",
           "question": "What happens if the `COUNT()` function is used on an empty set?",
           "options": [
             "It returns 0.",
@@ -629,7 +628,7 @@
           "explanation": "The `COUNT()` function will return 0 when used on an empty set, as there are no rows to count."
         },
         {
-          "id": 2,
+          "id": "sql-edge-2",
           "question": "What does SQL return if a query attempts to insert a duplicate value into a column with a 'UNIQUE' constraint?",
           "options": [
             "The query succeeds but the duplicate value is ignored.",
@@ -641,7 +640,7 @@
           "explanation": "A 'UNIQUE' constraint ensures that all values in a column are unique. If an attempt is made to insert a duplicate, the query will fail with an error."
         },
         {
-          "id": 3,
+          "id": "sql-edge-3",
           "question": "What happens if you attempt to divide by zero in a SQL query?",
           "options": [
             "SQL returns NULL.",
@@ -653,44 +652,43 @@
           "explanation": "In most SQL implementations, dividing by zero results in an error because it is an undefined mathematical operation."
         },
         {
-          "id": 4,
+          "id": "sql-edge-4",
           "question": "What is the behavior of LIMIT and OFFSET when their values exceed the number of rows in the result set?",
           "options": [
-          "It raises an error",
-          "It returns all available rows",
-          "It returns an empty result set",
-          "It depends on the LIMIT and OFFSET values"
+            "It raises an error",
+            "It returns all available rows",
+            "It returns an empty result set",
+            "It depends on the LIMIT and OFFSET values"
           ],
           "answer": "It depends on the LIMIT and OFFSET values",
           "explanation": "If OFFSET exceeds the number of rows, an empty result set is returned. If LIMIT exceeds the remaining rows after OFFSET, all remaining rows are returned. No error is raised in either case."
         },
         {
-        "id": 6,
-        "question": "What is the result of comparing NULL to NULL using the = operator?",
-        "options": [
-        "TRUE",
-        "FALSE",
-        "NULL",
-        "It depends on the database system"
-        ],
-        "answer": "NULL",
-        "explanation": "When comparing NULL to NULL using the = operator, the result is NULL, not TRUE. This is because NULL represents an unknown value, and comparing two unknown values doesn't yield a boolean result. To check if a value is NULL, use IS NULL instead."
+          "id": "sql-edge-5",
+          "question": "What is the result of comparing NULL to NULL using the = operator?",
+          "options": [
+            "TRUE",
+            "FALSE",
+            "NULL",
+            "It depends on the database system"
+          ],
+          "answer": "NULL",
+          "explanation": "When comparing NULL to NULL using the = operator, the result is NULL, not TRUE. This is because NULL represents an unknown value, and comparing two unknown values doesn't yield a boolean result. To check if a value is NULL, use IS NULL instead."
         },
         {
-          "id": 4,
+          "id": "sql-edge-6",
           "question": "What is the result of using LIMIT 0 in a SELECT statement?",
           "options": [
-          "An empty result set",
-          "The first row of the result",
-          "An error",
-          "All rows in the table"
+            "An empty result set",
+            "The first row of the result",
+            "An error",
+            "All rows in the table"
           ],
           "answer": "An empty result set",
           "explanation": "Using LIMIT 0 in a SELECT statement returns an empty result set. This can be useful for checking the structure of a result without retrieving any actual data."
         }
       ]
     },
-    
     {
       "id": "sql-views",
       "type": "topic",
@@ -698,7 +696,7 @@
       "difficulty": "Medium",
       "questions": [
         {
-          "id": 1,
+          "id": "sql-views-1",
           "question": "What is a SQL view?",
           "options": [
             "A temporary table that only exists during the current session.",
@@ -710,7 +708,7 @@
           "explanation": "A SQL view is essentially a saved query that behaves like a table, allowing you to query it as if it were a normal table."
         },
         {
-          "id": 2,
+          "id": "sql-views-2",
           "question": "Write a SQL query to create a view named 'student_orders' that shows all students and their corresponding orders.",
           "initialData": [
             "CREATE TABLE students (id INTEGER PRIMARY KEY, name TEXT);",
@@ -722,7 +720,7 @@
           "explanation": "This query creates a view named 'student_orders' that combines data from both the 'students' and 'orders' tables using a JOIN."
         },
         {
-          "id": 3,
+          "id": "sql-views-3",
           "question": "Can a SQL view be updated directly? Explain your answer.",
           "options": [
             "Yes, always.",
@@ -734,7 +732,7 @@
           "explanation": "A view can be updated directly if it is based on a single table and doesn't include complex calculations or joins. However, if it includes multiple tables, aggregate functions, or `DISTINCT`, it cannot be updated."
         },
         {
-          "id": 4,
+          "id": "sql-views-4",
           "question": "What is a materialized view, and how does it differ from a regular SQL view?",
           "options": [
             "A materialized view stores the query results physically, while a regular view does not.",
@@ -746,7 +744,159 @@
           "explanation": "A materialized view is a snapshot of a query's result set that is physically stored in the database. In contrast, a regular view is a virtual table that re-executes the query whenever it is accessed."
         }
       ]
+    },
+    {
+      "id": "encryption-security",
+      "type": "topic",
+      "title": "Encryption and Security",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "encryption-security-1",
+          "question": "What is hashing in the context of data security?",
+          "options": [
+            "The process of converting plaintext data into a fixed-size string of characters.",
+            "A method of encrypting data with a public key.",
+            "A technique used to verify the integrity of data.",
+            "A way to store passwords securely."
+          ],
+          "answer": "The process of converting plaintext data into a fixed-size string of characters.",
+          "explanation": "Hashing transforms data into a fixed-length string, making it difficult to reverse-engineer the original data."
+        },
+        {
+          "id": "encryption-security-2",
+          "question": "What is the purpose of 'salting' in password hashing?",
+          "options": [
+            "To add a random value to the password before hashing it.",
+            "To encrypt the password with a private key.",
+            "To create a checksum of the password.",
+            "To make the password longer."
+          ],
+          "answer": "To add a random value to the password before hashing it.",
+          "explanation": "Salting adds a unique random value to each password, making it more resistant to rainbow table attacks."
+        },
+        {
+          "id": "encryption-security-3",
+          "question": "What is a checksum?",
+          "options": [
+            "A technique to secure data using encryption.",
+            "A value used to verify the integrity of data.",
+            "A method of encoding data for storage.",
+            "An algorithm to generate random values."
+          ],
+          "answer": "A value used to verify the integrity of data.",
+          "explanation": "A checksum is a computed value that helps to detect errors in data during transmission or storage."
+        },
+        {
+          "id": "encryption-security-4",
+          "question": "What does end-to-end encryption (E2EE) ensure?",
+          "options": [
+            "Only the sender and recipient can read the messages.",
+            "Messages are stored securely on a server.",
+            "Encryption keys are shared publicly.",
+            "Data is compressed before transmission."
+          ],
+          "answer": "Only the sender and recipient can read the messages.",
+          "explanation": "E2EE ensures that data is encrypted on the sender's device and only decrypted on the recipient's device, preventing intermediaries from accessing it."
+        },
+        {
+          "id": "encryption-security-5",
+          "question": "What is the main feature of public/private key encryption?",
+          "options": [
+            "It uses a single key for both encryption and decryption.",
+            "It uses two different keys for encryption and decryption.",
+            "It does not require any keys.",
+            "It is only used for symmetric encryption."
+          ],
+          "answer": "It uses two different keys for encryption and decryption.",
+          "explanation": "Public/private key encryption uses a public key for encryption and a corresponding private key for decryption, enhancing security."
+        },
+        {
+          "id": "encryption-security-6",
+          "question": "What is symmetric encryption?",
+          "options": [
+            "A method where the same key is used for both encryption and decryption.",
+            "A technique that uses two different keys.",
+            "A form of encryption that does not require a key.",
+            "A method of hashing data."
+          ],
+          "answer": "A method where the same key is used for both encryption and decryption.",
+          "explanation": "In symmetric encryption, the same key must be kept secret and is used for both encrypting and decrypting the data."
+        },
+        {
+          "id": "encryption-security-7",
+          "question": "Which of the following algorithms is commonly used for hashing?",
+          "options": [
+            "AES",
+            "RSA",
+            "SHA-256",
+            "Diffie-Hellman"
+          ],
+          "answer": "SHA-256",
+          "explanation": "SHA-256 is a widely used hashing algorithm that produces a 256-bit hash value."
+        },
+        {
+          "id": "encryption-security-8",
+          "question": "What does the term 'key exchange' refer to?",
+          "options": [
+            "The process of swapping symmetric keys between parties.",
+            "The method of securely sharing public keys.",
+            "A protocol for sending encrypted messages.",
+            "The generation of new keys for encryption."
+          ],
+          "answer": "The process of swapping symmetric keys between parties.",
+          "explanation": "Key exchange refers to the methods used to securely share cryptographic keys, allowing encrypted communication."
+        },
+        {
+          "id": "encryption-security-9",
+          "question": "In which scenario would you use symmetric encryption?",
+          "options": [
+            "When you need to securely send a message to multiple recipients.",
+            "When both the sender and receiver can securely share a key.",
+            "When you need to encrypt data at rest.",
+            "When you want to avoid key management complexities."
+          ],
+          "answer": "When both the sender and receiver can securely share a key.",
+          "explanation": "Symmetric encryption is efficient when the same key is shared between parties that can securely exchange it."
+        },
+        {
+          "id": "encryption-security-10",
+          "question": "Which of the following is NOT a characteristic of hashing?",
+          "options": [
+            "Deterministic output.",
+            "Reversible process.",
+            "Fixed-size output.",
+            "Collision-resistant."
+          ],
+          "answer": "Reversible process.",
+          "explanation": "Hashing is a one-way function, meaning it cannot be reversed to obtain the original input."
+        },
+        {
+          "id": "encryption-security-11",
+          "question": "What is the primary purpose of using salts in password storage?",
+          "options": [
+            "To increase the length of the password.",
+            "To create unique hashes for the same password.",
+            "To improve hashing speed.",
+            "To encrypt the password before storage."
+          ],
+          "answer": "To create unique hashes for the same password.",
+          "explanation": "Salts ensure that even identical passwords have unique hashes, enhancing security against dictionary attacks."
+        },
+        {
+          "id": "encryption-security-12",
+          "question": "What is the primary risk of not using encryption for sensitive data?",
+          "options": [
+            "Data can be accessed without authorization.",
+            "Data will be automatically deleted.",
+            "Data will be corrupted.",
+            "Data will be publicly visible."
+          ],
+          "answer": "Data can be accessed without authorization.",
+          "explanation": "Without encryption, sensitive data is vulnerable to unauthorized access and potential data breaches."
+        }
+      ]
     }
-    
   ]
+  
 }

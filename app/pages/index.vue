@@ -4,7 +4,7 @@
     <Alert class="mb-4">
       <AlertTitle>Heads up!</AlertTitle>
       <AlertDescription>
-        Your progress will now be saved for practice and challenges!
+        Your progress  on this page will now be saved!
       </AlertDescription>
     </Alert>
     <h1 class="text-3xl font-bold mb-6">Practice</h1>

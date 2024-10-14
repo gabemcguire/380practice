@@ -15,7 +15,11 @@ export default defineNuxtConfig({
   ],
 
   debug: true,
-
+  
+  plugins: [
+    '~/plugins/initDatabase.ts',
+  ],
+  
   devtools: {
     enabled: false,
   },

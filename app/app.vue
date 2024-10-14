@@ -4,7 +4,6 @@ import '@/assets/styles/style.css'
 import '@/assets/styles/themes.css'
 import '@/assets/styles/doc.css'
 import '@/assets/styles/shiki.css'
-
 import { ConfigProvider } from 'radix-vue'
 import { appName } from '@/config/site'
 import Toaster from '@/components/ui/toast/Toaster.vue'

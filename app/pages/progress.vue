@@ -6,7 +6,7 @@
       <UseClient>
       <Popover>
           <PopoverTrigger as-child>
-            <Button variant="outline">
+            <Button @click="deleteProgress" variant="outline">
               Delete Progress
             </Button>
           </PopoverTrigger>
@@ -82,7 +82,12 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
+import { useQuestionStore } from '~/stores/questionStore'
+const store = useQuestionStore()
 
+const deleteProgress = () => {
+  console.log('delete progress')
+}
 // Mock data - replace with actual data fetching logic
 const modules = ref([
   { id: 1, title: 'SQL Basics', progress: 75, completedQuestions: 15, totalQuestions: 20 },
