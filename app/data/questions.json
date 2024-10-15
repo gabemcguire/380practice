@@ -1636,7 +1636,499 @@
           "explanation": "This query uses a LEFT JOIN to display all courses, even those without any students enrolled. The COALESCE function is used to replace NULL values with 'No students' where appropriate."
         }
       ]
+    },
+    {
+      "id": "sql-foreign-keys",
+      "type": "topic",
+      "title": "Foreign Keys",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "sql-fk-1",
+          "question": "What is a foreign key in SQL?",
+          "options": [
+            "A field in one table that uniquely identifies a row of another table.",
+            "A field that must contain unique values in the same table.",
+            "A key that automatically generates values for a column.",
+            "A column that can store multiple types of data."
+          ],
+          "answer": "A field in one table that uniquely identifies a row of another table.",
+          "explanation": "A foreign key is a field in one table that references the primary key of another table, creating a relationship between the two tables."
+        },
+        {
+          "id": "sql-fk-2",
+          "question": "Which of the following SQL statements correctly defines a foreign key in a 'orders' table that references the 'customers' table?",
+          "options": [
+            "FOREIGN KEY (customer_id) REFERENCES customers(id)",
+            "PRIMARY KEY (customer_id) REFERENCES customers(id)",
+            "UNIQUE KEY (customer_id) REFERENCES customers(id)",
+            "FOREIGN KEY (customer_id) REFERENCES orders(id)"
+          ],
+          "answer": "FOREIGN KEY (customer_id) REFERENCES customers(id)",
+          "explanation": "The correct syntax to define a foreign key is 'FOREIGN KEY (column) REFERENCES other_table(column)', where the foreign key references the primary key in another table."
+        },
+        {
+          "id": "sql-fk-3",
+          "question": "Write a SQL query to create a 'orders' table where the 'customer_id' is a foreign key that references the 'id' column in the 'customers' table.",
+          "initialData": [],
+          "expectedResult": "CREATE TABLE orders (order_id INTEGER PRIMARY KEY, customer_id INTEGER, order_details TEXT, FOREIGN KEY (customer_id) REFERENCES customers(id));",
+          "explanation": "This query creates a table with a foreign key constraint on the 'customer_id' column, which references the 'id' column of the 'customers' table, enforcing the relationship between the two tables."
+        },
+        {
+          "id": "sql-fk-4",
+          "question": "What is the purpose of a foreign key in a database?",
+          "options": [
+            "To enforce referential integrity between two tables.",
+            "To automatically generate unique values for a column.",
+            "To ensure all values in a column are unique.",
+            "To group rows in a table based on common values."
+          ],
+          "answer": "To enforce referential integrity between two tables.",
+          "explanation": "A foreign key enforces referential integrity, ensuring that a value in one table corresponds to an existing value in another table, maintaining the relationship between them."
+        },
+        {
+          "id": "sql-fk-5",
+          "question": "Write a SQL query to create a 'students' table and a 'courses' table, where the 'course_id' in the 'students' table is a foreign key referencing the 'id' column in the 'courses' table.",
+          "initialData": [],
+          "expectedResult": "CREATE TABLE courses (id INTEGER PRIMARY KEY, course_name TEXT); CREATE TABLE students (student_id INTEGER PRIMARY KEY, student_name TEXT, course_id INTEGER, FOREIGN KEY (course_id) REFERENCES courses(id));",
+          "explanation": "This query creates a relationship between the 'students' and 'courses' tables by defining 'course_id' in the 'students' table as a foreign key that references the 'id' column of the 'courses' table."
+        },
+        {
+          "id": "sql-fk-6",
+          "question": "Which of the following describes the ON DELETE CASCADE option in a foreign key constraint?",
+          "options": [
+            "It deletes all records in the referencing table when the referenced record is deleted.",
+            "It deletes all records in the referenced table when the referencing record is deleted.",
+            "It prevents deletion of the referenced record if there are matching records in the referencing table.",
+            "It updates all records in the referencing table when the referenced record is updated."
+          ],
+          "answer": "It deletes all records in the referencing table when the referenced record is deleted.",
+          "explanation": "ON DELETE CASCADE ensures that when a referenced record in the parent table is deleted, all related records in the referencing (child) table are automatically deleted."
+        },
+        {
+          "id": "sql-fk-7",
+          "question": "Write a SQL query to create a 'books' table and a 'authors' table, where deleting an author will automatically delete all books written by that author. Use the ON DELETE CASCADE option.",
+          "initialData": [],
+          "expectedResult": "CREATE TABLE authors (author_id INTEGER PRIMARY KEY, name TEXT); CREATE TABLE books (book_id INTEGER PRIMARY KEY, title TEXT, author_id INTEGER, FOREIGN KEY (author_id) REFERENCES authors(author_id) ON DELETE CASCADE);",
+          "explanation": "This query creates a relationship between 'books' and 'authors' where, if an author is deleted, all books written by that author are also deleted due to the ON DELETE CASCADE option."
+        },
+        {
+          "id": "sql-fk-8",
+          "question": "What happens if you try to insert a value into a foreign key column that does not exist in the referenced table?",
+          "options": [
+            "The insert will fail due to a foreign key constraint violation.",
+            "The insert will succeed and the value will be inserted as NULL.",
+            "The insert will succeed and a default value will be used.",
+            "The insert will succeed if the value is unique."
+          ],
+          "answer": "The insert will fail due to a foreign key constraint violation.",
+          "explanation": "When inserting a value into a foreign key column, the value must exist in the referenced table. If it does not, the operation fails due to a foreign key constraint violation."
+        }
+      ]
+    },
+    {
+      "id": "sql-between",
+      "type": "topic",
+      "title": "SQL BETWEEN",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "sql-between-1",
+          "question": "What does the SQL BETWEEN operator do?",
+          "options": [
+            "It selects values within a given range, including the start and end values.",
+            "It selects values outside a given range.",
+            "It selects values within a given range but excludes the start and end values.",
+            "It selects only values that match exactly one of two specified values."
+          ],
+          "answer": "It selects values within a given range, including the start and end values.",
+          "explanation": "The SQL BETWEEN operator is used to filter the result set for values that fall within a specified range, including the boundaries."
+        },
+        {
+          "id": "sql-between-2",
+          "question": "Which of the following SQL queries correctly uses the BETWEEN operator to find products priced between $50 and $100?",
+          "options": [
+            "SELECT * FROM products WHERE price BETWEEN 50 AND 100;",
+            "SELECT * FROM products WHERE price >= 50 AND price <= 100;",
+            "SELECT * FROM products WHERE price IN (50, 100);",
+            "SELECT * FROM products WHERE price = 50 OR price = 100;"
+          ],
+          "answer": "SELECT * FROM products WHERE price BETWEEN 50 AND 100;",
+          "explanation": "The correct way to use BETWEEN is 'BETWEEN 50 AND 100', which includes all products with a price in this range, including $50 and $100."
+        },
+        {
+          "id": "sql-between-3",
+          "question": "Write a SQL query to find all employees who were hired between January 1, 2020, and December 31, 2023. Use the 'employees' table.",
+          "initialData": [
+            "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY, name TEXT, hire_date DATE);",
+            "INSERT INTO employees (employee_id, name, hire_date) VALUES (1, 'John', '2020-02-15'), (2, 'Jane', '2019-06-10'), (3, 'Emily', '2023-07-19');"
+          ],
+          "expectedResult": "SELECT * FROM employees WHERE hire_date BETWEEN '2020-01-01' AND '2023-12-31';",
+          "explanation": "This query uses the BETWEEN operator to select employees who were hired within the specified date range, including both the start and end dates."
+        },
+        {
+          "id": "sql-between-4",
+          "question": "Write a SQL query to list all products whose prices are between $10 and $30, using the 'products' table.",
+          "initialData": [
+            "CREATE TABLE products (product_id INTEGER PRIMARY KEY, product_name TEXT, price DECIMAL);",
+            "INSERT INTO products (product_id, product_name, price) VALUES (1, 'Keyboard', 25), (2, 'Mouse', 15), (3, 'Monitor', 75);"
+          ],
+          "expectedResult": "SELECT product_name, price FROM products WHERE price BETWEEN 10 AND 30;",
+          "explanation": "The query selects product names and prices for all products that have a price between $10 and $30, including those priced exactly at $10 and $30."
+        },
+        {
+          "id": "sql-between-5",
+          "question": "Which SQL query would you use to find all customers whose age is between 18 and 35?",
+          "options": [
+            "SELECT * FROM customers WHERE age BETWEEN 18 AND 35;",
+            "SELECT * FROM customers WHERE age > 18 AND age < 35;",
+            "SELECT * FROM customers WHERE age IN (18, 35);",
+            "SELECT * FROM customers WHERE age = 18 OR age = 35;"
+          ],
+          "answer": "SELECT * FROM customers WHERE age BETWEEN 18 AND 35;",
+          "explanation": "The BETWEEN operator is used to find all customers within the age range of 18 to 35, including both ages."
+        },
+        {
+          "id": "sql-between-6",
+          "question": "Write a SQL query to find all orders placed between March 1, 2023, and May 31, 2023, using the 'orders' table.",
+          "initialData": [
+            "CREATE TABLE orders (order_id INTEGER PRIMARY KEY, order_date DATE, total_amount DECIMAL);",
+            "INSERT INTO orders (order_id, order_date, total_amount) VALUES (1, '2023-03-15', 200), (2, '2023-05-05', 150), (3, '2023-06-10', 300);"
+          ],
+          "expectedResult": "SELECT * FROM orders WHERE order_date BETWEEN '2023-03-01' AND '2023-05-31';",
+          "explanation": "This query uses the BETWEEN operator to retrieve orders that were placed between March 1 and May 31, 2023, including both dates."
+        },
+        {
+          "id": "sql-between-7",
+          "question": "Write a SQL query to find all students with test scores between 70 and 90 using the 'students' table.",
+          "initialData": [
+            "CREATE TABLE students (student_id INTEGER PRIMARY KEY, name TEXT, test_score INTEGER);",
+            "INSERT INTO students (student_id, name, test_score) VALUES (1, 'Alice', 85), (2, 'Bob', 65), (3, 'Charlie', 90), (4, 'David', 95);"
+          ],
+          "expectedResult": "SELECT name, test_score FROM students WHERE test_score BETWEEN 70 AND 90;",
+          "explanation": "This query uses the BETWEEN operator to find students whose test scores are between 70 and 90, inclusive."
+        },
+        {
+          "id": "sql-between-8",
+          "question": "Which of the following is true about the SQL BETWEEN operator?",
+          "options": [
+            "It is inclusive, meaning it includes the boundary values in the range.",
+            "It excludes the boundary values in the range.",
+            "It is used only with numeric values.",
+            "It always returns NULL for any NULL values in the range."
+          ],
+          "answer": "It is inclusive, meaning it includes the boundary values in the range.",
+          "explanation": "The BETWEEN operator is inclusive, meaning it includes both the start and end values in the specified range."
+        }
+      ]
+    },
+    {
+      "id": "sql-in",
+      "type": "topic",
+      "title": "SQL IN Operator",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "sql-in-1",
+          "question": "What does the SQL IN operator do?",
+          "options": [
+            "It selects values that match any value in a given list.",
+            "It selects values within a given range.",
+            "It selects values outside of a given list.",
+            "It selects values that match exactly one of two specified values."
+          ],
+          "answer": "It selects values that match any value in a given list.",
+          "explanation": "The SQL IN operator is used to filter the result set by matching values in a list of values."
+        },
+        {
+          "id": "sql-in-2",
+          "question": "Which of the following SQL queries correctly uses the IN operator to find all products whose category is either 'Electronics', 'Furniture', or 'Toys'?",
+          "options": [
+            "SELECT * FROM products WHERE category IN ('Electronics', 'Furniture', 'Toys');",
+            "SELECT * FROM products WHERE category = ('Electronics', 'Furniture', 'Toys');",
+            "SELECT * FROM products WHERE category BETWEEN 'Electronics' AND 'Toys';",
+            "SELECT * FROM products WHERE category LIKE ('Electronics', 'Furniture', 'Toys');"
+          ],
+          "answer": "SELECT * FROM products WHERE category IN ('Electronics', 'Furniture', 'Toys');",
+          "explanation": "The IN operator allows you to match any value within a list, in this case, 'Electronics', 'Furniture', and 'Toys'."
+        },
+        {
+          "id": "sql-in-3",
+          "question": "Write a SQL query to find all students whose grades are either 'A', 'B', or 'C'. Use the 'students' table.",
+          "initialData": [
+            "CREATE TABLE students (student_id INTEGER PRIMARY KEY, name TEXT, grade TEXT);",
+            "INSERT INTO students (student_id, name, grade) VALUES (1, 'Alice', 'A'), (2, 'Bob', 'B'), (3, 'Charlie', 'D');"
+          ],
+          "expectedResult": "SELECT * FROM students WHERE grade IN ('A', 'B', 'C');",
+          "explanation": "The query uses the IN operator to filter students whose grades are 'A', 'B', or 'C', returning only those that match one of the values."
+        },
+        {
+          "id": "sql-in-4",
+          "question": "Write a SQL query to find all employees who are working in the 'HR' or 'Engineering' departments using the 'employees' table.",
+          "initialData": [
+            "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY, name TEXT, department TEXT);",
+            "INSERT INTO employees (employee_id, name, department) VALUES (1, 'John', 'HR'), (2, 'Jane', 'Engineering'), (3, 'Emily', 'Marketing');"
+          ],
+          "expectedResult": "SELECT * FROM employees WHERE department IN ('HR', 'Engineering');",
+          "explanation": "This query uses the IN operator to filter employees who work in either the 'HR' or 'Engineering' departments."
+        },
+        {
+          "id": "sql-in-5",
+          "question": "Which SQL query would you use to find all orders where the total amount is either $100, $150, or $200?",
+          "options": [
+            "SELECT * FROM orders WHERE total_amount IN (100, 150, 200);",
+            "SELECT * FROM orders WHERE total_amount BETWEEN 100 AND 200;",
+            "SELECT * FROM orders WHERE total_amount LIKE (100, 150, 200);",
+            "SELECT * FROM orders WHERE total_amount = 100 OR 150 OR 200;"
+          ],
+          "answer": "SELECT * FROM orders WHERE total_amount IN (100, 150, 200);",
+          "explanation": "The IN operator allows you to match any of the values within the list, making it the correct choice for this query."
+        },
+        {
+          "id": "sql-in-6",
+          "question": "Write a SQL query to find all products where the supplier is either 'Supplier A' or 'Supplier B'. Use the 'products' table.",
+          "initialData": [
+            "CREATE TABLE products (product_id INTEGER PRIMARY KEY, product_name TEXT, supplier_name TEXT);",
+            "INSERT INTO products (product_id, product_name, supplier_name) VALUES (1, 'Laptop', 'Supplier A'), (2, 'Mouse', 'Supplier B'), (3, 'Keyboard', 'Supplier C');"
+          ],
+          "expectedResult": "SELECT * FROM products WHERE supplier_name IN ('Supplier A', 'Supplier B');",
+          "explanation": "This query filters products where the supplier is either 'Supplier A' or 'Supplier B', using the IN operator to match any value in the list."
+        },
+        {
+          "id": "sql-in-7",
+          "question": "Which of the following is true about the SQL IN operator?",
+          "options": [
+            "It allows matching values within a specified list of values.",
+            "It is used to match values within a range.",
+            "It excludes all values from the list provided.",
+            "It only works with numeric values."
+          ],
+          "answer": "It allows matching values within a specified list of values.",
+          "explanation": "The IN operator matches any value that exists in the provided list, making it useful for filtering specific values."
+        },
+        {
+          "id": "sql-in-8",
+          "question": "Write a SQL query to find all movies released in the years 2010, 2015, or 2020 using the 'movies' table.",
+          "initialData": [
+            "CREATE TABLE movies (movie_id INTEGER PRIMARY KEY, title TEXT, release_year INTEGER);",
+            "INSERT INTO movies (movie_id, title, release_year) VALUES (1, 'Inception', 2010), (2, 'The Martian', 2015), (3, 'Tenet', 2020);"
+          ],
+          "expectedResult": "SELECT * FROM movies WHERE release_year IN (2010, 2015, 2020);",
+          "explanation": "This query uses the IN operator to filter movies that were released in the years 2010, 2015, or 2020."
+        }
+      ]
+    },
+    {
+      "id": "sql-union",
+      "type": "topic",
+      "title": "SQL UNION and UNION ALL",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "sql-union-1",
+          "question": "What is the difference between UNION and UNION ALL in SQL?",
+          "options": [
+            "UNION removes duplicate records, while UNION ALL includes all records, including duplicates.",
+            "UNION returns all rows in both tables, while UNION ALL returns only unique rows.",
+            "UNION performs an INNER JOIN, while UNION ALL performs a LEFT JOIN.",
+            "UNION compares values, while UNION ALL compares column names."
+          ],
+          "answer": "UNION removes duplicate records, while UNION ALL includes all records, including duplicates.",
+          "explanation": "UNION returns distinct rows by default, whereas UNION ALL returns all rows, including duplicates."
+        },
+        {
+          "id": "sql-union-2",
+          "question": "Which of the following SQL queries correctly combines the results of two SELECT statements while removing duplicate records?",
+          "options": [
+            "SELECT * FROM table1 UNION SELECT * FROM table2;",
+            "SELECT * FROM table1 UNION ALL SELECT * FROM table2;",
+            "SELECT * FROM table1 JOIN table2;",
+            "SELECT * FROM table1 LEFT JOIN table2;"
+          ],
+          "answer": "SELECT * FROM table1 UNION SELECT * FROM table2;",
+          "explanation": "The UNION operator combines the results of two queries and removes duplicate rows by default."
+        },
+        {
+          "id": "sql-union-3",
+          "question": "Write a SQL query to combine all records from the 'customers' and 'suppliers' tables, removing any duplicates. Select the 'name' and 'location' columns from both tables.",
+          "initialData": [
+            "CREATE TABLE customers (customer_id INTEGER PRIMARY KEY, name TEXT, location TEXT);",
+            "CREATE TABLE suppliers (supplier_id INTEGER PRIMARY KEY, name TEXT, location TEXT);",
+            "INSERT INTO customers (customer_id, name, location) VALUES (1, 'Alice', 'New York'), (2, 'Bob', 'Los Angeles');",
+            "INSERT INTO suppliers (supplier_id, name, location) VALUES (1, 'TechCorp', 'New York'), (2, 'Alice', 'New York');"
+          ],
+          "expectedResult": "SELECT name, location FROM customers UNION SELECT name, location FROM suppliers;",
+          "explanation": "This query combines the records from both 'customers' and 'suppliers' tables and removes duplicate records such as 'Alice' from New York, who appears in both tables."
+        },
+        {
+          "id": "sql-union-4",
+          "question": "Write a SQL query to combine all products from the 'electronics' and 'furniture' tables. Include duplicates. Select the 'product_name' and 'price' columns from both tables.",
+          "initialData": [
+            "CREATE TABLE electronics (product_id INTEGER PRIMARY KEY, product_name TEXT, price DECIMAL);",
+            "CREATE TABLE furniture (product_id INTEGER PRIMARY KEY, product_name TEXT, price DECIMAL);",
+            "INSERT INTO electronics (product_id, product_name, price) VALUES (1, 'Laptop', 1000), (2, 'Mouse', 50);",
+            "INSERT INTO furniture (product_id, product_name, price) VALUES (1, 'Table', 200), (2, 'Laptop', 1000);"
+          ],
+          "expectedResult": "SELECT product_name, price FROM electronics UNION ALL SELECT product_name, price FROM furniture;",
+          "explanation": "The query combines all products from both tables, including duplicate records such as 'Laptop', which is present in both tables, by using UNION ALL to include all rows."
+        },
+        {
+          "id": "sql-union-5",
+          "question": "Which SQL operator should you use to combine the results of two queries while keeping duplicate records?",
+          "options": [
+            "UNION ALL",
+            "UNION",
+            "LEFT JOIN",
+            "RIGHT JOIN"
+          ],
+          "answer": "UNION ALL",
+          "explanation": "UNION ALL combines the results of two queries and includes all records, even if they are duplicates."
+        },
+        {
+          "id": "sql-union-6",
+          "question": "What is the key difference between UNION and a LEFT JOIN?",
+          "options": [
+            "UNION combines the results of two queries, while LEFT JOIN combines columns from two tables based on a matching condition.",
+            "UNION removes NULL values, while LEFT JOIN retains them.",
+            "UNION compares only columns with identical data types, while LEFT JOIN compares all columns.",
+            "UNION always returns more rows than a LEFT JOIN."
+          ],
+          "answer": "UNION combines the results of two queries, while LEFT JOIN combines columns from two tables based on a matching condition.",
+          "explanation": "UNION stacks the results of two queries together, while a LEFT JOIN combines data from two tables based on a key, filling in NULLs for missing matches."
+        },
+        {
+          "id": "sql-union-7",
+          "question": "Write a SQL query to combine the results of two SELECT statements that retrieve the names of employees from the 'hr_employees' table and 'sales_employees' table. Ensure there are no duplicate names in the result.",
+          "initialData": [
+            "CREATE TABLE hr_employees (employee_id INTEGER PRIMARY KEY, name TEXT);",
+            "CREATE TABLE sales_employees (employee_id INTEGER PRIMARY KEY, name TEXT);",
+            "INSERT INTO hr_employees (employee_id, name) VALUES (1, 'John'), (2, 'Jane');",
+            "INSERT INTO sales_employees (employee_id, name) VALUES (1, 'Alice'), (2, 'John');"
+          ],
+          "expectedResult": "SELECT name FROM hr_employees UNION SELECT name FROM sales_employees;",
+          "explanation": "This query combines the employee names from both tables and removes duplicates, such as 'John', who appears in both tables."
+        },
+        {
+          "id": "sql-union-8",
+          "question": "Which of the following SQL statements combines the result of two queries and includes all records, including NULLs from the right table where matches are missing?",
+          "options": [
+            "SELECT * FROM table1 LEFT JOIN table2;",
+            "SELECT * FROM table1 UNION SELECT * FROM table2;",
+            "SELECT * FROM table1 UNION ALL SELECT * FROM table2;",
+            "SELECT * FROM table1 RIGHT JOIN table2;"
+          ],
+          "answer": "SELECT * FROM table1 RIGHT JOIN table2;",
+          "explanation": "A RIGHT JOIN includes all records from the right table and matches them with records from the left table, including NULLs where there is no match."
+        },
+        {
+          "id": "sql-union-9",
+          "question": "Write a SQL query to combine all departments from the 'hr_departments' and 'sales_departments' tables, even if they are duplicates.",
+          "initialData": [
+            "CREATE TABLE hr_departments (dept_id INTEGER PRIMARY KEY, dept_name TEXT);",
+            "CREATE TABLE sales_departments (dept_id INTEGER PRIMARY KEY, dept_name TEXT);",
+            "INSERT INTO hr_departments (dept_id, dept_name) VALUES (1, 'HR'), (2, 'Recruiting');",
+            "INSERT INTO sales_departments (dept_id, dept_name) VALUES (1, 'HR'), (2, 'Sales');"
+          ],
+          "expectedResult": "SELECT dept_name FROM hr_departments UNION ALL SELECT dept_name FROM sales_departments;",
+          "explanation": "This query combines all departments from both tables, including duplicates like 'HR', by using UNION ALL to retain all rows."
+        }
+      ]
+    },
+    {
+      "id": "sql-order-by",
+      "type": "topic",
+      "title": "SQL ORDER BY with Edge Cases",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "sql-order-by-1",
+          "question": "What is the default behavior for sorting NULL values when using the ORDER BY clause in ascending order?",
+          "options": [
+            "NULL values appear first.",
+            "NULL values appear last.",
+            "NULL values are excluded from the result.",
+            "SQL raises an error when sorting NULL values."
+          ],
+          "answer": "NULL values appear first.",
+          "explanation": "In most databases, when sorting in ascending order (ASC), NULL values appear first by default."
+        },
+        {
+          "id": "sql-order-by-2",
+          "question": "Which of the following SQL queries correctly orders results by price in descending order, placing NULL values last?",
+          "options": [
+            "SELECT * FROM products ORDER BY price DESC NULLS LAST;",
+            "SELECT * FROM products ORDER BY price NULLS LAST DESC;",
+            "SELECT * FROM products ORDER BY price DESC WHERE price IS NOT NULL;",
+            "SELECT * FROM products ORDER BY price DESC EXCLUDE NULLS;"
+          ],
+          "answer": "SELECT * FROM products ORDER BY price DESC NULLS LAST;",
+          "explanation": "The 'NULLS LAST' clause ensures that NULL values are placed at the end of the result set, even when ordering in descending order."
+        },
+        {
+          "id": "sql-order-by-3",
+          "question": "Write a SQL query to select all employees and order them by hire_date in ascending order, placing NULL hire_dates last. Use the 'employees' table.",
+          "initialData": [
+            "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY, name TEXT, hire_date DATE);",
+            "INSERT INTO employees (employee_id, name, hire_date) VALUES (1, 'John', '2023-01-15'), (2, 'Jane', NULL), (3, 'Emily', '2022-06-10');"
+          ],
+          "expectedResult": "SELECT * FROM employees ORDER BY hire_date ASC NULLS LAST;",
+          "explanation": "The query orders employees by hire_date in ascending order, placing rows with NULL hire_dates last using the 'NULLS LAST' clause."
+        },
+        {
+          "id": "sql-order-by-4",
+          "question": "Write a SQL query to order products by price in ascending order. Products with NULL prices should appear first. Use the 'products' table.",
+          "initialData": [
+            "CREATE TABLE products (product_id INTEGER PRIMARY KEY, product_name TEXT, price DECIMAL);",
+            "INSERT INTO products (product_id, product_name, price) VALUES (1, 'Laptop', 1000), (2, 'Mouse', NULL), (3, 'Keyboard', 75);"
+          ],
+          "expectedResult": "SELECT * FROM products ORDER BY price ASC NULLS FIRST;",
+          "explanation": "The query orders products by price in ascending order, but it places rows with NULL prices first using the 'NULLS FIRST' clause."
+        },
+        {
+          "id": "sql-order-by-5",
+          "question": "Which SQL statement orders employees by salary in descending order, placing NULL values first?",
+          "options": [
+            "SELECT * FROM employees ORDER BY salary DESC NULLS FIRST;",
+            "SELECT * FROM employees ORDER BY salary NULLS FIRST DESC;",
+            "SELECT * FROM employees ORDER BY salary DESC WHERE salary IS NOT NULL;",
+            "SELECT * FROM employees ORDER BY salary DESC EXCLUDE NULLS;"
+          ],
+          "answer": "SELECT * FROM employees ORDER BY salary DESC NULLS FIRST;",
+          "explanation": "The 'NULLS FIRST' clause ensures that NULL values appear at the top of the result set, even when sorting in descending order."
+        },
+        {
+          "id": "sql-order-by-6",
+          "question": "Write a SQL query to order students by test_score in descending order, placing NULL scores first. Use the 'students' table.",
+          "initialData": [
+            "CREATE TABLE students (student_id INTEGER PRIMARY KEY, name TEXT, test_score INTEGER);",
+            "INSERT INTO students (student_id, name, test_score) VALUES (1, 'Alice', 85), (2, 'Bob', NULL), (3, 'Charlie', 90);"
+          ],
+          "expectedResult": "SELECT * FROM students ORDER BY test_score DESC NULLS FIRST;",
+          "explanation": "This query orders students by test_score in descending order and places rows with NULL test scores first using 'NULLS FIRST'."
+        },
+        {
+          "id": "sql-order-by-7",
+          "question": "Which of the following describes how the ORDER BY clause sorts NULL values in SQL by default?",
+          "options": [
+            "NULL values are placed first in ascending order and last in descending order.",
+            "NULL values are placed last in both ascending and descending order.",
+            "NULL values are always excluded from the result set.",
+            "SQL raises an error if NULL values are included in an ORDER BY clause."
+          ],
+          "answer": "NULL values are placed first in ascending order and last in descending order.",
+          "explanation": "By default, in most databases, NULL values appear first when sorting in ascending order and last when sorting in descending order."
+        },
+        {
+          "id": "sql-order-by-8",
+          "question": "Write a SQL query to retrieve all movies, ordered by release_year in ascending order, with NULL values placed last. Use the 'movies' table.",
+          "initialData": [
+            "CREATE TABLE movies (movie_id INTEGER PRIMARY KEY, title TEXT, release_year INTEGER);",
+            "INSERT INTO movies (movie_id, title, release_year) VALUES (1, 'Inception', 2010), (2, 'The Martian', NULL), (3, 'Tenet', 2020);"
+          ],
+          "expectedResult": "SELECT * FROM movies ORDER BY release_year ASC NULLS LAST;",
+          "explanation": "The query orders movies by release_year in ascending order and places rows with NULL release_year values at the bottom using the 'NULLS LAST' clause."
+        }
+      ]
     }
   ]
-  
 }
