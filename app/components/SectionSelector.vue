@@ -2,12 +2,41 @@
 <template>
   <div class="w-full max-w-6xl mx-auto">
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-2xl font-bold">Select a Topic</h2>
+      <h2 class="text-2xl font -bold">Select a Topic</h2>
       <Button @click="shuffleSections" variant="outline"> 
         <Icon name="radix-icons:shuffle" class="mr-2 h-4 w-4" />
         Shuffle
       </Button>
     </div>
+    
+    <h2 class="text-2xl font-semibold text-amber-500 ">
+      Recently Added
+    </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 gap-4 gap-y-6 mt-1 mb-8 ">
+        <Card 
+          v-for="section in newTopicSections" 
+          :key="section.id"
+          class="w-full cursor-pointer hover:shadow-md hover:scale-105 transition-all duration-200 flex flex-col"
+          @click="selectSection(section.id)"
+        >
+          <CardHeader class="pb-2">
+            <div class="flex justify-between items-center">
+              <CardTitle class="text-xl">{{ section.title }}</CardTitle>
+              <Badge :class="[difficultyColors[section.difficulty], 'text-white']" class="p-1">
+                {{ section.difficulty }}
+              </Badge>
+            </div>
+          </CardHeader>
+          <CardContent class="flex-grow flex flex-col justify-between">
+            <p class="text-sm text-gray-600 mb-4">{{ section.description }}</p>
+            <div class="flex justify-between items-center mt-auto">
+              <span class="text-sm">{{ section.completedQuestions || '-' }} / {{ section.questions.length }} completed</span>
+              <Progress :model-value="(section.completedQuestions / section.totalQuestions) * 100" class="w-1/2" />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    <h2 class="text-2xl font-bold">All</h2>
     <div v-if="loading">
       <p>Loading topics...</p>
     </div>
@@ -15,7 +44,7 @@
       v-else 
       name="shuffle-list" 
       tag="div" 
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 gap-y-6"
+      class="grid grid-cols-1 sm:grid-cols-2 mt-1 lg:grid-cols-3 xl:grid-cols-3 gap-4 gap-y-6"
     >
       <Card 
         v-for="section in shuffledSections" 
@@ -60,6 +89,10 @@ const topicSections = computed(() =>
   store.sectionsWithProgress.filter(section => section.type === 'topic')
 )
 
+
+const newTopicSections = computed(() =>
+  store.sectionsWithProgress.filter(section => section.type === 'new-topic')
+)
 const shuffledSections = ref<Section[]>([])
 
 // Function to save shuffled order to local storage
@@ -95,6 +128,7 @@ const shuffleSections = () => {
   shuffledSections.value = [...shuffledSections.value].sort(() => Math.random() - 0.5)
   saveShuffledOrder(shuffledSections.value)
 }
+
 
 // Watch for changes in topicSections and reapply order
 watch(topicSections, () => {

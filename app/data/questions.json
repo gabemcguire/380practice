@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 14,
   "sections": [
     {
       "id": "entity-relationship-diagrams",
@@ -1210,6 +1210,430 @@
           ],
           "answer": "On columns that have low cardinality (few unique values)",
           "explanation": "Indexes are less useful on columns with low cardinality (few unique values), such as columns with boolean values or status flags, because they provide little benefit over scanning the entire table."
+        }
+      ]
+    },
+    {
+      "id": "sql-subqueries",
+      "type": "new-topic",
+      "title": "Subqueries I",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "sql-subqueries-1",
+          "question": "Write a SQL query to find the customer who has placed the largest number of orders. Use the 'customers' and 'orders' tables.",
+          "initialData": [
+            "CREATE TABLE customers (customer_id INTEGER PRIMARY KEY, name TEXT);",
+            "CREATE TABLE orders (order_id INTEGER PRIMARY KEY, customer_id INTEGER, order_total DECIMAL);",
+            "INSERT INTO customers (customer_id, name) VALUES (1, 'Alice'), (2, 'Bob'), (3, 'Charlie');",
+            "INSERT INTO orders (order_id, customer_id, order_total) VALUES (1, 1, 100), (2, 1, 50), (3, 2, 200), (4, 3, 75);"
+          ],
+          "expectedResult": "SELECT name FROM customers WHERE customer_id = (SELECT customer_id FROM orders GROUP BY customer_id ORDER BY COUNT(order_id) DESC LIMIT 1);",
+          "explanation": "This query uses a subquery to count the number of orders per customer and return the customer who has placed the most orders."
+        },
+        {
+          "id": "sql-subqueries-2",
+          "question": "Write a SQL query to find the author who has written the longest book. Use the 'authors' and 'books' tables.",
+          "initialData": [
+            "CREATE TABLE authors (author_id INTEGER PRIMARY KEY, name TEXT);",
+            "CREATE TABLE books (book_id INTEGER PRIMARY KEY, author_id INTEGER, pages INTEGER);",
+            "INSERT INTO authors (author_id, name) VALUES (1, 'George Orwell'), (2, 'J.K. Rowling'), (3, 'J.R.R. Tolkien');",
+            "INSERT INTO books (book_id, author_id, pages) VALUES (1, 1, 326), (2, 2, 870), (3, 3, 1178);"
+          ],
+          "expectedResult": "SELECT name FROM authors WHERE author_id = (SELECT author_id FROM books ORDER BY pages DESC LIMIT 1);",
+          "explanation": "This query uses a subquery to find the book with the highest number of pages and then retrieves the corresponding author."
+        },
+        {
+          "id": "sql-subqueries-3",
+          "question": "Write a SQL query to find the event with the highest attendance, along with the city where it was held. Use the 'events' and 'cities' tables.",
+          "initialData": [
+            "CREATE TABLE events (event_id INTEGER PRIMARY KEY, name TEXT, city_id INTEGER, attendance INTEGER);",
+            "CREATE TABLE cities (city_id INTEGER PRIMARY KEY, city_name TEXT);",
+            "INSERT INTO events (event_id, name, city_id, attendance) VALUES (1, 'Music Festival', 1, 5000), (2, 'Tech Conference', 2, 15000), (3, 'Art Expo', 3, 3000);",
+            "INSERT INTO cities (city_id, city_name) VALUES (1, 'New York'), (2, 'San Francisco'), (3, 'Los Angeles');"
+          ],
+          "expectedResult": "SELECT name, city_name FROM events JOIN cities ON events.city_id = cities.city_id WHERE attendance = (SELECT MAX(attendance) FROM events);",
+          "explanation": "This query finds the event with the highest attendance using a subquery and retrieves the event name along with the city where it was held."
+        },
+        {
+          "id": "sql-subqueries-4",
+          "question": "Write a SQL query to find the student with the highest average test score across all their tests. Use the 'students' and 'test_scores' tables.",
+          "initialData": [
+            "CREATE TABLE students (student_id INTEGER PRIMARY KEY, name TEXT);",
+            "CREATE TABLE test_scores (test_id INTEGER PRIMARY KEY, student_id INTEGER, score INTEGER);",
+            "INSERT INTO students (student_id, name) VALUES (1, 'Alice'), (2, 'Bob'), (3, 'Charlie');",
+            "INSERT INTO test_scores (test_id, student_id, score) VALUES (1, 1, 85), (2, 1, 90), (3, 2, 78), (4, 3, 92), (5, 3, 88);"
+          ],
+          "expectedResult": "SELECT name FROM students WHERE student_id = (SELECT student_id FROM test_scores GROUP BY student_id ORDER BY AVG(score) DESC LIMIT 1);",
+          "explanation": "This query calculates the average test score for each student and uses a subquery to find the student with the highest average."
+        }
+      ]
+    },
+    {
+      "id": "sql-group-by",
+      "type": "topic",
+      "title": "GROUP BY",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "sql-group-by-1",
+          "question": "Which of the following SQL statements correctly groups the 'products' table by category and counts the total number of products in each category?",
+          "options": [
+            "SELECT category, COUNT(*) FROM products GROUP BY category;",
+            "SELECT category, COUNT(*) FROM products ORDER BY category;",
+            "SELECT COUNT(*) FROM products GROUP BY category;",
+            "SELECT category FROM products GROUP BY category;"
+          ],
+          "answer": "SELECT category, COUNT(*) FROM products GROUP BY category;",
+          "explanation": "This statement correctly groups the 'products' table by category and counts the total number of products using COUNT(*)."
+        },
+        {
+          "id": "sql-group-by-2",
+          "question": "Write a SQL query to group the planets by their types and count how many moons they have in total. Use the 'planets' and 'moons' tables.",
+          "initialData": [
+            "CREATE TABLE planets (planet_id INTEGER PRIMARY KEY, name TEXT, type TEXT);",
+            "CREATE TABLE moons (moon_id INTEGER PRIMARY KEY, planet_id INTEGER, name TEXT);",
+            "INSERT INTO planets (planet_id, name, type) VALUES (1, 'Earth', 'Terrestrial'), (2, 'Jupiter', 'Gas Giant'), (3, 'Mars', 'Terrestrial');",
+            "INSERT INTO moons (moon_id, planet_id, name) VALUES (1, 1, 'Moon'), (2, 2, 'Europa'), (3, 2, 'Ganymede'), (4, 3, 'Phobos'), (5, 3, 'Deimos');"
+          ],
+          "expectedResult": "SELECT planets.type, COUNT(moons.moon_id) as moon_count FROM planets LEFT JOIN moons ON planets.planet_id = moons.planet_id GROUP BY planets.type;",
+          "explanation": "This query groups the planets by type and counts the total number of moons for each type using a LEFT JOIN to ensure all planet types are represented."
+        },
+        {
+          "id": "sql-group-by-3",
+          "question": "Write a SQL query to find the total number of unique ingredients used by each type of dish. Use the 'dishes' and 'ingredients' tables.",
+          "initialData": [
+            "CREATE TABLE dishes (dish_id INTEGER PRIMARY KEY, name TEXT, type TEXT);",
+            "CREATE TABLE ingredients (ingredient_id INTEGER PRIMARY KEY, dish_id INTEGER, name TEXT);",
+            "INSERT INTO dishes (dish_id, name, type) VALUES (1, 'Pizza', 'Italian'), (2, 'Sushi', 'Japanese'), (3, 'Lasagna', 'Italian');",
+            "INSERT INTO ingredients (ingredient_id, dish_id, name) VALUES (1, 1, 'Cheese'), (2, 1, 'Tomato'), (3, 2, 'Rice'), (4, 3, 'Cheese'), (5, 3, 'Pasta');"
+          ],
+          "expectedResult": "SELECT dishes.type, COUNT(DISTINCT ingredients.name) as unique_ingredients FROM dishes INNER JOIN ingredients ON dishes.dish_id = ingredients.dish_id GROUP BY dishes.type;",
+          "explanation": "This query uses an INNER JOIN and GROUP BY to find the total number of unique ingredients used in each type of dish, using COUNT with DISTINCT to ensure ingredients are only counted once."
+        },
+        {
+          "id": "sql-group-by-4",
+          "question": "Write a SQL query to find the most popular genre of book by counting how many times each genre is borrowed from a library. Use the 'books' and 'borrows' tables.",
+          "initialData": [
+            "CREATE TABLE books (book_id INTEGER PRIMARY KEY, title TEXT, genre TEXT);",
+            "CREATE TABLE borrows (borrow_id INTEGER PRIMARY KEY, book_id INTEGER, borrow_date DATE);",
+            "INSERT INTO books (book_id, title, genre) VALUES (1, 'Dune', 'Sci-Fi'), (2, '1984', 'Dystopian'), (3, 'The Hobbit', 'Fantasy');",
+            "INSERT INTO borrows (borrow_id, book_id, borrow_date) VALUES (1, 1, '2024-01-01'), (2, 2, '2024-02-15'), (3, 1, '2024-03-10'), (4, 3, '2024-04-12');"
+          ],
+          "expectedResult": "SELECT books.genre, COUNT(borrows.borrow_id) as borrow_count FROM books LEFT JOIN borrows ON books.book_id = borrows.book_id GROUP BY books.genre;",
+          "explanation": "This query groups the books by genre and counts how many times books from each genre have been borrowed, even if some genres have no borrows."
+        }
+      ]
+    },
+    {
+      "id": "sql-having",
+      "type": "new-topic",
+      "title": "HAVING",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "sql-having-1",
+          "question": "Write a SQL query to find the cities where the average temperature in the last year exceeded 80°F. Use the 'cities' and 'weather' tables.",
+          "initialData": [
+            "CREATE TABLE cities (city_id INTEGER PRIMARY KEY, city_name TEXT);",
+            "CREATE TABLE weather (weather_id INTEGER PRIMARY KEY, city_id INTEGER, temperature DECIMAL, date DATE);",
+            "INSERT INTO cities (city_id, city_name) VALUES (1, 'Phoenix'), (2, 'Seattle'), (3, 'Miami');",
+            "INSERT INTO weather (weather_id, city_id, temperature, date) VALUES (1, 1, 90, '2024-06-01'), (2, 1, 95, '2024-07-01'), (3, 2, 70, '2024-06-01'), (4, 2, 65, '2024-07-01'), (5, 3, 85, '2024-06-01'), (6, 3, 88, '2024-07-01');"
+          ],
+          "expectedResult": "SELECT city_name FROM cities JOIN weather ON cities.city_id = weather.city_id GROUP BY city_name HAVING AVG(temperature) > 80;",
+          "explanation": "This query groups the cities by name and uses the `HAVING` clause to filter out cities with an average temperature below 80°F."
+        },
+        {
+          "id": "sql-having-2",
+          "question": "Write a SQL query to find the authors who have written more than two books. Use the 'authors' and 'books' tables.",
+          "initialData": [
+            "CREATE TABLE authors (author_id INTEGER PRIMARY KEY, name TEXT);",
+            "CREATE TABLE books (book_id INTEGER PRIMARY KEY, author_id INTEGER, title TEXT);",
+            "INSERT INTO authors (author_id, name) VALUES (1, 'George Orwell'), (2, 'J.K. Rowling'), (3, 'Isaac Asimov');",
+            "INSERT INTO books (book_id, author_id, title) VALUES (1, 1, '1984'), (2, 1, 'Animal Farm'), (3, 2, 'Harry Potter and the Sorcerers Stone'), (4, 2, 'Harry Potter and the Chamber of Secrets'), (5, 2, 'Harry Potter and the Prisoner of Azkaban'), (6, 3, 'Foundation');"
+          ],
+          "expectedResult": "SELECT name FROM authors JOIN books ON authors.author_id = books.author_id GROUP BY authors.name HAVING COUNT(books.book_id) > 2;",
+          "explanation": "This query groups authors by name and uses the `HAVING` clause to find authors who have written more than two books."
+        },
+        {
+          "id": "sql-having-3",
+          "question": "Write a SQL query to find the restaurants where the average review rating is below 3 stars. Use the 'restaurants' and 'reviews' tables.",
+          "initialData": [
+            "CREATE TABLE restaurants (restaurant_id INTEGER PRIMARY KEY, name TEXT);",
+            "CREATE TABLE reviews (review_id INTEGER PRIMARY KEY, restaurant_id INTEGER, rating DECIMAL);",
+            "INSERT INTO restaurants (restaurant_id, name) VALUES (1, 'Burger Town'), (2, 'Sushi Palace'), (3, 'Pasta Heaven');",
+            "INSERT INTO reviews (review_id, restaurant_id, rating) VALUES (1, 1, 2.5), (2, 1, 3), (3, 2, 4.5), (4, 2, 4.2), (5, 3, 1.8), (6, 3, 2.1);"
+          ],
+          "expectedResult": "SELECT name FROM restaurants JOIN reviews ON restaurants.restaurant_id = reviews.restaurant_id GROUP BY restaurants.name HAVING AVG(reviews.rating) < 3;",
+          "explanation": "This query uses `HAVING` to find restaurants with an average review rating below 3 stars by grouping the results by restaurant."
+        },
+        {
+          "id": "sql-having-4",
+          "question": "Write a SQL query to find the sports teams that have won more than 3 championships. Use the 'teams' and 'championships' tables.",
+          "initialData": [
+            "CREATE TABLE teams (team_id INTEGER PRIMARY KEY, team_name TEXT);",
+            "CREATE TABLE championships (championship_id INTEGER PRIMARY KEY, team_id INTEGER, year INTEGER);",
+            "INSERT INTO teams (team_id, team_name) VALUES (1, 'Lions'), (2, 'Tigers'), (3, 'Bears');",
+            "INSERT INTO championships (championship_id, team_id, year) VALUES (1, 1, 2020), (2, 1, 2018), (3, 2, 2019), (4, 2, 2021), (5, 2, 2022), (6, 3, 2017);"
+          ],
+          "expectedResult": "SELECT team_name FROM teams JOIN championships ON teams.team_id = championships.team_id GROUP BY teams.team_name HAVING COUNT(championships.championship_id) > 3;",
+          "explanation": "This query uses `HAVING` to find teams that have won more than 3 championships by grouping the teams and counting their championships."
+        }
+      ]
+    },
+    {
+      "id": "sql-composite-primary-keys",
+      "type": "topic",
+      "title": "Composite Primary Keys",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "sql-cpk-1",
+          "question": "What is a composite primary key?",
+          "options": [
+            "A primary key that consists of more than one column.",
+            "A foreign key that references multiple tables.",
+            "A key that allows NULL values.",
+            "A key that is automatically generated by the database."
+          ],
+          "answer": "A primary key that consists of more than one column.",
+          "explanation": "A composite primary key is made up of two or more columns that together form a unique identifier for each record in a table."
+        },
+        {
+          "id": "sql-cpk-2",
+          "question": "Which of the following best describes when you should use a composite primary key?",
+          "options": [
+            "When no single column can uniquely identify each record in the table.",
+            "When a table has more than three columns.",
+            "When the table has only foreign key relationships.",
+            "When a table has no primary key."
+          ],
+          "answer": "When no single column can uniquely identify each record in the table.",
+          "explanation": "A composite primary key is useful when no single column provides unique identification but a combination of multiple columns does."
+        },
+        {
+          "id": "sql-cpk-3",
+          "question": "Write a SQL query to create a 'book_loans' table with a composite primary key consisting of 'book_id' and 'borrower_id'.",
+          "initialData": [],
+          "expectedResult": "CREATE TABLE book_loans (book_id INTEGER, borrower_id INTEGER, loan_date DATE, PRIMARY KEY (book_id, borrower_id));",
+          "explanation": "This query creates a table where the combination of 'book_id' and 'borrower_id' forms a unique identifier for each record, ensuring that the same book cannot be borrowed by the same person more than once at the same time."
+        },
+        {
+          "id": "sql-cpk-4",
+          "question": "Which of the following SQL statements correctly defines a composite primary key?",
+          "options": [
+            "PRIMARY KEY (column1, column2)",
+            "PRIMARY KEY (column1), PRIMARY KEY (column2)",
+            "PRIMARY KEY (column1 AND column2)",
+            "PRIMARY KEY (column1 OR column2)"
+          ],
+          "answer": "PRIMARY KEY (column1, column2)",
+          "explanation": "The correct syntax for defining a composite primary key is 'PRIMARY KEY (column1, column2)', which ensures that the combination of column1 and column2 is unique."
+        },
+        {
+          "id": "sql-cpk-5",
+          "question": "Write a SQL query to create a 'student_courses' table where a student can enroll in multiple courses but cannot enroll in the same course more than once. Use 'student_id' and 'course_id' as the composite primary key.",
+          "initialData": [],
+          "expectedResult": "CREATE TABLE student_courses (student_id INTEGER, course_id INTEGER, enrollment_date DATE, PRIMARY KEY (student_id, course_id));",
+          "explanation": "This query defines 'student_id' and 'course_id' as a composite primary key, ensuring that a student cannot be enrolled in the same course more than once."
+        },
+        {
+          "id": "sql-cpk-6",
+          "question": "Why is a composite primary key beneficial in many-to-many relationships?",
+          "options": [
+            "It helps uniquely identify each relationship between entities.",
+            "It reduces the number of columns needed in a table.",
+            "It ensures that only one entity is referenced.",
+            "It automatically generates foreign key constraints."
+          ],
+          "answer": "It helps uniquely identify each relationship between entities.",
+          "explanation": "In many-to-many relationships, a composite primary key allows you to uniquely identify each pair of related entities, which is essential for linking records between the two tables."
+        },
+        {
+          "id": "sql-cpk-7",
+          "question": "Write a SQL query to find all loans in the 'book_loans' table where the same 'book_id' was borrowed by more than one 'borrower_id' on the same 'loan_date'.",
+          "initialData": [
+            "CREATE TABLE book_loans (book_id INTEGER, borrower_id INTEGER, loan_date DATE, PRIMARY KEY (book_id, borrower_id));",
+            "INSERT INTO book_loans (book_id, borrower_id, loan_date) VALUES (1, 101, '2024-01-01'), (1, 102, '2024-01-01'), (2, 103, '2024-02-01');"
+          ],
+          "expectedResult": "SELECT book_id, loan_date, COUNT(borrower_id) as borrower_count FROM book_loans GROUP BY book_id, loan_date HAVING COUNT(borrower_id) > 1;",
+          "explanation": "This query groups the results by 'book_id' and 'loan_date', then uses `HAVING` to filter out groups where more than one borrower borrowed the same book on the same date."
+        }
+      ]
+    },
+    {
+      "id": "sql-like",
+      "type": "new-topic",
+      "title": "LIKE and Pattern Matching",
+      "difficulty": "Easy",
+      "questions": [
+        {
+          "id": "sql-like-1",
+          "question": "Which of the following is a wildcard used in SQL for matching any sequence of characters?",
+          "options": [
+            "%",
+            "_",
+            "#",
+            "$"
+          ],
+          "answer": "%",
+          "explanation": "The '%' wildcard in SQL is used to match any sequence of characters (zero or more) in a string. For example, 'A%' would match any string that starts with 'A'."
+        },
+        {
+          "id": "sql-like-2",
+          "question": "Which SQL wildcard is used to match exactly one character?",
+          "options": [
+            "_",
+            "%",
+            "*",
+            "?"
+          ],
+          "answer": "_",
+          "explanation": "The '_' wildcard in SQL matches exactly one character. For example, 'A_' would match any two-character string that starts with 'A', like 'An' or 'A1'."
+        },
+        {
+          "id": "sql-like-3",
+          "question": "Write a SQL query to find all users whose names start with 'J'. Use the 'users' table.",
+          "initialData": [
+            "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);",
+            "INSERT INTO users (name) VALUES ('John'), ('Jane'), ('Alice'), ('Jill');"
+          ],
+          "expectedResult": "SELECT * FROM users WHERE name LIKE 'J%';",
+          "explanation": "This query uses the 'LIKE' operator with the '%' wildcard to match any names that start with 'J'."
+        },
+        {
+          "id": "sql-like-4",
+          "question": "Write a SQL query to find all books whose titles have exactly five characters. Use the 'books' table.",
+          "initialData": [
+            "CREATE TABLE books (book_id INTEGER PRIMARY KEY, title TEXT);",
+            "INSERT INTO books (title) VALUES ('Dune'), ('It'), ('1984'), ('Brave'), ('Fahrenheit');"
+          ],
+          "expectedResult": "SELECT * FROM books WHERE title LIKE '_____';",
+          "explanation": "This query uses the 'LIKE' operator with the '_' wildcard repeated five times to match titles with exactly five characters."
+        },
+        {
+          "id": "sql-like-5",
+          "question": "Which of the following queries finds all emails ending with '.com'?",
+          "options": [
+            "SELECT * FROM users WHERE email LIKE '%.com';",
+            "SELECT * FROM users WHERE email LIKE '%com';",
+            "SELECT * FROM users WHERE email LIKE '_.com';",
+            "SELECT * FROM users WHERE email LIKE '%@%.com';"
+          ],
+          "answer": "SELECT * FROM users WHERE email LIKE '%.com';",
+          "explanation": "The query 'SELECT * FROM users WHERE email LIKE '%.com';' finds all emails ending with '.com', where '%' can match any characters before the '.com'."
+        },
+        {
+          "id": "sql-like-6",
+          "question": "Write a SQL query to find all products where the third character in the product name is 'X'. Use the 'products' table.",
+          "initialData": [
+            "CREATE TABLE products (product_id INTEGER PRIMARY KEY, name TEXT);",
+            "INSERT INTO products (name) VALUES ('AXE'), ('BOX'), ('PIXEL'), ('MAXIMUS');"
+          ],
+          "expectedResult": "SELECT * FROM products WHERE name LIKE '__X%';",
+          "explanation": "This query uses two underscores '__' to match the first two characters, then 'X' for the third character, followed by '%' to match any sequence of characters after."
+        },
+        {
+          "id": "sql-like-7",
+          "question": "Write a SQL query to find all songs whose title contains the word 'Love' (case-insensitive). Use the 'songs' table.",
+          "initialData": [
+            "CREATE TABLE songs (song_id INTEGER PRIMARY KEY, title TEXT);",
+            "INSERT INTO songs (title) VALUES ('Endless Love'), ('Crazy In Love'), ('Tainted Love'), ('All You Need Is Love');"
+          ],
+          "expectedResult": "SELECT * FROM songs WHERE LOWER(title) LIKE '%love%';",
+          "explanation": "This query uses the 'LOWER()' function to make the search case-insensitive, and '%love%' matches any titles containing 'love'."
+        },
+        {
+          "id": "sql-like-8",
+          "question": "Which of the following SQL statements will find all usernames that end with the letter 'e'?",
+          "options": [
+            "SELECT * FROM users WHERE username LIKE '%e';",
+            "SELECT * FROM users WHERE username LIKE '_e%';",
+            "SELECT * FROM users WHERE username LIKE 'e%';",
+            "SELECT * FROM users WHERE username LIKE '_e';"
+          ],
+          "answer": "SELECT * FROM users WHERE username LIKE '%e';",
+          "explanation": "The query 'SELECT * FROM users WHERE username LIKE '%e';' will return all usernames that end with the letter 'e', where '%' matches any characters before the 'e'."
+        }
+      ]
+    },
+    {
+      "id": "sql-left-joins-with-null",
+      "type": "topic",
+      "title": "LEFT JOINs with NULL",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "sql-left-join-null-4",
+          "question": "Which function can be used to replace NULL values with a specific value in SQL?",
+          "options": [
+            "COALESCE",
+            "ISNULL",
+            "NVL",
+            "IFNULL"
+          ],
+          "answer": "COALESCE",
+          "explanation": "COALESCE is used to return the first non-NULL value in a list of arguments. It's often used to replace NULL values with a specified value in SQL."
+        },
+        {
+          "id": "sql-left-join-null-1",
+          "question": "Write a SQL query to find all customers and the orders they have placed. Include customers who have not placed any orders, and display 'No orders' for customers with no orders. Use the 'customers' and 'orders' tables.",
+          "initialData": [
+            "CREATE TABLE customers (customer_id INTEGER PRIMARY KEY, name TEXT);",
+            "CREATE TABLE orders (order_id INTEGER PRIMARY KEY, customer_id INTEGER, order_details TEXT);",
+            "INSERT INTO customers (customer_id, name) VALUES (1, 'Alice'), (2, 'Bob'), (3, 'Charlie');",
+            "INSERT INTO orders (order_id, customer_id, order_details) VALUES (1, 1, 'Laptop'), (2, 1, 'Mouse'), (3, 3, 'Keyboard');"
+          ],
+          "expectedResult": "SELECT customers.name, COALESCE(orders.order_details, 'No orders') as order_details FROM customers LEFT JOIN orders ON customers.customer_id = orders.customer_id;",
+          "explanation": "This query uses a LEFT JOIN to include all customers, even those without orders. The COALESCE function replaces NULL order details with 'No orders' for customers who haven’t placed any orders."
+        },
+        {
+          "id": "sql-left-join-null-2",
+          "question": "Write a SQL query to list all employees and their respective departments. Include employees who are not assigned to any department, and show 'No department' where appropriate. Use the 'employees' and 'departments' tables.",
+          "initialData": [
+            "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY, name TEXT, department_id INTEGER);",
+            "CREATE TABLE departments (department_id INTEGER PRIMARY KEY, department_name TEXT);",
+            "INSERT INTO employees (employee_id, name, department_id) VALUES (1, 'John', 101), (2, 'Jane', NULL), (3, 'Emily', 102);",
+            "INSERT INTO departments (department_id, department_name) VALUES (101, 'HR'), (102, 'Engineering');"
+          ],
+          "expectedResult": "SELECT employees.name, COALESCE(departments.department_name, 'No department') as department FROM employees LEFT JOIN departments ON employees.department_id = departments.department_id;",
+          "explanation": "This query uses a LEFT JOIN to include all employees, even those without an assigned department. The COALESCE function fills in 'No department' where employees don’t have a department."
+        },
+        {
+          "id": "sql-left-join-null-3",
+          "question": "Which SQL keyword is used to include all records from the left table and matching records from the right table, with NULL values in place of missing matches?",
+          "options": [
+            "LEFT JOIN",
+            "INNER JOIN",
+            "RIGHT JOIN",
+            "FULL OUTER JOIN"
+          ],
+          "answer": "LEFT JOIN",
+          "explanation": "A LEFT JOIN includes all records from the left table and matching records from the right table, filling in NULLs where no matches are found."
+        },
+        {
+          "id": "sql-left-join-null-5",
+          "question": "Write a SQL query to list all products and their corresponding supplier names. Include products that have no supplier and show 'No supplier' for such products. Use the 'products' and 'suppliers' tables.",
+          "initialData": [
+            "CREATE TABLE products (product_id INTEGER PRIMARY KEY, product_name TEXT, supplier_id INTEGER);",
+            "CREATE TABLE suppliers (supplier_id INTEGER PRIMARY KEY, supplier_name TEXT);",
+            "INSERT INTO products (product_id, product_name, supplier_id) VALUES (1, 'Laptop', 201), (2, 'Mouse', NULL), (3, 'Keyboard', 202);",
+            "INSERT INTO suppliers (supplier_id, supplier_name) VALUES (201, 'TechCorp'), (202, 'GadgetPro');"
+          ],
+          "expectedResult": "SELECT products.product_name, COALESCE(suppliers.supplier_name, 'No supplier') as supplier FROM products LEFT JOIN suppliers ON products.supplier_id = suppliers.supplier_id;",
+          "explanation": "This query uses a LEFT JOIN to include all products, even those without a supplier. The COALESCE function fills in 'No supplier' where products are missing a supplier."
+        },
+        {
+          "id": "sql-left-join-null-6",
+          "question": "Write a SQL query to display all courses and the students enrolled in them, including courses with no students enrolled. Show 'No students' for such courses. Use the 'courses' and 'enrollments' tables.",
+          "initialData": [
+            "CREATE TABLE courses (course_id INTEGER PRIMARY KEY, course_name TEXT);",
+            "CREATE TABLE enrollments (enrollment_id INTEGER PRIMARY KEY, course_id INTEGER, student_name TEXT);",
+            "INSERT INTO courses (course_id, course_name) VALUES (1, 'Math'), (2, 'Science'), (3, 'History');",
+            "INSERT INTO enrollments (enrollment_id, course_id, student_name) VALUES (1, 1, 'Alice'), (2, 1, 'Bob');"
+          ],
+          "expectedResult": "SELECT courses.course_name, COALESCE(enrollments.student_name, 'No students') as student FROM courses LEFT JOIN enrollments ON courses.course_id = enrollments.course_id;",
+          "explanation": "This query uses a LEFT JOIN to display all courses, even those without any students enrolled. The COALESCE function is used to replace NULL values with 'No students' where appropriate."
         }
       ]
     }
