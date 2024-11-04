@@ -1,5 +1,5 @@
 {
-  "version": 21,
+  "version": 22,
   "sections": [
     {
       "id": "entity-relationship-diagrams",
@@ -2928,7 +2928,7 @@
     },
     {
       "id": "build-files",
-      "type": "topic",
+      "type": "new-topic",
       "title": "Build Files",
       "difficulty": "Medium",
       "questions": [
@@ -2996,7 +2996,7 @@
     },
     {
       "id": "container-images",
-      "type": "topic",
+      "type": "new-topic",
       "title": "Container Images",
       "difficulty": "Medium",
       "questions": [
