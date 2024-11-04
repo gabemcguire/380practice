@@ -1,5 +1,5 @@
 {
-  "version": 15,
+  "version": 20,
   "sections": [
     {
       "id": "entity-relationship-diagrams",
@@ -1215,7 +1215,7 @@
     },
     {
       "id": "sql-subqueries",
-      "type": "new-topic",
+      "type":"topic",
       "title": "Subqueries I",
       "difficulty": "Medium",
       "questions": [
@@ -1327,7 +1327,7 @@
     },
     {
       "id": "sql-having",
-      "type": "new-topic",
+      "type": "topic",
       "title": "HAVING",
       "difficulty": "Medium",
       "questions": [
@@ -1463,7 +1463,7 @@
     },
     {
       "id": "sql-like",
-      "type": "new-topic",
+      "type": "topic",
       "title": "LIKE and Pattern Matching",
       "difficulty": "Easy",
       "questions": [
@@ -2127,6 +2127,710 @@
           ],
           "expectedResult": "SELECT * FROM movies ORDER BY release_year ASC NULLS LAST;",
           "explanation": "The query orders movies by release_year in ascending order and places rows with NULL release_year values at the bottom using the 'NULLS LAST' clause."
+        }
+      ]
+    },
+    {
+      "id": "api-concepts",
+      "type": "new-topic",
+      "title": "API Concepts",
+      "difficulty": "Easy",
+      "questions": [
+        {
+          "id": "api-definition",
+          "question": "What is an API?",
+          "options": [
+            "A standardized way for software to connect and communicate",
+            "A tool for encrypting data",
+            "A database management system",
+            "A web server"
+          ],
+          "answer": "A standardized way for software to connect and communicate",
+          "explanation": "An API provides a consistent interface for software components to interact, hiding the implementation details from the user."
+        },
+        {
+          "id": "api-function",
+          "question": "Which of the following best describes the role of an API in software development?",
+          "options": [
+            "To serve as a database",
+            "To define rules for how applications communicate with each other",
+            "To create user interfaces",
+            "To handle network traffic"
+          ],
+          "answer": "To define rules for how applications communicate with each other",
+          "explanation": "APIs outline standardized ways for applications to interact, ensuring compatibility and simplifying integration."
+        },
+        {
+          "id": "web-api-definition",
+          "question": "What is a Web API?",
+          "options": [
+            "An API used to build desktop applications",
+            "An API designed for web servers or web applications",
+            "An API for database management",
+            "An API for mobile applications only"
+          ],
+          "answer": "An API designed for web servers or web applications",
+          "explanation": "A Web API is specifically meant for communication with a web server, often through HTTP requests."
+        },
+        {
+          "id": "api-endpoint",
+          "question": "In the context of a web API, what is an 'endpoint'?",
+          "options": [
+            "A function inside a database",
+            "The main server address",
+            "A specific route that provides access to a certain functionality",
+            "A client-side script"
+          ],
+          "answer": "A specific route that provides access to a certain functionality",
+          "explanation": "An endpoint is a URL that provides access to a particular function or resource within a web API."
+        },
+        {
+          "id": "http-client",
+          "question": "How does a client typically communicate with a Web API?",
+          "options": [
+            "Through SQL queries",
+            "Using HTTP requests",
+            "With Java bytecode",
+            "Via direct database access"
+          ],
+          "answer": "Using HTTP requests",
+          "explanation": "Clients interact with Web APIs using HTTP requests, which are sent over the internet to access specific resources or services."
+        },
+        {
+          "id": "endpoint-example",
+          "question": "What might an endpoint look like for a 'login' function in a Web API?",
+          "options": [
+            "https://website.com/api/v1/login",
+            "login('username', 'password')",
+            "SELECT * FROM users WHERE status = 'login'",
+            "new Login()"
+          ],
+          "answer": "https://website.com/api/v1/login",
+          "explanation": "Web API endpoints are usually formatted as URLs specifying the resource, often containing terms like 'api' and the function name."
+        },
+        {
+          "id": "api-consistent-output",
+          "question": "Why do APIs typically provide a consistent output format?",
+          "options": [
+            "To make debugging easier",
+            "To ensure clients can easily handle the response",
+            "To reduce the complexity of server logic",
+            "To avoid errors in endpoint URLs"
+          ],
+          "answer": "To ensure clients can easily handle the response",
+          "explanation": "Consistent output formats allow clients to parse responses predictably, making integration smoother."
+        },
+        {
+          "id": "api-examples",
+          "question": "Which of the following is an example of an API that you may have interacted with?",
+          "options": [
+            "Typing a URL in a browser",
+            "Using the 'print' function in Python",
+            "Installing an app on your phone",
+            "Writing code in a text editor"
+          ],
+          "answer": "Using the 'print' function in Python",
+          "explanation": "The 'print' function in Python is an example of an API within the language, allowing the user to execute complex functionality with a simple command."
+        }
+      ]
+    },
+    {
+      "id": "cloud-computing-fundamentals",
+      "type": "new-topic",
+      "title": "Cloud Computing Fundamentals",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "cloud-benefits-1",
+          "question": "Which of the following is a reason consumers like the cloud?",
+          "options": [
+            "Limited data availability",
+            "Increased infrastructure maintenance",
+            "Reduced business complexity",
+            "Reduced up-time"
+          ],
+          "answer": "Reduced business complexity",
+          "explanation": "The cloud reduces business complexity by handling infrastructure, allowing businesses to focus on their core operations."
+        },
+        {
+          "id": "cloud-benefits-2",
+          "question": "How does cloud computing reduce investments for businesses?",
+          "options": [
+            "By eliminating the need for operational expenditures",
+            "By allowing businesses to purchase and maintain their own infrastructure",
+            "By providing access to IT resources without up-front investments",
+            "By requiring businesses to set up their own data centers"
+          ],
+          "answer": "By providing access to IT resources without up-front investments",
+          "explanation": "Cloud computing enables businesses to avoid significant up-front costs by offering infrastructure as a service, based on usage."
+        },
+        {
+          "id": "scalability-definition",
+          "question": "What does scalability mean in an IT context?",
+          "options": [
+            "The ability to reduce costs",
+            "The ability to handle increased or decreased usage demands",
+            "The ability to maintain existing resources",
+            "The ability to upgrade hardware"
+          ],
+          "answer": "The ability to handle increased or decreased usage demands",
+          "explanation": "Scalability refers to an IT resource's capacity to adapt to changing demand levels, either by scaling up/down or scaling out/in."
+        },
+        {
+          "id": "horizontal-scaling",
+          "question": "What is horizontal scaling in cloud computing?",
+          "options": [
+            "Increasing the capacity of a single resource",
+            "Allocating more resources of the same type",
+            "Replacing a resource with a higher capacity one",
+            "Reducing the number of available resources"
+          ],
+          "answer": "Allocating more resources of the same type",
+          "explanation": "Horizontal scaling involves adding more resources of the same type to handle increased demand, often seen in cloud environments."
+        },
+        {
+          "id": "vertical-scaling",
+          "question": "What is vertical scaling in cloud environments?",
+          "options": [
+            "Adding more resources of the same type",
+            "Replacing a resource with one that has higher or lower capacity",
+            "Scaling out resources across multiple regions",
+            "Duplicating resources to increase resiliency"
+          ],
+          "answer": "Replacing a resource with one that has higher or lower capacity",
+          "explanation": "Vertical scaling refers to upgrading or downgrading a resource’s capacity, although it's less common in cloud environments due to the time involved."
+        },
+        {
+          "id": "cloud-effectiveness-1",
+          "question": "Which feature makes a cloud service effective by allowing users to access resources as needed?",
+          "options": [
+            "Multitenancy",
+            "Elasticity",
+            "On-demand usage",
+            "Resource pooling"
+          ],
+          "answer": "On-demand usage",
+          "explanation": "On-demand usage allows cloud consumers to self-provision resources without waiting, giving flexibility in resource management."
+        },
+        {
+          "id": "cloud-effectiveness-2",
+          "question": "What does 'ubiquitous access' mean in the context of cloud computing?",
+          "options": [
+            "Users can access the service from any device or location",
+            "Only specific devices can access the service",
+            "Limited access based on usage",
+            "Resource availability varies by location"
+          ],
+          "answer": "Users can access the service from any device or location",
+          "explanation": "Ubiquitous access ensures that cloud services are accessible from various devices and locations, improving convenience and flexibility."
+        },
+        {
+          "id": "multitenancy",
+          "question": "What is multitenancy in cloud computing?",
+          "options": [
+            "A feature allowing each user to access dedicated resources",
+            "A feature that isolates each tenant while using shared resources",
+            "A service where only one user can access resources at a time",
+            "A system that prevents resource pooling"
+          ],
+          "answer": "A feature that isolates each tenant while using shared resources",
+          "explanation": "Multitenancy allows multiple customers to use a single instance of a software application, with each tenant's data and usage isolated."
+        },
+        {
+          "id": "cloud-elasticity",
+          "question": "Which characteristic allows cloud resources to scale dynamically to meet demand?",
+          "options": [
+            "Measured usage",
+            "Ubiquitous access",
+            "Elasticity",
+            "On-demand usage"
+          ],
+          "answer": "Elasticity",
+          "explanation": "Elasticity refers to the cloud’s ability to automatically adjust resources to meet changing demands efficiently."
+        },
+        {
+          "id": "measured-usage",
+          "question": "How does 'measured usage' benefit cloud consumers?",
+          "options": [
+            "By providing access to resources only during high demand",
+            "By ensuring users only pay for the resources they actually use",
+            "By charging a flat fee regardless of usage",
+            "By limiting access to resources during peak hours"
+          ],
+          "answer": "By ensuring users only pay for the resources they actually use",
+          "explanation": "Measured usage tracks the consumer’s actual use, allowing for billing based on resource consumption, which aligns costs with business performance."
+        }
+      ]
+    },
+    {
+      "id": "cloud-service-models",
+      "type": "new-topic",
+      "title": "SaaS vs. PaaS vs. IaaS",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "service-model-definition",
+          "question": "What does 'SaaS' stand for in cloud computing?",
+          "options": [
+            "System as a Service",
+            "Software as a Service",
+            "Server as a Service",
+            "Storage as a Service"
+          ],
+          "answer": "Software as a Service",
+          "explanation": "SaaS stands for Software as a Service, which provides software applications over the internet without requiring local installation."
+        },
+        {
+          "id": "saas-purpose",
+          "question": "Which of the following best describes the purpose of SaaS?",
+          "options": [
+            "To provide a platform for developers to build applications",
+            "To offer ready-to-use applications over the internet",
+            "To provide virtualized computing resources",
+            "To manage data storage exclusively"
+          ],
+          "answer": "To offer ready-to-use applications over the internet",
+          "explanation": "SaaS delivers fully managed applications to users over the internet, eliminating the need for installation and maintenance."
+        },
+        {
+          "id": "paas-purpose",
+          "question": "What is the primary purpose of Platform as a Service (PaaS)?",
+          "options": [
+            "To provide infrastructure resources",
+            "To offer tools and environment for developers to build and deploy applications",
+            "To provide operating system management",
+            "To deliver fully functional applications to end-users"
+          ],
+          "answer": "To offer tools and environment for developers to build and deploy applications",
+          "explanation": "PaaS offers a platform with development tools, libraries, and services for developers to create, test, and deploy applications."
+        },
+        {
+          "id": "iaas-purpose",
+          "question": "Which of the following is the primary role of Infrastructure as a Service (IaaS)?",
+          "options": [
+            "Providing software applications to end-users",
+            "Delivering scalable infrastructure resources like storage and servers",
+            "Offering development tools for application building",
+            "Managing cloud-based customer support"
+          ],
+          "answer": "Delivering scalable infrastructure resources like storage and servers",
+          "explanation": "IaaS provides fundamental cloud infrastructure, including storage, servers, and networking, for customers to manage as needed."
+        },
+        {
+          "id": "service-model-example-1",
+          "question": "Which of the following is an example of a SaaS product?",
+          "options": [
+            "Microsoft Azure",
+            "Dropbox",
+            "AWS EC2",
+            "Google Cloud Storage"
+          ],
+          "answer": "Dropbox",
+          "explanation": "Dropbox is an example of SaaS, as it provides cloud-based storage accessible via an internet browser or app, with no setup required from the user."
+        },
+        {
+          "id": "service-model-example-2",
+          "question": "Which of the following is an example of a PaaS offering?",
+          "options": [
+            "Google App Engine",
+            "Microsoft Word",
+            "Amazon S3",
+            "Zoom"
+          ],
+          "answer": "Google App Engine",
+          "explanation": "Google App Engine is a PaaS that provides a platform for developers to build and deploy applications without managing the underlying infrastructure."
+        },
+        {
+          "id": "iaas-characteristics",
+          "question": "What is a key characteristic of IaaS?",
+          "options": [
+            "Full control over infrastructure and virtualization",
+            "Managed application software",
+            "Access to development tools and libraries",
+            "Built-in application-level security"
+          ],
+          "answer": "Full control over infrastructure and virtualization",
+          "explanation": "IaaS gives customers control over virtualized hardware resources, allowing them to configure and manage servers, storage, and networking."
+        },
+        {
+          "id": "saas-benefit",
+          "question": "What is a key benefit of using SaaS for a business?",
+          "options": [
+            "Full control over operating system configurations",
+            "Reduced need for software maintenance",
+            "Direct access to physical hardware",
+            "Ability to customize development environments"
+          ],
+          "answer": "Reduced need for software maintenance",
+          "explanation": "SaaS eliminates the need for businesses to handle maintenance and updates, as the provider manages the software entirely."
+        },
+        {
+          "id": "service-comparison",
+          "question": "In which cloud model do consumers manage the applications and data, while the provider manages everything else (runtime, middleware, OS, servers)?",
+          "options": [
+            "IaaS",
+            "PaaS",
+            "SaaS",
+            "None of the above"
+          ],
+          "answer": "PaaS",
+          "explanation": "In PaaS, the provider manages everything up to the runtime environment, while consumers handle applications and data."
+        },
+        {
+          "id": "scalability-service-models",
+          "question": "Which cloud model typically offers the most flexibility for scalability?",
+          "options": [
+            "SaaS",
+            "PaaS",
+            "IaaS",
+            "None of the above"
+          ],
+          "answer": "IaaS",
+          "explanation": "IaaS offers the most flexibility for scalability, allowing consumers to adjust infrastructure resources like storage, compute, and networking as needed."
+        }
+      ]
+    },
+    {
+      "id": "virtual-servers",
+      "type": "new-topic",
+      "title": "Virtual Servers in Cloud Computing",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "server-types-1",
+          "question": "What is the primary difference between a small and large virtual server?",
+          "options": [
+            "The amount of storage",
+            "The number of virtual cores and RAM",
+            "The cost of the server",
+            "The data transfer speed"
+          ],
+          "answer": "The number of virtual cores and RAM",
+          "explanation": "Small servers have fewer cores and RAM than large servers, making them suitable for different workloads."
+        },
+        {
+          "id": "hypervisor-role",
+          "question": "What role does the hypervisor play in virtual server deployment?",
+          "options": [
+            "It provides the physical hardware for the server",
+            "It initializes and manages virtual server instances",
+            "It configures network settings",
+            "It secures the data on the virtual server"
+          ],
+          "answer": "It initializes and manages virtual server instances",
+          "explanation": "The hypervisor manages the creation and operation of virtual servers from pre-created images."
+        },
+        {
+          "id": "customization-1",
+          "question": "Once a virtual server is created, what can a user typically do?",
+          "options": [
+            "Only use the server as it is",
+            "Fully customize the server's configurations and settings",
+            "Access only a limited set of applications",
+            "Upgrade storage but not RAM or CPU"
+          ],
+          "answer": "Fully customize the server's configurations and settings",
+          "explanation": "Virtual servers offer flexibility, allowing users to tailor them to specific needs after creation."
+        },
+        {
+          "id": "server-options",
+          "question": "Which type of virtual server would be best suited for memory-intensive applications?",
+          "options": [
+            "Small Virtual Server",
+            "Processor Large Virtual Server",
+            "Memory Large Virtual Server",
+            "Ultra-large Virtual Server"
+          ],
+          "answer": "Memory Large Virtual Server",
+          "explanation": "Memory Large Virtual Servers have high RAM capacity, ideal for memory-heavy workloads."
+        },
+        {
+          "id": "ultra-large",
+          "question": "What is a defining feature of an Ultra-large Virtual Server?",
+          "options": [
+            "High storage capacity",
+            "Large number of virtual cores and RAM",
+            "Dedicated network connection",
+            "Enhanced GPU performance"
+          ],
+          "answer": "Large number of virtual cores and RAM",
+          "explanation": "Ultra-large virtual servers offer extensive computing power and memory, suitable for complex workloads."
+        }
+      ]
+    },
+    {
+      "id": "cloud-usage-monitoring",
+      "type": "new-topic",
+      "title": "Cloud Usage Monitoring and Agents",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "usage-monitor-role",
+          "question": "What is the primary role of a cloud usage monitor?",
+          "options": [
+            "To configure security settings",
+            "To optimize storage capacity",
+            "To track and record cloud resource usage",
+            "To monitor user activity"
+          ],
+          "answer": "To track and record cloud resource usage",
+          "explanation": "A cloud usage monitor helps ensure that users are accurately billed by tracking resource consumption."
+        },
+        {
+          "id": "monitoring-agent",
+          "question": "What does a monitoring agent typically do?",
+          "options": [
+            "Analyzes dataflows on communication pathways",
+            "Monitors system security",
+            "Manages database backups",
+            "Reduces storage costs"
+          ],
+          "answer": "Analyzes dataflows on communication pathways",
+          "explanation": "Monitoring agents collect metrics on network traffic and message flows, often transparently."
+        },
+        {
+          "id": "resource-agent",
+          "question": "What is a resource agent designed to monitor?",
+          "options": [
+            "Specific system events like initiating and suspending resources",
+            "User login activity",
+            "Hardware malfunctions",
+            "Security breaches"
+          ],
+          "answer": "Specific system events like initiating and suspending resources",
+          "explanation": "Resource agents track specific actions and events that occur within cloud resources."
+        }
+      ]
+    },
+    {
+      "id": "resource-replication-scaling",
+      "type": "new-topic",
+      "title": "Resource Replication and Scaling in Cloud Environments",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "resource-replication-purpose",
+          "question": "Why is resource replication used in cloud environments?",
+          "options": [
+            "To enhance availability and performance of resources",
+            "To minimize storage costs",
+            "To simplify cloud management",
+            "To prevent unauthorized access"
+          ],
+          "answer": "To enhance availability and performance of resources",
+          "explanation": "Replication increases the redundancy and scalability of resources, enhancing availability and performance."
+        },
+        {
+          "id": "resource-scaling",
+          "question": "What is the purpose of resource scaling in cloud environments?",
+          "options": [
+            "To limit resource access to specific users",
+            "To dynamically adjust resources to meet demand",
+            "To provide data backup",
+            "To simplify user interfaces"
+          ],
+          "answer": "To dynamically adjust resources to meet demand",
+          "explanation": "Scaling allows cloud environments to flexibly increase or decrease resources based on usage needs."
+        },
+        {
+          "id": "horizontal-scaling-definition",
+          "question": "What does horizontal scaling involve in a cloud environment?",
+          "options": [
+            "Replacing a resource with a higher capacity one",
+            "Adding more resources of the same type to meet demand",
+            "Increasing the storage capacity of a single resource",
+            "Reducing the processing power of resources"
+          ],
+          "answer": "Adding more resources of the same type to meet demand",
+          "explanation": "Horizontal scaling refers to adding more instances of the same type, typically through load balancing, to handle increased demand."
+        },
+        {
+          "id": "vertical-scaling-definition",
+          "question": "What does vertical scaling involve?",
+          "options": [
+            "Adding more resources of the same type",
+            "Increasing the capacity of an existing resource",
+            "Duplicating resources to enhance availability",
+            "Reducing the size of storage capacity"
+          ],
+          "answer": "Increasing the capacity of an existing resource",
+          "explanation": "Vertical scaling involves upgrading the capacity of a single resource, such as adding more RAM or CPU power."
+        },
+        {
+          "id": "horizontal-scaling-benefit",
+          "question": "What is a key advantage of horizontal scaling?",
+          "options": [
+            "It minimizes downtime during scaling",
+            "It allows resource upgrades without new hardware",
+            "It reduces resource costs significantly",
+            "It simplifies infrastructure management"
+          ],
+          "answer": "It minimizes downtime during scaling",
+          "explanation": "Horizontal scaling allows adding more instances with minimal downtime, as no existing resources need to be replaced."
+        },
+        {
+          "id": "vertical-scaling-limit",
+          "question": "What is a limitation of vertical scaling?",
+          "options": [
+            "It cannot increase CPU capacity",
+            "It requires replacing existing resources",
+            "It cannot be automated",
+            "It only applies to storage resources"
+          ],
+          "answer": "It requires replacing existing resources",
+          "explanation": "Vertical scaling typically requires replacing a resource with a higher-capacity version, which can lead to downtime."
+        },
+        {
+          "id": "replication-method",
+          "question": "How is virtualization used in resource replication?",
+          "options": [
+            "It splits a single resource into multiple instances",
+            "It allows for scaling resources down only",
+            "It reduces the need for physical storage",
+            "It provides automated scaling solutions"
+          ],
+          "answer": "It splits a single resource into multiple instances",
+          "explanation": "Virtualization enables the creation of multiple virtual instances from a single physical resource, enhancing availability and redundancy."
+        },
+        {
+          "id": "replication-benefit",
+          "question": "What is a primary benefit of resource replication?",
+          "options": [
+            "It reduces overall infrastructure costs",
+            "It allows for continuous access even if one instance fails",
+            "It increases the capacity of a single resource",
+            "It simplifies data storage needs"
+          ],
+          "answer": "It allows for continuous access even if one instance fails",
+          "explanation": "Resource replication enhances redundancy, allowing for high availability if one instance becomes unavailable."
+        },
+        {
+          "id": "scaling-comparison",
+          "question": "When would horizontal scaling be preferable to vertical scaling?",
+          "options": [
+            "When minimizing downtime is essential",
+            "When a single resource requires more processing power",
+            "When resources need to be upgraded individually",
+            "When storage needs to be increased on a single server"
+          ],
+          "answer": "When minimizing downtime is essential",
+          "explanation": "Horizontal scaling allows for minimal downtime, as additional resources are added alongside existing ones."
+        },
+        {
+          "id": "cloud-resource-scaling",
+          "question": "What does 'scaling out' refer to in cloud computing?",
+          "options": [
+            "Increasing the capacity of a single resource",
+            "Adding more instances of the same resource type",
+            "Replacing resources with higher capacity ones",
+            "Reducing the network traffic load"
+          ],
+          "answer": "Adding more instances of the same resource type",
+          "explanation": "Scaling out, a form of horizontal scaling, involves adding more resources of the same type to handle increased load."
+        }
+      ]
+    },
+    {
+      "id": "monitoring-resource-polling-agents",
+      "type": "new-topic",
+      "title": "Monitoring Agent, Resource Agent, and Polling Agent",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "monitoring-agent-purpose",
+          "question": "What is the primary purpose of a monitoring agent?",
+          "options": [
+            "To handle user authentication",
+            "To analyze and track dataflows in the network",
+            "To manage virtual machines",
+            "To upgrade software automatically"
+          ],
+          "answer": "To analyze and track dataflows in the network",
+          "explanation": "A monitoring agent observes and collects data on dataflows and message metrics along existing communication pathways."
+        },
+        {
+          "id": "resource-agent-function",
+          "question": "What specific events does a resource agent monitor?",
+          "options": [
+            "User login attempts",
+            "Server temperature levels",
+            "Initiating, suspending, and resuming resources",
+            "System security vulnerabilities"
+          ],
+          "answer": "Initiating, suspending, and resuming resources",
+          "explanation": "Resource agents monitor specific resource-related events such as initiation, suspension, and vertical scaling actions."
+        },
+        {
+          "id": "polling-agent-role",
+          "question": "What is the primary role of a polling agent?",
+          "options": [
+            "To periodically check the status of IT resources",
+            "To upgrade software automatically",
+            "To monitor user activities",
+            "To manage data encryption"
+          ],
+          "answer": "To periodically check the status of IT resources",
+          "explanation": "A polling agent periodically monitors resources to gather data on uptime, downtime, and other usage metrics."
+        },
+        {
+          "id": "monitoring-agent-location",
+          "question": "Where does a monitoring agent typically reside in the network?",
+          "options": [
+            "Along existing communication pathways",
+            "Inside user devices",
+            "In the cloud storage system",
+            "In physical data centers only"
+          ],
+          "answer": "Along existing communication pathways",
+          "explanation": "Monitoring agents are usually placed along communication pathways to monitor traffic and metrics transparently."
+        },
+        {
+          "id": "resource-agent-scaling",
+          "question": "Which agent is responsible for monitoring events like vertical scaling?",
+          "options": [
+            "Monitoring agent",
+            "Resource agent",
+            "Polling agent",
+            "Cloud manager"
+          ],
+          "answer": "Resource agent",
+          "explanation": "Resource agents track observable events, including actions like vertical scaling, to manage resource metrics."
+        },
+        {
+          "id": "polling-agent-usage",
+          "question": "Why is a polling agent important in cloud environments?",
+          "options": [
+            "To upgrade resources automatically",
+            "To periodically collect resource usage data",
+            "To replicate resources",
+            "To monitor network security"
+          ],
+          "answer": "To periodically collect resource usage data",
+          "explanation": "Polling agents are used to periodically gather data on resource usage, helping with billing and performance monitoring."
+        },
+        {
+          "id": "monitoring-usage-metrics",
+          "question": "Which of these agents would monitor network traffic metrics?",
+          "options": [
+            "Polling agent",
+            "Monitoring agent",
+            "Resource agent",
+            "Scaling agent"
+          ],
+          "answer": "Monitoring agent",
+          "explanation": "Monitoring agents are designed to observe network traffic, data flows, and message metrics for system analysis."
+        },
+        {
+          "id": "polling-uptime-downtime",
+          "question": "What type of data would a polling agent typically collect?",
+          "options": [
+            "Event logs",
+            "Uptime and downtime status",
+            "User behavior analytics",
+            "Application error logs"
+          ],
+          "answer": "Uptime and downtime status",
+          "explanation": "Polling agents monitor the operational status of resources, including tracking uptime and downtime to ensure availability."
         }
       ]
     }
