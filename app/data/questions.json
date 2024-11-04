@@ -1,5 +1,5 @@
 {
-  "version": 20,
+  "version": 21,
   "sections": [
     {
       "id": "entity-relationship-diagrams",
@@ -2831,6 +2831,234 @@
           ],
           "answer": "Uptime and downtime status",
           "explanation": "Polling agents monitor the operational status of resources, including tracking uptime and downtime to ensure availability."
+        }
+      ]
+    },
+    {
+      "id": "container-networks",
+      "type": "new-topic",
+      "title": "Container Networks",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "container-network-purpose",
+          "question": "What is the main purpose of container networks?",
+          "options": [
+            "To manage storage",
+            "To enable communication between containers",
+            "To handle user authentication",
+            "To provide access to databases"
+          ],
+          "answer": "To enable communication between containers",
+          "explanation": "Container networks are virtual networks designed to facilitate communication between containers."
+        },
+        {
+          "id": "container-network-features",
+          "question": "Which of the following is a key feature of container networks?",
+          "options": [
+            "Automatic scalability",
+            "Real-time monitoring",
+            "Resiliency and availability",
+            "Direct access to hardware resources"
+          ],
+          "answer": "Resiliency and availability",
+          "explanation": "Container networks prioritize features like resiliency, scalability, and availability to support stable container communication."
+        },
+        {
+          "id": "host-network-definition",
+          "question": "What is a host network in a container environment?",
+          "options": [
+            "A network connecting containers across multiple hosts",
+            "A virtual network supporting container communication on the same host",
+            "A physical network connecting container images",
+            "A dedicated storage network for containers"
+          ],
+          "answer": "A virtual network supporting container communication on the same host",
+          "explanation": "A host network is a virtual network that allows containers on the same host to communicate with each other."
+        },
+        {
+          "id": "overlay-network-definition",
+          "question": "What is an overlay network in a containerized environment?",
+          "options": [
+            "A network that connects containers on a single host",
+            "A network that enables communication between containers across different hosts",
+            "A network solely for database access",
+            "A network layer for encrypted data transmission"
+          ],
+          "answer": "A network that enables communication between containers across different hosts",
+          "explanation": "Overlay networks facilitate communication between containers located on different hosts."
+        },
+        {
+          "id": "network-choice",
+          "question": "When is an overlay network created in a container environment?",
+          "options": [
+            "When containers are on the same host",
+            "When containers are on different hosts",
+            "When only one container is in use",
+            "When network encryption is required"
+          ],
+          "answer": "When containers are on different hosts",
+          "explanation": "An overlay network is created to connect containers deployed on separate hosts, enabling inter-host communication."
+        },
+        {
+          "id": "multiple-networks",
+          "question": "Why might multiple container networks be needed in a containerized application?",
+          "options": [
+            "To provide storage redundancy",
+            "To separate network traffic for different solutions",
+            "To reduce container memory usage",
+            "To allow for faster deployment"
+          ],
+          "answer": "To separate network traffic for different solutions",
+          "explanation": "Multiple networks can be used to manage distinct sets of solutions or services within a containerized application."
+        },
+        {
+          "id": "shared-program",
+          "question": "How can a reusable software program be shared across multiple container networks?",
+          "options": [
+            "By installing the program in each network separately",
+            "By placing the program in a container that participates in multiple networks",
+            "By assigning the program to an overlay network",
+            "By encrypting the program data"
+          ],
+          "answer": "By placing the program in a container that participates in multiple networks",
+          "explanation": "A reusable program can be placed in a container that connects to multiple networks, allowing it to serve multiple applications."
+        }
+      ]
+    },
+    {
+      "id": "build-files",
+      "type": "topic",
+      "title": "Build Files",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "build-file-definition",
+          "question": "What is a build file in containerization?",
+          "options": [
+            "A configuration file that defines a container's contents",
+            "A type of virtual network",
+            "A security protocol for containers",
+            "A template for virtual machine deployment"
+          ],
+          "answer": "A configuration file that defines a container's contents",
+          "explanation": "A build file specifies the contents and configurations of a container image."
+        },
+        {
+          "id": "base-image-specification",
+          "question": "What does a build file specify about a base container image?",
+          "options": [
+            "The network type",
+            "The memory allocation",
+            "The base image to use for customization",
+            "The operating system settings"
+          ],
+          "answer": "The base image to use for customization",
+          "explanation": "A build file can specify the base container image from which the customized image will be built."
+        },
+        {
+          "id": "build-file-os-resources",
+          "question": "How does a build file affect OS resources in a container?",
+          "options": [
+            "It can limit OS resources",
+            "It defines which OS resources to include in the container",
+            "It stores OS resources permanently",
+            "It encrypts OS resources"
+          ],
+          "answer": "It defines which OS resources to include in the container",
+          "explanation": "The build file specifies additional OS resources that should be part of the container image."
+        },
+        {
+          "id": "network-deployment",
+          "question": "How does a build file influence container network deployment?",
+          "options": [
+            "By assigning the container to a specific network",
+            "By defining the container’s IP address",
+            "By configuring hardware settings",
+            "By setting encryption parameters"
+          ],
+          "answer": "By assigning the container to a specific network",
+          "explanation": "A build file can include instructions on which container network the container will connect to upon deployment."
+        },
+        {
+          "id": "machine-processable",
+          "question": "Why is it important that a build file is machine-processable?",
+          "options": [
+            "It allows automated container deployment",
+            "It improves container security",
+            "It requires less memory",
+            "It enables encryption"
+          ],
+          "answer": "It allows automated container deployment",
+          "explanation": "Machine-processable build files enable automated deployment of containers, streamlining the setup process."
+        }
+      ]
+    },
+    {
+      "id": "container-images",
+      "type": "topic",
+      "title": "Container Images",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "container-image-definition",
+          "question": "What is a container image?",
+          "options": [
+            "A running instance of a container",
+            "A template used to create containers",
+            "A physical storage device",
+            "A type of network configuration"
+          ],
+          "answer": "A template used to create containers",
+          "explanation": "Container images act as templates that define the environment and applications needed to deploy a container."
+        },
+        {
+          "id": "base-container-image",
+          "question": "What is a base container image?",
+          "options": [
+            "An image with limited functionality",
+            "A default template used to build customized images",
+            "A container that hosts databases",
+            "An image with encrypted data only"
+          ],
+          "answer": "A default template used to build customized images",
+          "explanation": "Base container images serve as the foundational templates for creating more customized images."
+        },
+        {
+          "id": "customized-image-purpose",
+          "question": "Why would you create a customized container image?",
+          "options": [
+            "To add specific software or configurations",
+            "To avoid using the base image",
+            "To optimize CPU usage",
+            "To create a new operating system"
+          ],
+          "answer": "To add specific software or configurations",
+          "explanation": "Customized images allow developers to include software, configurations, or specific settings unique to their application."
+        },
+        {
+          "id": "image-immutability",
+          "question": "What does it mean when we say container images are immutable?",
+          "options": [
+            "They can be edited multiple times",
+            "They cannot be changed after creation",
+            "They require updates every month",
+            "They are stored on physical hardware"
+          ],
+          "answer": "They cannot be changed after creation",
+          "explanation": "Container images are immutable, meaning that once created, they cannot be altered. A new version must be built for any changes."
+        },
+        {
+          "id": "kernel-functions",
+          "question": "How do container images interact with OS kernel functions?",
+          "options": [
+            "The kernel is included in each image",
+            "The container engine provides access to kernel functions",
+            "They use a virtual kernel",
+            "Images do not require kernel functions"
+          ],
+          "answer": "The container engine provides access to kernel functions",
+          "explanation": "The container engine acts as a bridge, allowing containers to access OS kernel functions without including the kernel in each image."
         }
       ]
     }
