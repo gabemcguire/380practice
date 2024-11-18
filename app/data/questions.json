@@ -1,5 +1,5 @@
 {
-  "version": 22,
+  "version": 25,
   "sections": [
     {
       "id": "entity-relationship-diagrams",
@@ -2132,7 +2132,7 @@
     },
     {
       "id": "api-concepts",
-      "type": "new-topic",
+      "type": "topic",
       "title": "API Concepts",
       "difficulty": "Easy",
       "questions": [
@@ -2236,7 +2236,7 @@
     },
     {
       "id": "cloud-computing-fundamentals",
-      "type": "new-topic",
+      "type": "topic",
       "title": "Cloud Computing Fundamentals",
       "difficulty": "Medium",
       "questions": [
@@ -2364,7 +2364,7 @@
     },
     {
       "id": "cloud-service-models",
-      "type": "new-topic",
+      "type": "topic",
       "title": "SaaS vs. PaaS vs. IaaS",
       "difficulty": "Medium",
       "questions": [
@@ -2492,7 +2492,7 @@
     },
     {
       "id": "virtual-servers",
-      "type": "new-topic",
+      "type": "topic",
       "title": "Virtual Servers in Cloud Computing",
       "difficulty": "Medium",
       "questions": [
@@ -2560,7 +2560,7 @@
     },
     {
       "id": "cloud-usage-monitoring",
-      "type": "new-topic",
+      "type": "topic",
       "title": "Cloud Usage Monitoring and Agents",
       "difficulty": "Medium",
       "questions": [
@@ -2604,7 +2604,7 @@
     },
     {
       "id": "resource-replication-scaling",
-      "type": "new-topic",
+      "type": "topic",
       "title": "Resource Replication and Scaling in Cloud Environments",
       "difficulty": "Medium",
       "questions": [
@@ -2732,7 +2732,7 @@
     },
     {
       "id": "monitoring-resource-polling-agents",
-      "type": "new-topic",
+      "type": "topic",
       "title": "Monitoring Agent, Resource Agent, and Polling Agent",
       "difficulty": "Medium",
       "questions": [
@@ -2836,7 +2836,7 @@
     },
     {
       "id": "container-networks",
-      "type": "new-topic",
+      "type": "topic",
       "title": "Container Networks",
       "difficulty": "Medium",
       "questions": [
@@ -2928,7 +2928,7 @@
     },
     {
       "id": "build-files",
-      "type": "new-topic",
+      "type": "topic",
       "title": "Build Files",
       "difficulty": "Medium",
       "questions": [
@@ -2996,7 +2996,7 @@
     },
     {
       "id": "container-images",
-      "type": "new-topic",
+      "type": "topic",
       "title": "Container Images",
       "difficulty": "Medium",
       "questions": [

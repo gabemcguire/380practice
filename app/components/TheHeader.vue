@@ -16,6 +16,7 @@ const mainNav = [
     title: 'Challenges',
     href: '/challenges',
   },
+  
 /*  {
     title: 'Progress',
     href: '/progress',
