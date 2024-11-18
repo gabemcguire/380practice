@@ -1,7 +1,38 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import { MoonIcon, SunIcon } from '@radix-icons/vue'
+import { useColorMode } from '@vueuse/core'
+import { useMagicKeys } from '@vueuse/core'
+
+// In Nuxt 3, we should use the built-in composables for data imports
+const questions = await useAsyncData('questions', () => {
+  return Promise.resolve(questionsData) // Replace questionsData with your actual data source
+})
+
+interface NavItem {
+  title: string
+  href: string
+}
+
+interface Question {
+  id: string
+  question: string
+  options: string[]
+  answer: string
+  explanation: string
+}
+
+interface Section {
+  id: string
+  type: string
+  title: string
+  difficulty: string
+  questions: Question[]
+}
 
 const color = useColorMode()
+const searchQuery = ref('')
+const isOpen = ref(false)
 
 function toggleDark() {
   color.preference = color.value === 'dark' ? 'light' : 'dark'
@@ -16,18 +47,12 @@ const mainNav = [
     title: 'Challenges',
     href: '/challenges',
   },
-  
-/*  {
-    title: 'Progress',
-    href: '/progress',
-  }, */
   {
     title: 'About',
     href: '/about',
   },
 ]
 
-const isOpen = ref(false)
 const { Meta_K, Ctrl_K } = useMagicKeys({
   passive: false,
   onEventFired(e) {
@@ -41,9 +66,43 @@ watch([Meta_K, Ctrl_K], (v) => {
     isOpen.value = true
 })
 
+const filteredResults = computed(() => {
+  if (!searchQuery.value || !questions.data.value?.sections) return []
+  
+  const query = searchQuery.value.toLowerCase()
+  const results: Array<{ type: string; title: string; href: string; subtitle?: string }> = []
+
+  // Search through sections/topics
+  questions.data.value.sections.forEach((section: Section) => {
+    if (section.title.toLowerCase().includes(query)) {
+      results.push({
+        type: 'topic',
+        title: section.title,
+        href: `/topic/${section.id}`,
+        subtitle: `${section.difficulty} • ${section.questions.length} questions`
+      })
+    }
+
+    // Search through questions in each section
+    section.questions.forEach((question: Question) => {
+      if (question.question.toLowerCase().includes(query)) {
+        results.push({
+          type: 'question',
+          title: question.question,
+          href: `/topic/${section.id}#${question.id}`,
+          subtitle: `${section.title} • ${section.difficulty}`
+        })
+      }
+    })
+  })
+
+  return results
+})
+
 function handleSelectLink(item: any) {
-  navigateTo({ path: item.href })
+  navigateTo(item.href)
   isOpen.value = false
+  searchQuery.value = ''
 }
 </script>
 
@@ -65,7 +124,6 @@ function handleSelectLink(item: any) {
           </NuxtLink>
         </nav>
       </div>
-
       <div class="flex flex-1 items-center justify-end space-x-2">
         <div class="w-full flex-1 hidden md:w-auto md:flex-none">
           <Button
@@ -80,7 +138,6 @@ function handleSelectLink(item: any) {
             </Kbd>
           </Button>
         </div>
-
         <ClientOnly>
           <Button
             class="h-9 w-9"
@@ -102,14 +159,16 @@ function handleSelectLink(item: any) {
   <Dialog v-model:open="isOpen">
     <DialogContent class="p-0">
       <Command>
-        <CommandInput placeholder="Search topics or questions..." />
+        <CommandInput 
+          placeholder="Search topics or questions..." 
+          v-model="searchQuery"
+        />
         <CommandEmpty>
           No results found.
         </CommandEmpty>
-        <CommandList
-          @escape-key-down="isOpen = false"
-        >
-          <CommandGroup heading="Navigation">
+        <CommandList @escape-key-down="isOpen = false">
+          <!-- Navigation Group -->
+          <CommandGroup v-if="!searchQuery" heading="Navigation">
             <CommandItem
               v-for="item in mainNav"
               :key="item.title"
@@ -121,7 +180,43 @@ function handleSelectLink(item: any) {
               <span>{{ item.title }}</span>
             </CommandItem>
           </CommandGroup>
-          <!-- You can add more command groups here for topics or specific questions -->
+
+          <!-- Search Results -->
+          <template v-if="searchQuery && filteredResults.length">
+            <!-- Topics Group -->
+            <CommandGroup heading="Topics">
+              <CommandItem
+                v-for="result in filteredResults.filter(r => r.type === 'topic')"
+                :key="result.title"
+                :value="result.title"
+                class="py-3"
+                @select="handleSelectLink(result)"
+              >
+                <Icon name="radix-icons:component-2" class="mr-2 h-5 w-5" />
+                <div class="flex flex-col">
+                  <span>{{ result.title }}</span>
+                  <span class="text-sm text-muted-foreground">{{ result.subtitle }}</span>
+                </div>
+              </CommandItem>
+            </CommandGroup>
+
+            <!-- Questions Group -->
+            <CommandGroup heading="Questions">
+              <CommandItem
+                v-for="result in filteredResults.filter(r => r.type === 'question')"
+                :key="result.title"
+                :value="result.title"
+                class="py-3"
+                @select="handleSelectLink(result)"
+              >
+                <Icon name="radix-icons:question-mark" class="mr-2 h-5 w-5" />
+                <div class="flex flex-col">
+                  <span>{{ result.title }}</span>
+                  <span class="text-sm text-muted-foreground">{{ result.subtitle }}</span>
+                </div>
+              </CommandItem>
+            </CommandGroup>
+          </template>
         </CommandList>
       </Command>
     </DialogContent>

@@ -1,5 +1,5 @@
 {
-  "version": 25,
+  "version": 29,
   "sections": [
     {
       "id": "entity-relationship-diagrams",
@@ -3059,6 +3059,354 @@
           ],
           "answer": "The container engine provides access to kernel functions",
           "explanation": "The container engine acts as a bridge, allowing containers to access OS kernel functions without including the kernel in each image."
+        }
+      ]
+    },
+    {
+      "id": "web-caching-I",
+      "type": "new-topic",
+      "title": "Web Caching Basics",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "cache1-q1",
+          "question": "What type of data is typically easy to cache on the web?",
+          "options": [
+            "Dynamic data",
+            "Static data",
+            "User-specific data",
+            "Request-computed data"
+          ],
+          "answer": "Static data",
+          "explanation": "Static data, such as images, stylesheets, and HTML, is the same for all users and is easy to cache."
+        },
+        {
+          "id": "cache1-q2",
+          "question": "Which of the following is NOT an example of static content?",
+          "options": [
+            "CSS stylesheets",
+            "User-specific dashboard",
+            "HTML pages",
+            "Website logo"
+          ],
+          "answer": "User-specific dashboard",
+          "explanation": "User-specific dashboards are examples of dynamic content, as they are computed for individual users."
+        },
+        {
+          "id": "cache1-q3",
+          "question": "What is the main disadvantage of age-based caching?",
+          "options": [
+            "It cannot store static data.",
+            "It requires constant communication with the origin server.",
+            "Updated content may not be available until the cache expires.",
+            "It is incompatible with shared caches."
+          ],
+          "answer": "Updated content may not be available until the cache expires.",
+          "explanation": "Age-based caching allows users to store data for a predefined time, but updated content is not retrieved until the cached version becomes stale."
+        },
+        {
+          "id": "cache1-q4",
+          "question": "What is the role of an ETag in caching?",
+          "options": [
+            "Storing content locally without validation",
+            "Identifying whether cached data is fresh",
+            "Determining the age of cached content",
+            "Preventing caching of dynamic data"
+          ],
+          "answer": "Identifying whether cached data is fresh",
+          "explanation": "ETags uniquely identify the content of a response and validate whether the cached version is fresh during subsequent requests."
+        },
+        {
+          "id": "cache1-q5",
+          "question": "What HTTP response code is returned when an ETag match confirms cached data is fresh?",
+          "options": [
+            "200 OK",
+            "304 Not Modified",
+            "404 Not Found",
+            "500 Internal Server Error"
+          ],
+          "answer": "304 Not Modified",
+          "explanation": "The 304 Not Modified response indicates that the cached data is fresh, and no new content is sent from the server."
+        },
+        {
+          "id": "cache1-q6",
+          "question": "Which of the following statements is true about dynamic data?",
+          "options": [
+            "It can only be stored in shared caches.",
+            "It is identical for all users.",
+            "It is computed at request time and often user-specific.",
+            "It is always cached for a predefined duration."
+          ],
+          "answer": "It is computed at request time and often user-specific.",
+          "explanation": "Dynamic data is generated based on user-specific or request-specific information and cannot be stored in shared caches."
+        },
+        {
+          "id": "cache1-q7",
+          "question": "Why is a cache hit beneficial in terms of traffic?",
+          "options": [
+            "It reduces traffic by 50%.",
+            "It reduces traffic by 75%.",
+            "It saves 100% of traffic for that request.",
+            "It does not reduce traffic."
+          ],
+          "answer": "It saves 100% of traffic for that request.",
+          "explanation": "When a cache hit occurs, the request is served directly from the cache, eliminating the need to fetch data from the origin server."
+        }
+      ]
+    },
+    {
+      "id": "serverless-architectures-I",
+      "type": "new-topic",
+      "title": "Serverless Architectures",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "serverless1-q1",
+          "question": "What is the key characteristic of a serverless architecture?",
+          "options": [
+            "Applications are deployed on dedicated servers.",
+            "Servers automatically scale to handle requests.",
+            "The infrastructure is managed entirely by the cloud provider.",
+            "Applications are run on physical hardware instead of virtual machines."
+          ],
+          "answer": "The infrastructure is managed entirely by the cloud provider.",
+          "explanation": "In serverless architectures, developers focus on writing code, while the cloud provider handles server management, scaling, and provisioning."
+        },
+        {
+          "id": "serverless1-q2",
+          "question": "Which of the following is NOT a common use case for serverless computing?",
+          "options": [
+            "Running machine learning models on GPUs",
+            "Event-driven functions",
+            "Real-time data processing",
+            "Hosting large-scale relational databases"
+          ],
+          "answer": "Hosting large-scale relational databases",
+          "explanation": "While serverless is ideal for event-driven and on-demand computing, hosting large-scale relational databases often requires dedicated resources and is less suited for serverless environments."
+        },
+        {
+          "id": "serverless1-q3",
+          "question": "What does FaaS stand for?",
+          "options": [
+            "Framework as a Service",
+            "Functions as a Service",
+            "Files as a Service",
+            "Forms as a Service"
+          ],
+          "answer": "Functions as a Service",
+          "explanation": "Functions as a Service (FaaS) is a core component of serverless architectures where individual functions are deployed and executed on-demand in response to events."
+        },
+        {
+          "id": "serverless1-q4",
+          "question": "Which of the following serverless architectures uses event-driven triggers?",
+          "options": [
+            "Microservices",
+            "Functions as a Service (FaaS)",
+            "Monolithic applications",
+            "Virtual machines"
+          ],
+          "answer": "Functions as a Service (FaaS)",
+          "explanation": "FaaS is inherently event-driven, meaning functions are executed in response to specific triggers such as HTTP requests or file uploads."
+        },
+        {
+          "id": "serverless1-q5",
+          "question": "What is a key advantage of serverless architectures?",
+          "options": [
+            "Always-on infrastructure",
+            "Lower cost due to pay-per-use pricing",
+            "Full control over the underlying servers",
+            "Ease of managing dedicated hardware"
+          ],
+          "answer": "Lower cost due to pay-per-use pricing",
+          "explanation": "Serverless architectures operate on a pay-per-use model, charging only for the actual execution time of functions, leading to cost savings compared to traditional always-on servers."
+        },
+        {
+          "id": "serverless1-q6",
+          "question": "Which of the following best describes the difference between serverless and microservices architectures?",
+          "options": [
+            "Serverless is always monolithic, while microservices are distributed.",
+            "Serverless abstracts infrastructure management, while microservices focus on decomposing applications into independent services.",
+            "Microservices do not scale, but serverless does.",
+            "Microservices require event-driven design, while serverless does not."
+          ],
+          "answer": "Serverless abstracts infrastructure management, while microservices focus on decomposing applications into independent services.",
+          "explanation": "Serverless focuses on eliminating the need to manage infrastructure, while microservices emphasize breaking applications into modular, independently deployable services."
+        },
+        {
+          "id": "serverless1-q7",
+          "question": "Which of the following is a popular serverless platform?",
+          "options": [
+            "Kubernetes",
+            "AWS Lambda",
+            "Docker Swarm",
+            "Apache Kafka"
+          ],
+          "answer": "AWS Lambda",
+          "explanation": "AWS Lambda is one of the leading serverless platforms, allowing developers to run code in response to events without managing servers."
+        },
+        {
+          "id": "serverless1-q8",
+          "question": "What is a cold start in serverless computing?",
+          "options": [
+            "When a function runs for the first time and incurs additional latency",
+            "When a server runs out of memory and restarts",
+            "When a serverless application fails to scale automatically",
+            "When a cloud provider disables an inactive function"
+          ],
+          "answer": "When a function runs for the first time and incurs additional latency",
+          "explanation": "A cold start occurs when a serverless function is executed for the first time or after a period of inactivity, leading to initialization delays."
+        },
+        {
+          "id": "serverless1-q9",
+          "question": "Which of the following is a potential drawback of serverless architectures?",
+          "options": [
+            "They cannot scale automatically.",
+            "They require manual server provisioning.",
+            "They may incur latency during cold starts.",
+            "They do not support event-driven programming."
+          ],
+          "answer": "They may incur latency during cold starts.",
+          "explanation": "Cold starts are a common drawback of serverless architectures, as functions may experience latency when initializing after inactivity."
+        },
+        {
+          "id": "serverless1-q10",
+          "question": "What type of architecture divides applications into small, independently deployable services?",
+          "options": [
+            "Serverless architecture",
+            "Microservices architecture",
+            "Monolithic architecture",
+            "Event-driven architecture"
+          ],
+          "answer": "Microservices architecture",
+          "explanation": "Microservices architecture splits applications into small, independently deployable services, each handling a specific business capability."
+        }
+      ]
+    },
+    {
+      "id": "etags-cdns-I",
+      "type": "new-topic",
+      "title": "ETags and Content Delivery Networks",
+      "difficulty": "Medium",
+      "questions": [
+        {
+          "id": "etags-cdns-q1",
+          "question": "What is a potential privacy concern with using ETags?",
+          "options": [
+            "ETags can be used to disable cookies.",
+            "ETags can uniquely identify users for tracking.",
+            "ETags prevent users from accessing cached content.",
+            "ETags allow users to bypass authentication."
+          ],
+          "answer": "ETags can uniquely identify users for tracking.",
+          "explanation": "ETags can act as unique identifiers when applied to requests, allowing users to be tracked even without cookies."
+        },
+        {
+          "id": "etags-cdns-q2",
+          "question": "How can ETags be misused for tracking users?",
+          "options": [
+            "By making them large and hard to decode.",
+            "By assigning unique ETags to non-important images.",
+            "By applying them to dynamic content only.",
+            "By avoiding cache validation mechanisms."
+          ],
+          "answer": "By assigning unique ETags to non-important images.",
+          "explanation": "Assigning unique ETags to non-essential resources like a 1-pixel image can allow servers to track users across requests without using cookies."
+        },
+        {
+          "id": "etags-cdns-q3",
+          "question": "What is the primary motivation for using a Content Delivery Network (CDN)?",
+          "options": [
+            "To eliminate the need for caching.",
+            "To handle dynamic user-specific data efficiently.",
+            "To reduce latency by serving static content closer to users.",
+            "To store dynamic content in a shared location."
+          ],
+          "answer": "To reduce latency by serving static content closer to users.",
+          "explanation": "CDNs improve performance by delivering static content from servers geographically close to the user, reducing latency."
+        },
+        {
+          "id": "etags-cdns-q4",
+          "question": "What is the term for the original server in a CDN architecture?",
+          "options": [
+            "Edge server",
+            "Cache",
+            "Origin server",
+            "Local server"
+          ],
+          "answer": "Origin server",
+          "explanation": "The origin server is the source of the content that CDNs distribute across their network of geographically diverse servers."
+        },
+        {
+          "id": "etags-cdns-q5",
+          "question": "Which caching mechanisms do CDNs typically use?",
+          "options": [
+            "Age-based and ETag-based caching",
+            "Dynamic content caching only",
+            "No caching, they only distribute requests",
+            "Cookie-based and token-based caching"
+          ],
+          "answer": "Age-based and ETag-based caching",
+          "explanation": "CDNs commonly use age-based and ETag-based caching to ensure cached content is fresh and relevant while improving efficiency."
+        },
+        {
+          "id": "etags-cdns-q6",
+          "question": "What is one of the security benefits of using a CDN?",
+          "options": [
+            "CDNs encrypt all HTTP traffic automatically.",
+            "Users never directly hit the origin server.",
+            "CDNs prevent brute force attacks on user accounts.",
+            "CDNs eliminate the need for firewalls."
+          ],
+          "answer": "Users never directly hit the origin server.",
+          "explanation": "CDNs act as intermediaries, protecting the origin server by handling requests and serving cached content."
+        },
+        {
+          "id": "etags-cdns-q7",
+          "question": "Which of the following is NOT a benefit of using a CDN?",
+          "options": [
+            "Improved reliability by delivering cached content when the origin server is down.",
+            "Faster delivery of dynamic, user-specific data.",
+            "Lower bandwidth costs by reducing the distance data travels.",
+            "Enhanced performance by caching content at edge servers."
+          ],
+          "answer": "Faster delivery of dynamic, user-specific data.",
+          "explanation": "CDNs are optimized for static content delivery and caching but are less effective for dynamic, user-specific data that must be fetched from the origin server."
+        },
+        {
+          "id": "etags-cdns-q8",
+          "question": "What happens when a CDN experiences a cache hit?",
+          "options": [
+            "The request is sent to the origin server.",
+            "The content is served directly from the CDN cache.",
+            "The CDN temporarily disables the origin server.",
+            "The user is redirected to another CDN server."
+          ],
+          "answer": "The content is served directly from the CDN cache.",
+          "explanation": "A cache hit means the requested content is already available in the CDN’s cache, so the origin server is not contacted."
+        },
+        {
+          "id": "etags-cdns-q9",
+          "question": "Which of the following is an example of a popular CDN service?",
+          "options": [
+            "Docker",
+            "Cloudflare",
+            "PostgreSQL",
+            "AWS EC2"
+          ],
+          "answer": "Cloudflare",
+          "explanation": "Cloudflare is a widely used CDN that provides caching, security, and performance optimization services."
+        },
+        {
+          "id": "etags-cdns-q10",
+          "question": "Why might a CDN reduce bandwidth costs?",
+          "options": [
+            "Because it compresses all data.",
+            "Because data travels shorter distances to the user.",
+            "Because it replaces static content with dynamic content.",
+            "Because it eliminates the need for edge servers."
+          ],
+          "answer": "Because data travels shorter distances to the user.",
+          "explanation": "By serving cached content from edge servers close to the user, CDNs minimize the data traveling over long distances, reducing bandwidth costs."
         }
       ]
     }
