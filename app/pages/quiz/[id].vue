@@ -187,7 +187,3 @@ onMounted(async () => {
   console.log('OnMounted - isCorrect:', store.isCorrect)
 })
 </script>
-
-<style scoped>
-/* Add any component-specific styles here */
-</style>
